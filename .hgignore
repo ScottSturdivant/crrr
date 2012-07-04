@@ -1,0 +1,5 @@
+syntax: glob
+venv
+*.pyc
+Colorado_Rhodesian_Ridgeback_Rescue.egg-info
+distribute-0.6.10.tar.gz

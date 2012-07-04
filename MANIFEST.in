@@ -1,0 +1,2 @@
+recursive-include crrr/templates *
+recursive-include crrr/static *
