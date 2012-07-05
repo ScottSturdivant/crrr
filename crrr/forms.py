@@ -1,5 +1,14 @@
 import re
-from wtforms import Form, IntegerField, TextField, SelectMultipleField, PasswordField, validators
+from crrr.states import states
+from wtforms import (
+    Form,
+    IntegerField,
+    TextField,
+    SelectField,
+    SelectMultipleField,
+    PasswordField,
+    validators
+    )
 
 
 class ApplicationForm(Form):
@@ -13,6 +22,7 @@ class PersonalInfo(Form):
     city       = TextField("City", [validators.Length(min=1, max=128)])
     email      = TextField("Email", [validators.Email()])
     zip_code   = TextField("Zip Code", [validators.Regexp('^(\d{5}(-\d{4})?)?$')])
+    state      = SelectField("State", [validators.Required()], choices=states)
     phone      = TextField("Phone", 
                  [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
 

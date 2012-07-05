@@ -103,3 +103,15 @@ class TestVolunteerForm:
         form.validate()
         assert form.errors.get('phone', None) is not None
 
+    def test_valid_state(self):
+        form = forms.VolunteerForm(state='CO')
+        form.validate()
+        assert form.errors.get('state', None) is None
+
+    def test_invalid_state(self):
+        form = forms.VolunteerForm(state='AA')
+        form.validate()
+        assert form.errors.get('state', None) is not None
+        form = forms.VolunteerForm(state='')
+        form.validate()
+        assert form.errors.get('state', None) is not None
