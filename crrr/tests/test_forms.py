@@ -22,7 +22,7 @@ class TestVolunteerForm:
         form = forms.VolunteerForm(first_name='')
         form.validate()
         assert form.errors.get('first_name', None) is not None
-    
+
     def test_valid_last_name(self):
         form = forms.VolunteerForm(last_name='Sturdivant')
         form.validate()
@@ -115,3 +115,25 @@ class TestVolunteerForm:
         form = forms.VolunteerForm(state='')
         form.validate()
         assert form.errors.get('state', None) is not None
+
+
+class TestLogin:
+    def test_username(self):
+        form = forms.Login(username='admin')
+        form.validate()
+        assert form.errors.get('username', None) is None
+
+    def test_invalid_username(self):
+        form = forms.Login(username='a'*80)
+        form.validate()
+        assert form.errors.get('username', None) is not None
+
+    def test_password(self):
+        form = forms.Login(password='footron')
+        form.validate()
+        assert form.errors.get('password', None) is None
+
+    def test_invalid_password(self):
+        form = forms.Login(password='')
+        form.validate()
+        assert form.errors.get('password', None) is not None
