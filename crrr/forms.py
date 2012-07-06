@@ -1,5 +1,5 @@
 import re
-from crrr.states import states
+from crrr.states import STATES
 from wtforms import (
     Form,
     IntegerField,
@@ -18,7 +18,7 @@ class Address(Form):
     addr_1     = TextField("Address Line 1", [validators.Length(min=1, max=128)])
     addr_2     = TextField("Address Line 2", [validators.Optional(), validators.Length(max=128)])
     city       = TextField("City", [validators.Length(min=1, max=128)])
-    state      = SelectField("State", [validators.Required()], choices=states)
+    state      = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)))
     zip_code   = TextField("Zip Code", [validators.Regexp('^(\d{5}(-\d{4})?)?$')])
 
 class PersonalInfo(Address):

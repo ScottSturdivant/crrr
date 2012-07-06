@@ -52,6 +52,3 @@ STATES = [
     'WA',
 
 ]
-
-states = zip(STATES, STATES)
-states.sort()
