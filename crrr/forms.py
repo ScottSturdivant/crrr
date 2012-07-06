@@ -35,3 +35,7 @@ class VolunteerForm(PersonalInfo):
                                         ('food',  'Provide some doggie food.'),
                                         ('check', 'Home checks.')]
                               )
+
+class Login(Form):
+    username = TextField("Username", [validators.Length(max=12)])
+    password = PasswordField("Password", [validators.Required()])
