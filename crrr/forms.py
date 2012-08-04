@@ -5,7 +5,7 @@ from wtforms import (
     IntegerField,
     TextField,
     SelectField,
-    SelectMultipleField,
+    BooleanField,
     PasswordField,
     validators
     )
@@ -27,14 +27,25 @@ class PersonalInfo(Address):
     email      = TextField("Email", [validators.Email()])
     phone      = TextField("Phone", 
                  [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
+    phone_h    = TextField("Phone (h)", 
+                 [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
+    phone_c    = TextField("Phone (c)", 
+                 [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
+    phone_w    = TextField("Phone (w)", 
+                 [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
 
 
-class VolunteerForm(PersonalInfo):
-    duty = SelectMultipleField("Duty", 
-                               choices=[('drive', 'Drive some doggies.'),
-                                        ('food',  'Provide some doggie food.'),
-                                        ('check', 'Home checks.')]
-                              )
+class Volunteer(PersonalInfo):
+    foster    = BooleanField(label='Be a foster family for a rescued Ridgeback.')
+    transport = BooleanField(label=('Help transport a rescue dog.  For example, '
+                                    'to and from a vet appointment or from a '
+                                    'surrenduring situation to foster care.'))
+    home_check = BooleanField(label='Help with home checks for a prospective adopter.')
+    adopter_check = BooleanField(label=('Help with reference checks for a prospective '
+                                        'adopter.  This requires telephone time.'))
+    donate_crate = BooleanField(label='Donate a large dog crate.')
+    donate_supplies = BooleanField(label='Buy food or dog supplies such as beds, leashes, collars, etc.')
+    other = BooleanField(label='Other')
 
 class Login(Form):
     username = TextField("Username", [validators.Length(max=12)])

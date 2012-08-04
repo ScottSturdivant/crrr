@@ -1,6 +1,7 @@
-from flask import request, session, render_template
-from crrr import app
-from crrr.forms import Login
+from flask import request, session, render_template, flash
+from flaskext.mail import Message
+from crrr import app, mail
+from crrr.forms import Login, Volunteer
 
 @app.route('/')
 def index():
@@ -40,6 +41,17 @@ def application():
 def happy_tails():
     pass
 
-@app.route('/volunteer')
+@app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():
-    pass
+    if request.method == 'GET':
+        return render_template('volunteer.html', form=Volunteer())
+    elif request.method == 'POST':
+        volunteer = Volunteer(request.form)
+        if volunteer.validate():
+            msg = Message("Volunteer Application",
+                          sender='scott.sturdivant@gmail.com',
+                          recipients=['scott.sturdivant@gmail.com'])
+            msg.html = render_template('email_volunteer.html', form=volunteer),
+            mail.send(msg)
+            return msg.html
+        return render_template('volunteer.html', form=volunteer)
