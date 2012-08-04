@@ -48,10 +48,11 @@ def volunteer():
     elif request.method == 'POST':
         volunteer = Volunteer(request.form)
         if volunteer.validate():
-            msg = Message("Volunteer Application",
-                          sender='scott.sturdivant@gmail.com',
-                          recipients=['scott.sturdivant@gmail.com'])
+            msg = Message("%s %s Volunteer Application Submittal" % (volunteer.first_name.data, volunteer.last_name.data),
+                          sender='%s %s <%s>' % (volunteer.first_name.data, volunteer.last_name.data, volunteer.email.data),
+                          recipients=[app.config.get('CRRR_EMAIL'),
+                                      '%s %s <%s>' % (volunteer.first_name.data, volunteer.last_name.data, volunteer.email.data)])
             msg.html = render_template('email_volunteer.html', form=volunteer),
             mail.send(msg)
-            return msg.html
+            return render_template('volunteer.html')
         return render_template('volunteer.html', form=volunteer)

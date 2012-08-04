@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if form %}
 The CRRR depends on support from community members like yourself to be able to
 provide a caring environment for our rescued Ridgebacks. We have numerous
 oportunities for helping out, ranging from the time and emotionally intensive
 fostering of dogs, to the shuffling of paperwork, to the screening of potential
 adopters. If you are in any way interested in assisting us, please fill out the
 form below. Thank you for your interest!
-{% if form %}
 <div id="application">
   <table class="application" style="margin-bottom: 0px; border-bottom: 0px;">
     <form method="POST" action="/volunteer">
@@ -97,5 +97,7 @@ form below. Thank you for your interest!
     </tr>
   </table>
 </form>
+{% else %}
+Thank you for your interest in becoming a volunteer.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.<br />
 {% endif %}
 {% endblock %}
