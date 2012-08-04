@@ -60,3 +60,8 @@ class TestAdmin:
             rv = self.app.post('/volunteer', data=self.form.data)
         assert '%s %s <%s>' % (self.fname, self.lname, self.email) in outbox[0].recipients
 
+    def test_submit_form_success(self):
+        """Tests that the user sees that their form was submitted successfully."""
+        with mail.record_messages() as outbox:
+            rv = self.app.post('/volunteer', data=self.form.data)
+        assert 'Thank you for your interest in becoming a volunteer.' in rv.data
