@@ -1,10 +1,11 @@
-from flask import request, session, render_template, flash
+from flask import request, session, render_template, flash, g
 from flaskext.mail import Message
 from crrr import app, mail
 from crrr.forms import Login, Volunteer
 
 @app.route('/')
 def index():
+    g.index = True
     return render_template('index.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -23,26 +24,32 @@ def admin():
 
 @app.route('/about')
 def about():
+    g.about = True
     return render_template('about.html') 
 
 @app.route('/faq')
 def faq():
-    return render_template('faq.html') 
+    g.faq = True
+    return render_template('faq.html')
 
 @app.route('/available_dogs')
 def available_dogs():
-    pass
+    g.available_dogs = True
+    return render_template('layout.html')
 
 @app.route('/application')
 def application():
-    pass
+    g.application = True
+    return render_template('layout.html')
 
 @app.route('/happy_tails')
 def happy_tails():
-    pass
+    g.happy_tails = True
+    return render_template('layout.html')
 
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():
+    g.volunteer = True
     if request.method == 'GET':
         return render_template('volunteer.html', form=Volunteer())
     elif request.method == 'POST':
