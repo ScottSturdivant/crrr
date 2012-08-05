@@ -11,6 +11,12 @@
     {% endblock %}
   </head>
 <body>
+  <div id="heading">
+    {% include "includes/heading.html" %}
+  </div>  <!--heading-->
+  <div id="menu">
+    {% include "includes/nav.html" %}
+  </div> <!--menu-->
   <div id="content">{% block content %}{% endblock %}</div>
   <div id="footer">
     {% block footer %}

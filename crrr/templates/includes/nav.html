@@ -1,0 +1,14 @@
+<ul id="nav">
+  <li class="first current"><a href="/">Home</a></li>
+  <li><a href={{ url_for('about') }}>About RRs</a>
+    <ul>
+      <li style="border-top: 1px solid black;" ><a href={{ url_for('about') }}>The Breed</a></li>
+      <li ><a href={{ url_for('faq') }}>FAQs</a></li>
+    </ul>
+  </li>
+  <li ><a href={{ url_for('available_dogs') }}>Available Dogs</a></li>
+  <li ><a href={{ url_for('happy_tails') }}>Happy Tails</a></li>
+  <li ><a href={{ url_for('application') }}>Application</a></li>
+  <li class="last"><a href={{ url_for('volunteer') }}>Volunteer</a></li>
+</ul>
+<div class="blank">&nbsp;</div> <!-- blank -->
