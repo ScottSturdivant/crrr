@@ -2,7 +2,7 @@ from crrr import app, mail
 from crrr.forms import Volunteer
 
 
-class TestAdmin:
+class TestVolunteer:
 
     @classmethod
     def setup_class(self):
@@ -58,7 +58,7 @@ class TestAdmin:
         """Tests that the user submitting the form is emailed the results."""
         with mail.record_messages() as outbox:
             rv = self.app.post('/volunteer', data=self.form.data)
-        assert '%s %s <%s>' % (self.fname, self.lname, self.email) in outbox[0].recipients
+        assert ('%s %s' % (self.fname, self.lname), self.email) in outbox[0].recipients
 
     def test_submit_form_success(self):
         """Tests that the user sees that their form was submitted successfully."""
