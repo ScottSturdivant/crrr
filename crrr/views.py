@@ -5,7 +5,7 @@ from crrr.forms import Login, Volunteer
 
 @app.route('/')
 def index():
-    return 'Hello World.'
+    return render_template('index.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
