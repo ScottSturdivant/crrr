@@ -27,7 +27,7 @@ def about():
 
 @app.route('/faq')
 def faq():
-    pass
+    return render_template('faq.html') 
 
 @app.route('/available_dogs')
 def available_dogs():
