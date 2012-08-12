@@ -12,8 +12,8 @@ form below. Thank you for your interest!
   <div class="application" style="margin-bottom: 0px; border-bottom: 0px;">
     <form method="POST" action="/volunteer">
     {{ form.hidden_tag() }}
-    <div class="heading">CRRR Volunteer Application</div>
-    <div class="subheading">Personal Information</div>
+    <div class="heading"><h1>CRRR Volunteer Application</h1></div>
+    <div class="subheading"><h2>Personal Information</h2></div>
     {% if form.errors %}
     <ul class="errors">
       {% for field_name, field_errors in form.errors|dictsort if field_errors %}
@@ -34,7 +34,7 @@ form below. Thank you for your interest!
     {{ render(form.phone_c) }}
     {{ render(form.phone_w) }}
     {{ render(form.email) }}
-    <div class="subheading">Volunteering Information</div>
+    <div class="subheading"><h2>Volunteering Information</h2></div>
     Please select all that you are able to assist with:<br />
     {{ bool_render(form.foster) }}
     {{ bool_render(form.transport) }}
