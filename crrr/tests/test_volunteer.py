@@ -1,6 +1,7 @@
 from crrr import app, mail
 from crrr.forms import Volunteer
-
+from werkzeug.datastructures import MultiDict
+from werkzeug.test import EnvironBuilder
 
 class TestVolunteer:
 
@@ -10,13 +11,14 @@ class TestVolunteer:
         self.fname = "Scott"
         self.lname = "Sturdivant"
         self.email = "asdf@asdf.com"
-        self.form = Volunteer(first_name=self.fname,
-                              last_name=self.lname,
-                              addr_1="8885 S Field Ct",
-                              city="Littleton",
-                              state="CO",
-                              zip_code="80128",
-                              email=self.email)
+        with app.test_request_context():
+            self.form = Volunteer(first_name=self.fname,
+                                  last_name=self.lname,
+                                  addr_1="8885 S Field Ct",
+                                  city="Littleton",
+                                  state="CO",
+                                  zip_code="80128",
+                                  email=self.email)
 
     def test_show_volunteer_form(self):
         """The volunteer page should present a form."""
@@ -27,7 +29,9 @@ class TestVolunteer:
     def test_submit_form_sends_mail(self):
         """When submitting the volunteer form, an email should be sent."""
         with mail.record_messages() as outbox:
+            #rv = self.app.post('/volunteer', data="asdf")
             rv = self.app.post('/volunteer', data=self.form.data)
+            print rv.data
         assert len(outbox) == 1
 
     def test_submit_form_mail_subject(self):

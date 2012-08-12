@@ -1,7 +1,11 @@
 from flask import request, session, render_template, flash, g
 from flaskext.mail import Message
 from crrr import app, mail
-from crrr.forms import Login, Volunteer
+from crrr.forms import (
+    Login,
+    Volunteer,
+    Application,
+    )
 
 @app.route('/')
 def index():
@@ -37,10 +41,13 @@ def available_dogs():
     g.available_dogs = True
     return render_template('layout.html')
 
-@app.route('/application')
+@app.route('/application', methods=['GET', 'POST'])
 def application():
     g.application = True
-    return render_template('layout.html')
+    form = Application()
+    if form.validate_on_submit():
+        pass
+    return render_template('application.html', form=form)
 
 @app.route('/happy_tails')
 def happy_tails():
@@ -50,20 +57,17 @@ def happy_tails():
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():
     g.volunteer = True
-    if request.method == 'GET':
-        return render_template('volunteer.html', form=Volunteer())
-    elif request.method == 'POST':
-        volunteer = Volunteer(request.form)
-        if volunteer.validate():
-            name = volunteer.first_name.data + " " + volunteer.last_name.data
-            msg = Message("%s Volunteer Application Submittal" % name,
-                          sender=(name, volunteer.email.data),
-                          recipients=[app.config.get('CRRR_EMAIL'),
-                                      (name, volunteer.email.data)])
-            msg.html = render_template('email_volunteer.html', form=volunteer),
-            mail.send(msg)
-            return render_template('volunteer.html')
-        return render_template('volunteer.html', form=volunteer)
+    form = Volunteer()
+    if form.validate_on_submit():
+        name = form.first_name.data + " " + form.last_name.data
+        msg = Message("%s Volunteer Application Submittal" % name,
+                      sender=(name, form.email.data),
+                      recipients=[app.config.get('CRRR_EMAIL'),
+                                  (name, form.email.data)])
+        msg.html = render_template('email_volunteer.html', form=form),
+        mail.send(msg)
+        return render_template('volunteer.html')
+    return render_template('volunteer.html', form=form)
 
 @app.errorhandler(404)
 def page_not_found(error):

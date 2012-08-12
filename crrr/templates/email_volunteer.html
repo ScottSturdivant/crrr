@@ -1,90 +1,27 @@
 <div id="application">
   <table class="application" style="margin-bottom: 0px; border-bottom: 0px;">
-    <form method="POST" action="/volunteer">
     <tr>
       <th colspan="2">CRRR Volunteer Application</th>
     </tr>
     <tr>
       <th colspan="2" class="subheading">Personal Information</th>
     </tr>
-    {% if form.errors %}
-    <ul class="errors">
-      {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-        {% for error in field_errors %}
-          <li>{{ form[field_name].label }}: {{ error }}</li>
-        {% endfor %}
-      {% endfor %}
-    </ul>
-    {% endif %}
+    {% for field in form.personal_info %}
     <tr>
-      <td>{{ form.first_name.label(class="label required") }}:</td>
-      <td>{{form.first_name(size="40") }}</td>
+      <td>{{ field.label(class="label required") }}:</td>
+      <td>{{ field() }}</td>
     </tr>
-    <tr>
-      <td>{{ form.last_name.label(class="label required") }}:</td>
-      <td>{{ form.last_name(size="40") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.addr_1.label(class="label required") }}:</td>
-      <td>{{ form.addr_1(size="40") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.addr_2.label(class="label") }}:</td>
-      <td>{{ form.addr_2(size="40") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.city.label(class="label required") }}:</td>
-      <td>{{ form.city(size="40") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.state.label(class="label required") }}:</td>
-      <td>{{ form.state() }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.zip_code.label(class="label required") }}:</td>
-      <td>{{ form.zip_code() }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.phone.label(class="label required") }}:</td>
-      <td>{{ form.phone() }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.email.label(class="label required") }}:</td>
-      <td>{{ form.email() }}</td>
-    </tr>
+    {% endfor %}
     <tr>
       <th colspan="2" class="subheading">Volunteering Information</th>
     </tr>
-    <tr>
-      <td>{{ form.foster() }}</td>
-      <td>{{ form.foster.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.transport() }}</td>
-      <td>{{ form.transport.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.home_check() }}</td>
-      <td>{{ form.home_check.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.adopter_check() }}</td>
-      <td>{{ form.adopter_check.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.donate_crate() }}</td>
-      <td>{{ form.donate_crate.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.donate_supplies() }}</td>
-      <td>{{ form.donate_supplies.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.other() }}</td>
-      <td>{{ form.other.label(class="label") }}</td>
-    </tr>
-    <tr>
-      <th colspan="2" class="subheading"><input type="submit" value="Send" /></th> 
-    </tr>
+    {% for field in form.volunteer_for %}
+      {% if field.data %}
+      <tr>
+        <td>{{ field() }}</td>
+        <td>{{ field.label(class="label") }}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
   </table>
-</form>
+</div>
