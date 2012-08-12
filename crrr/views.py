@@ -14,6 +14,7 @@ def index():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
+    g.title = "CRRR - Admin"
     if request.method == 'POST':
         login = Login(request.POST)
         if login.validate():
@@ -29,21 +30,25 @@ def admin():
 @app.route('/about')
 def about():
     g.about = True
+    g.title = "CRRR - About"
     return render_template('about.html') 
 
 @app.route('/faq')
 def faq():
     g.faq = True
+    g.title = "CRRR - FAQ"
     return render_template('faq.html')
 
 @app.route('/available_dogs')
 def available_dogs():
     g.available_dogs = True
+    g.title = "CRRR - Available Dogs"
     return render_template('layout.html')
 
 @app.route('/application', methods=['GET', 'POST'])
 def application():
     g.application = True
+    g.title = "CRRR - Application"
     form = Application()
     if form.validate_on_submit():
         pass
@@ -52,11 +57,13 @@ def application():
 @app.route('/happy_tails')
 def happy_tails():
     g.happy_tails = True
+    g.title = "CRRR - Happy Tails"
     return render_template('layout.html')
 
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():
     g.volunteer = True
+    g.title = "CRRR - Volunteer"
     form = Volunteer()
     if form.validate_on_submit():
         name = form.first_name.data + " " + form.last_name.data
