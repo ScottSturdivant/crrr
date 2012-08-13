@@ -1,6 +1,6 @@
 from flask import request, session, render_template, flash, g
 from flaskext.mail import Message
-from crrr import app, mail
+from crrr import app, mail, query_db
 from crrr.forms import (
     Login,
     Volunteer,
@@ -43,7 +43,8 @@ def faq():
 def available_dogs():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
-    return render_template('layout.html')
+    dogs = query_db('select * from Dog_info')
+    return render_template('available.html', dogs=dogs)
 
 @app.route('/application', methods=['GET', 'POST'])
 def application():

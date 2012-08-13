@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if dogs %}
+<div id="available_dogs">
+</div> <!-- AVAILABLE_DOGS-->
+{% else %}
+<p>Bummer!  There are presently no dogs available for adoption.  Please check back
+soon!</p>
+{% endif %}
+{% endblock %}
