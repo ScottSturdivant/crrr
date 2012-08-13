@@ -18,7 +18,9 @@ with the right home. </p>
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
     {% if form.errors %}
-    <ul class="errors">
+    <p class="missing">Oh no!  Your application hasn't passed our validation!  Please ensure the following required fields are filled
+in properly:</p>
+    <ul class="missing">
       {% for field_name, field_errors in form.errors|dictsort if field_errors %}
         {% for error in field_errors %}
           <li>{{ form[field_name].label }}: {{ error }}</li>
