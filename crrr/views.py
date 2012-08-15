@@ -1,6 +1,9 @@
-from flask import request, session, render_template, flash, g
+import pdb
+from flask import request, session, render_template, flash, g, url_for, redirect
 from flaskext.mail import Message
-from crrr import app, mail, query_db
+from flask.ext.login import login_required, login_user, logout_user
+from crrr import app, mail, login_manager
+from crrr.models import User
 from crrr.forms import (
     Login,
     Volunteer,
@@ -12,15 +15,42 @@ def index():
     g.index = True
     return render_template('index.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    g.title = 'CRRR - Login'
+    form = Login(next=request.args.get('next'))
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+        if user:
+            if user.check_password(password):
+                login_user(user)
+                flash('You have logged in.')
+                pdb.set_trace() ############################## Breakpoint ##############################
+                return redirect(request.args.get("next") or url_for("index"))
+            else:
+                return render_template('login.html', form=form, error='Invalid password.')
+        else:
+            return render_template('login.html', form=form, error='Invalid user name.')
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('index'))
+
+
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin():
     g.title = "CRRR - Admin"
     if request.method == 'POST':
         login = Login(request.POST)
-        if login.validate():
-            # TODO - Authenticate
-            session['username'] = login.username
-            return redirect(url_for('admin'))
+        session['username'] = login.username
+        return redirect(url_for('admin'))
     elif request.method == 'GET':
         if 'username' in session:
             print "Logged in!"
@@ -43,8 +73,7 @@ def faq():
 def available_dogs():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
-    dogs = query_db('select * from Dog_info')
-    return render_template('available.html', dogs=dogs)
+    return render_template('available.html')
 
 @app.route('/application', methods=['GET', 'POST'])
 def application():
@@ -80,3 +109,7 @@ def volunteer():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)

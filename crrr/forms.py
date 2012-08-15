@@ -11,6 +11,7 @@ from flask.ext.wtf import (
     SelectMultipleField,
     FormField,
     FieldList,
+    HiddenField,
     validators
     )
 
@@ -78,6 +79,8 @@ class Volunteer(PersonalInfo):
 class Login(Form):
     username = TextField("Username", [validators.Length(max=12)])
     password = PasswordField("Password", [validators.Required()])
+    remember_me = BooleanField(label='Remember me')
+    submit = SubmitField('Submit')
 
 class Application(PersonalInfo):
     address_length = TextField("How long have you lived at this address?", [validators.Optional()])
