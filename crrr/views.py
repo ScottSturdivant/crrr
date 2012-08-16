@@ -1,4 +1,3 @@
-import pdb
 from flask import request, session, render_template, flash, g, url_for, redirect
 from flaskext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
@@ -18,7 +17,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     g.title = 'CRRR - Login'
-    form = Login(next=request.args.get('next'))
+    form = Login()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -27,7 +26,6 @@ def login():
             if user.check_password(password):
                 login_user(user)
                 flash('You have logged in.')
-                pdb.set_trace() ############################## Breakpoint ##############################
                 return redirect(request.args.get("next") or url_for("index"))
             else:
                 return render_template('login.html', form=form, error='Invalid password.')

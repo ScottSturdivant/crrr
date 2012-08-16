@@ -9,6 +9,6 @@ class TestAdmin:
 
     def test_show_login(self):
         """Verifies that if /admin is visited without credentials, that a login page is shown."""
-        rv = self.app.get('/admin')
+        rv = self.app.get('/admin', follow_redirects=True)
         assert "Username" in rv.data
         assert "Password" in rv.data
