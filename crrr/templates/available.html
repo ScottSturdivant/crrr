@@ -2,6 +2,9 @@
 {% block content %}
 {% if dogs %}
 <div id="available_dogs">
+{% for dog in dogs %}
+{{ dog.name }}
+{% endfor %}
 </div> <!-- AVAILABLE_DOGS-->
 {% else %}
 <p>Bummer!  There are presently no dogs available for adoption.  Please check back

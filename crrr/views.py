@@ -2,7 +2,7 @@ from flask import request, session, render_template, flash, g, url_for, redirect
 from flaskext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
 from crrr import app, mail, login_manager
-from crrr.models import User
+from crrr.models import User, Dog
 from crrr.forms import (
     Login,
     Volunteer,
@@ -71,7 +71,8 @@ def faq():
 def available_dogs():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
-    return render_template('available.html')
+    dogs = Dog.query.filter_by(adopted=False).all()
+    return render_template('available.html', dogs=dogs)
 
 @app.route('/application', methods=['GET', 'POST'])
 def application():

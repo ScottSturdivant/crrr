@@ -36,3 +36,36 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+
+
+class Dog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    adopted = db.Column(db.Boolean())
+    breed = db.Column(db.String(120))
+    sex = db.Column(db.String(1))
+    age = db.Column(db.String(120))
+    mix = db.Column(db.Boolean())
+    size = db.Column(db.String(120))
+    fee = db.Column(db.Integer)
+    description = db.Column(db.Text())
+    special_needs = db.Column(db.Boolean())
+    home_without_dogs = db.Column(db.Boolean())
+    home_without_cats = db.Column(db.Boolean())
+    home_without_kids = db.Column(db.Boolean())
+    spayed = db.Column(db.Boolean())
+    shots = db.Column(db.Boolean())
+    housetrained = db.Column(db.Boolean())
+    photo1_url = db.Column(db.String(120))
+    photo2_url = db.Column(db.String(120))
+    photo3_url = db.Column(db.String(120))
+    archive = db.Column(db.Boolean())
+    happy_tails = db.Column(db.Text())
+
+    def __init__(self, **kwargs):
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+
+    def __repr__(self):
+        return '<Dog %r: status=%s>' % (self.name, self.status)
+
