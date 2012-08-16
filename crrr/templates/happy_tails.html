@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if dogs %}
+<div id="happy_tails">
+{% for dog in dogs %}
+{{ dog.name }}
+{{ dog.happy_tails }}
+{% endfor %}
+</div> <!-- HAPPY_TAILS -->
+{% else %}
+<p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
+around to it yet.  Please check back soon!</p>
+{% endif %}
+{% endblock %}

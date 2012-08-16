@@ -67,4 +67,15 @@ class TestCrrr:
         assert 'Mackenzie' in rv.data
         assert 'Nala' not in rv.data
 
+    def test_happy_tails(self):
+        """Shows that adopted dog's stories appear."""
+        rv = self.app.get('/happy_tails')
+        assert "check back soon" in rv.data
+        self.add_dog(name='Rodeo', adopted=True)
+        self.add_dog(name='Nala', adopted=False)
+        rv = self.app.get('/happy_tails')
+        assert 'Rodeo' in rv.data
+        assert 'A nice life' in rv.data
+        assert 'Nala' not in rv.data
+
 

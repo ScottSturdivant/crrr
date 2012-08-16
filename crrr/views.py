@@ -59,7 +59,7 @@ def admin():
 def about():
     g.about = True
     g.title = "CRRR - About"
-    return render_template('about.html') 
+    return render_template('about.html')
 
 @app.route('/faq')
 def faq():
@@ -87,7 +87,8 @@ def application():
 def happy_tails():
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    return render_template('layout.html')
+    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).all()
+    return render_template('happy_tails.html', dogs=dogs)
 
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():
