@@ -1,4 +1,3 @@
-import pdb
 from flask import request, session, render_template, flash, g, url_for, redirect
 from flaskext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
@@ -99,9 +98,8 @@ def get_dogs_for_page(page, per_page, count):
 def happy_tails(page):
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    pdb.set_trace() ############################## Breakpoint ##############################
     pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).paginate(page, PER_PAGE)
-    return render_template('happy_tails.html', dogs=pagination.items)
+    return render_template('happy_tails.html', dogs=pagination.items, pagination=pagination)
 
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():

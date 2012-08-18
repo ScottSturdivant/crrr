@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from "_helpers.html" import render_pagination %}
 {% block content %}
 {% if dogs %}
 <div id="happy_tails">
@@ -20,6 +21,7 @@
   </div> <!-- HAPPY_TAILS_DOG -->
 {% endfor %}
 </div> <!-- HAPPY_TAILS -->
+{{ render_pagination(pagination) }}
 {% else %}
 <p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
 around to it yet.  Please check back soon!</p>

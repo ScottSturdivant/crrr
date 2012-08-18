@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g
+from flask import Flask, g, request, url_for
 from flask.ext.mail import Mail
 from datetime import datetime
 from contextlib import closing
@@ -9,12 +9,18 @@ from flask.ext.login import LoginManager
 def get_year():
     return datetime.now().year
 
+def url_for_other_page(page):
+    args = request.view_args.copy()
+    args['page'] = page
+    return url_for(request.endpoint, **args)
+
 app = Flask(__name__)
 app.config['MAIL_FAIL_SILENTLY '] = False
 app.config['CRRR_EMAIL'] = 'adoptions@coloradorhodesianridgebackrescue.org'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/scott/CRRR/crrrescue.db'
 app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\xb7\xad\xa4\xc9"
 app.jinja_env.globals.update(get_year=get_year)
+app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 # Create a mail handler
 mail = Mail(app)
 # And a database
