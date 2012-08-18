@@ -3,7 +3,55 @@
 {% if dogs %}
 <div id="available_dogs">
 {% for dog in dogs %}
-{{ dog.name }}
+  <div id="dog">
+    <div id="dog_name"><h2>{{ dog.name }}</h2></div>
+    <div class="dog_thumbnails">
+      {% if dog.photo1_url %}
+      <a href="/images/{{ dog.id }}/{{ dog.photo1_url }}" target="_blank">
+      <img border="0" src="/images/{{ dog.id }}/tb_{{ dog.photo1_url }}" />
+      </a>
+      {% endif %}
+      {% if dog.photo2_url %}
+      <a href="/images/{{ dog.id }}/{{ dog.photo2_url }}" target="_blank">
+      <img border="0" src="/images/{{ dog.id }}/tb_{{ dog.photo2_url }}" />
+      </a>
+      {% endif %}
+      {% if dog.photo3_url %}
+      <a href="/images/{{ dog.id }}/{{ dog.photo3_url }}" target="_blank">
+      <img border="0" src="/images/{{ dog.id }}/tb_{{ dog.photo3_url }}" />
+      </a>
+      {% endif %}
+      <a href="{{ url_for('application') }}?dog={{ dog.name }}">Adopt me!</a>
+    </div> <!-- DOG_THUMBNAILS -->
+    <div class="dog_info">
+      <table>
+        <tr>
+          <td>
+            <em>Size:</em>{{ dog.size }}<br />
+            <em>Age:</em>{{ dog.age }} <br />
+            <em>Sex:</em>{{ dog.sex }}<br />
+            <em>Mix:</em>{{ dog.mix }}<br />
+            {% if dog.fee %}<em>Fee:</em>{{ dog.fee }}<br />{% endif %}
+          </td>
+          <td>
+            <ul>
+              {% if dog.shots %}<li>Up to date on routine shots</li>{% endif %}
+              {% if dog.housetrained %}<li>Housetrained</li>{% endif %}
+              {% if dog.spayed %}<li>Altered</li>{% endif %}
+              {% if dog.special_needs %}<li>A special needs animal</li>{% endif %}
+              {% if dog.home_without_dogs %}<li>In need of a home without other dogs</li>{% endif %}
+              {% if dog.home_without_cats %}<li>In need of a home without cats</li>{% endif %}
+              {% if dog.home_without_kids %}<li>In need of a home without children</li>{% endif %}
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <em>Notes:</em><br />
+      {{ dog.description }}
+      <br />
+    </div> <!-- DOG_INFO -->
+  </div><!-- DOG -->
 {% endfor %}
 </div> <!-- AVAILABLE_DOGS-->
 {% else %}

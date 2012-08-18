@@ -78,7 +78,7 @@ def available_dogs():
 def application():
     g.application = True
     g.title = "CRRR - Application"
-    form = Application()
+    form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
         pass
     return render_template('application.html', form=form)
