@@ -1,6 +1,8 @@
+import pdb
 from flask import request, session, render_template, flash, g, url_for, redirect
 from flaskext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.sqlalchemy import Pagination
 from crrr import app, mail, login_manager
 from crrr.models import User, Dog
 from crrr.forms import (
@@ -83,12 +85,23 @@ def application():
         pass
     return render_template('application.html', form=form)
 
-@app.route('/happy_tails')
-def happy_tails():
+PER_PAGE = 10
+def get_happy_tails_dog_count():
+    return Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).count()
+
+def get_dogs_for_page(page, per_page, count):
+    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).all()
+    return dogs[(page-1) * per_page:page * per_page]
+
+
+@app.route('/happy_tails', defaults={'page': 1})
+@app.route('/happy_tails/page/<int:page>')
+def happy_tails(page):
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).all()
-    return render_template('happy_tails.html', dogs=dogs)
+    pdb.set_trace() ############################## Breakpoint ##############################
+    pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).paginate(page, PER_PAGE)
+    return render_template('happy_tails.html', dogs=pagination.items)
 
 @app.route('/volunteer', methods=['GET', 'POST'])
 def volunteer():

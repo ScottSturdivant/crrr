@@ -67,5 +67,5 @@ class Dog(db.Model):
             setattr(self, key, kwargs[key])
 
     def __repr__(self):
-        return '<Dog %r: status=%s>' % (self.name, self.status)
+        return '<Dog %r: adopted=%s>' % (self.name, self.adopted)
 
