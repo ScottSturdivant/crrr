@@ -15,7 +15,7 @@ def index():
     g.index = True
     return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     g.title = 'CRRR - Login'
     form = Login()
@@ -34,7 +34,7 @@ def login():
             return render_template('login.html', form=form, error='Invalid user name.')
     return render_template('login.html', form=form)
 
-@app.route('/logout')
+@app.route('/logout/')
 @login_required
 def logout():
     logout_user()
@@ -42,40 +42,32 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin/')
 @login_required
 def admin():
     g.title = "CRRR - Admin"
-    if request.method == 'POST':
-        login = Login(request.POST)
-        session['username'] = login.username
-        return redirect(url_for('admin'))
-    elif request.method == 'GET':
-        if 'username' in session:
-            print "Logged in!"
-        else:
-            return render_template('admin.html', form=Login())
+    return render_template('admin.html')
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     g.about = True
     g.title = "CRRR - About"
     return render_template('about.html')
 
-@app.route('/faq')
+@app.route('/faq/')
 def faq():
     g.faq = True
     g.title = "CRRR - FAQ"
     return render_template('faq.html')
 
-@app.route('/available_dogs')
+@app.route('/available_dogs/')
 def available_dogs():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
     dogs = Dog.query.filter_by(adopted=False).all()
     return render_template('available.html', dogs=dogs)
 
-@app.route('/application', methods=['GET', 'POST'])
+@app.route('/application/', methods=['GET', 'POST'])
 def application():
     g.application = True
     g.title = "CRRR - Application"
@@ -85,15 +77,7 @@ def application():
     return render_template('application.html', form=form)
 
 PER_PAGE = 10
-def get_happy_tails_dog_count():
-    return Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).count()
-
-def get_dogs_for_page(page, per_page, count):
-    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).all()
-    return dogs[(page-1) * per_page:page * per_page]
-
-
-@app.route('/happy_tails', defaults={'page': 1})
+@app.route('/happy_tails/', defaults={'page': 1})
 @app.route('/happy_tails/page/<int:page>')
 def happy_tails(page):
     g.happy_tails = True
@@ -101,7 +85,7 @@ def happy_tails(page):
     pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).paginate(page, PER_PAGE)
     return render_template('happy_tails.html', dogs=pagination.items, pagination=pagination)
 
-@app.route('/volunteer', methods=['GET', 'POST'])
+@app.route('/volunteer/', methods=['GET', 'POST'])
 def volunteer():
     g.volunteer = True
     g.title = "CRRR - Volunteer"
