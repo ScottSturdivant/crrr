@@ -87,7 +87,7 @@ def application():
 def happy_tails():
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).all()
+    dogs = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).all()
     return render_template('happy_tails.html', dogs=dogs)
 
 @app.route('/volunteer', methods=['GET', 'POST'])
