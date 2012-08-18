@@ -3,8 +3,21 @@
 {% if dogs %}
 <div id="happy_tails">
 {% for dog in dogs %}
-{{ dog.name }}
-{{ dog.happy_tails }}
+  <div id="happy_tails_dog">
+    <div class="header"><h2>{{ dog.name }}</h2></div>
+    <div class="pictures {{ loop.cycle('odd', 'even') }}">
+    {% if dog.photo1_url %}
+      <a href=/images/{{ dog.id }}/{{ dog.photo1_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo1_url }}" /></a>
+    {% endif %}
+    {% if dog.photo2_url %}
+      <a href=/images/{{ dog.id }}/{{ dog.photo2_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo2_url }}" /></a>
+    {% endif %}
+    {% if dog.photo3_url %}
+      <a href=/images/{{ dog.id }}/{{ dog.photo3_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo3_url }}" /></a>
+    {% endif %}
+    </div> <!-- PICTURES -->
+    <div class="text">{{ dog.happy_tails }}</div>
+  </div> <!-- HAPPY_TAILS_DOG -->
 {% endfor %}
 </div> <!-- HAPPY_TAILS -->
 {% else %}
