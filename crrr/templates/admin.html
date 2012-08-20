@@ -1,4 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-Welcome.
+Welcome.  <a href="{{ url_for('logout') }}">Logout</a>
+<table class="dogs">
+  <tr>
+    <th>Name</th>
+    <th>Breed</th>
+    <th>Age</th>
+    <th>Sex</th>
+    <th>Status</th>
+    <th>
+    {% if request.args.get("showarchiveddogs") %}
+    <a href="{{ url_for('admin') }}">Archived</a></th>
+    {% else %}
+    <a href="{{ url_for('admin', showarchiveddogs=True) }}">Archived</a>
+    {% endif %}
+    </th>
+  </tr>
+{% for dog in dogs %}
+  <tr>
+    <td>{{ dog.name }}</td>
+    <td>{{ dog.breed }}</td>
+    <td>{{ dog.age }}</td>
+    <td>{{ dog.sex }}</td>
+    <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
+    <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
+  </tr>
+{% endfor %}
+</table>
 {% endblock %}

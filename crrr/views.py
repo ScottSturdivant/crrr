@@ -22,10 +22,11 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        remember = form.remember_me.data
         user = User.query.filter_by(username=username).first()
         if user:
             if user.check_password(password):
-                login_user(user)
+                login_user(user, remember=remember)
                 flash('You have logged in.')
                 return redirect(request.args.get("next") or url_for("index"))
             else:
@@ -46,7 +47,12 @@ def logout():
 @login_required
 def admin():
     g.title = "CRRR - Admin"
-    return render_template('admin.html')
+    show_archived_dogs = request.args.get('showarchiveddogs')
+    if show_archived_dogs:
+        dogs = Dog.query.order_by(Dog.name).all()
+    else:
+        dogs = Dog.query.filter_by(archive=False).order_by(Dog.name).all()
+    return render_template('admin.html', dogs=dogs)
 
 @app.route('/about/')
 def about():
