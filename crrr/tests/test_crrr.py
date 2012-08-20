@@ -39,7 +39,9 @@ class TestCrrr:
     def login(self, username, password):
         with crrr.app.test_request_context():
             form = crrr.forms.Login(username=username, password=password)
-        return self.app.post('/login?next=/admin', data=form.data, follow_redirects=True)
+        self.app.get('/admin/', follow_redirects=True)
+        rv = self.app.post('/login/?next=/admin', data=form.data, follow_redirects=True)
+        return rv
 
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
@@ -49,7 +51,7 @@ class TestCrrr:
         username = 'admin'
         password = 'pass'
         self.add_user(username, 'foo@foo.com', password, True)
-        rv = self.app.get('/admin', follow_redirects=True)
+        rv = self.app.get('/admin/', follow_redirects=True)
         assert 'Username' in rv.data
         assert 'Password' in rv.data
         rv = self.login(username, password)
@@ -57,25 +59,42 @@ class TestCrrr:
 
     def test_available_dogs(self):
         """Shows that adoptable dogs appear once added."""
-        rv = self.app.get('/available_dogs')
+        rv = self.app.get('/available_dogs/')
         assert 'no dogs available' in rv.data
         self.add_dog(name='Rodeo', adopted=False)
         self.add_dog(name='Mackenzie', adopted=False)
         self.add_dog(name='Nala', adopted=True)
-        rv = self.app.get('/available_dogs')
+        rv = self.app.get('/available_dogs/')
         assert 'Rodeo' in rv.data
         assert 'Mackenzie' in rv.data
         assert 'Nala' not in rv.data
 
     def test_happy_tails(self):
         """Shows that adopted dog's stories appear."""
-        rv = self.app.get('/happy_tails')
+        rv = self.app.get('/happy_tails/')
         assert "check back soon" in rv.data
         self.add_dog(name='Rodeo', adopted=True)
         self.add_dog(name='Nala', adopted=False)
-        rv = self.app.get('/happy_tails')
+        rv = self.app.get('/happy_tails/')
         assert 'Rodeo' in rv.data
         assert 'A nice life' in rv.data
         assert 'Nala' not in rv.data
 
+    def test_admin_dog_list(self):
+        """Tests that once logged into the admin interface, they see dogs.
+
+        Also shows that the list of dogs can be toggled (archived vs. not)
+        """
+        username = 'admin'
+        password = 'pass'
+        self.add_user(username, 'foo@foo.com', password, True)
+        self.add_dog(name='Rodeo', archive=True)
+        self.add_dog(name='Nala',  archive=False)
+        self.app.get('/admin/', follow_redirects=True)
+        rv = self.login(username, password)
+        assert 'Rodeo' not in rv.data
+        assert 'Nala' in rv.data
+        rv = self.app.get('/admin/?showarchiveddogs=True')
+        assert 'Rodeo' in rv.data
+        assert 'Nala' in rv.data
 
