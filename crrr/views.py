@@ -107,6 +107,13 @@ def volunteer():
         return render_template('volunteer.html')
     return render_template('volunteer.html', form=form)
 
+@app.route('/dog/<int:id>', methods=['GET','POST'])
+@login_required
+def dog(id):
+    g.title = 'CRRR - Edit Dog'
+    dog = Dog.query.filter_by(id=id).first_or_404()
+    return render_template('dog.html', dog=dog)
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
