@@ -11,19 +11,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120))
+    password = db.Column(db.String(120), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
-    active = db.Column(db.Boolean())
+    active = db.Column(db.Boolean(), default=True)
 
     # relations
     addresses = db.relationship('Address', lazy='dynamic')
-
-    def __init__(self, username, email, password="changeme", admin=False, active=True):
-        self.username = username
-        self.email = email
-        self.set_password(password)
-        self.admin = admin
-        self.active = active
 
     def __repr__(self):
         return '<User %r: admin=%s>' % (self.username, self.admin)
