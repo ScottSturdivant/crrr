@@ -45,17 +45,58 @@ class User(db.Model):
         return True
 
 
+class DogStatus(object):
+    """
+    Enum values for the dog model's status column.
+    """
+    ADOPTABLE = 'adoptable'
+    ADOPTED   = 'adopted'
+    HOLD      = 'hold'
+    PENDING   = 'pending'
+
+
+class DogAge(object):
+    """
+    Enum values for the dog model's age column.
+    """
+    PUPPY  = 'puppy'
+    YOUNG  = 'young'
+    ADULT  = 'adult'
+    SENIOR = 'senior'
+
+
+class DogSize(object):
+    """
+    Enum values for the dog model's size column.
+    """
+    SMALL  = 'small'
+    MEDIUM = 'medium'
+    LARGE  = 'large'
+    XLARGE = 'x-large'
+
+
 class Dog(db.Model):
     __tablename__ = 'dog'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    adopted = db.Column(db.Boolean())
+    status = db.Column(db.Enum(DogStatus.ADOPTABLE,
+                               DogStatus.ADOPTED,
+                               DogStatus.HOLD,
+                               DogStatus.PENDING,
+                               name='dog_status'))
     breed = db.Column(db.String(120))
     sex = db.Column(db.String(1))
-    age = db.Column(db.String(120))
+    age = db.Column(db.Enum(DogAge.PUPPY,
+                            DogAge.YOUNG,
+                            DogAge.ADULT,
+                            DogAge.SENIOR,
+                            name='dog_age'))
     mix = db.Column(db.Boolean())
-    size = db.Column(db.String(120))
+    size = db.Column(db.Enum(DogSize.SMALL,
+                             DogSize.MEDIUM,
+                             DogSize.LARGE,
+                             DogSize.XLARGE))
     fee = db.Column(db.Integer)
     description = db.Column(db.Text())
     special_needs = db.Column(db.Boolean())
