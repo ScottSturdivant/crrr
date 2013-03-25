@@ -65,11 +65,11 @@ class Dog(db.Model):
     spayed = db.Column(db.Boolean())
     shots = db.Column(db.Boolean())
     housetrained = db.Column(db.Boolean())
-    photo1_url = db.Column(db.String(120))
-    photo2_url = db.Column(db.String(120))
-    photo3_url = db.Column(db.String(120))
     archive = db.Column(db.Boolean())
     happy_tails = db.Column(db.Text())
+
+    # relations
+    pictures = db.relationship('Picture', lazy='dynamic')
 
     def __init__(self, **kwargs):
         for key in kwargs:
@@ -77,3 +77,20 @@ class Dog(db.Model):
 
     def __repr__(self):
         return '<Dog %r: adopted=%s>' % (self.name, self.adopted)
+
+
+class Picture(db.model):
+    __tablename__ = 'picture'
+
+    id = db.Column(db.Integer, primary_key=True)
+    dog_id = db.Column(db.Integer, db.ForeignKey('dog.id'))
+    title = db.Column(db.String(1024), nullable=False, index=True)
+    file_url = db.Column(db.String(1024), nullable=False)
+    thumb_url = db.Column(db.String(1024), nullable=False)
+
+    def __init__(self, title):
+        self.title = tile
+
+    def __repr__(self):
+        return "<Picture %s>" % (self.title)
+
