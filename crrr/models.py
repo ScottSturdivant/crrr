@@ -6,6 +6,8 @@ ROLE_USER = 0
 ROLE_ADMIN = 1
 
 class User(db.Model):
+    __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
@@ -44,6 +46,8 @@ class User(db.Model):
 
 
 class Dog(db.Model):
+    __tablename__ = 'dog'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     adopted = db.Column(db.Boolean())
