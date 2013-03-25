@@ -15,6 +15,8 @@ class User(db.Model):
     role = db.Column(db.SmallInteger, default=ROLE_USER)
     active = db.Column(db.Boolean())
 
+    # relations
+    addresses = db.relationship('Address', lazy='dynamic')
 
     def __init__(self, username, email, password="changeme", admin=False, active=True):
         self.username = username
