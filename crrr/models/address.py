@@ -10,6 +10,9 @@ class Address(db.Model):
     """
     A table for storing physical addresses.
     """
+
+    __tablename__ = 'address'
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     location = db.Column(db.Enum(AddressLocation.HOME,
