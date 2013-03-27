@@ -2,7 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from crrr import db
 
 
-class DogStatus(object):
+class Status(object):
     """
     Enum values for the dog model's status column.
     """
@@ -12,7 +12,7 @@ class DogStatus(object):
     PENDING   = 'pending'
 
 
-class DogAge(object):
+class Age(object):
     """
     Enum values for the dog model's age column.
     """
@@ -22,7 +22,7 @@ class DogAge(object):
     SENIOR = 'senior'
 
 
-class DogSize(object):
+class Size(object):
     """
     Enum values for the dog model's size column.
     """
@@ -37,23 +37,23 @@ class Dog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
-    status = db.Column(db.Enum(DogStatus.ADOPTABLE,
-                               DogStatus.ADOPTED,
-                               DogStatus.HOLD,
-                               DogStatus.PENDING,
+    status = db.Column(db.Enum(Status.ADOPTABLE,
+                               Status.ADOPTED,
+                               Status.HOLD,
+                               Status.PENDING,
                                name='dog_status'))
     breed = db.Column(db.String())
     sex = db.Column(db.String())
-    age = db.Column(db.Enum(DogAge.PUPPY,
-                            DogAge.YOUNG,
-                            DogAge.ADULT,
-                            DogAge.SENIOR,
+    age = db.Column(db.Enum(Age.PUPPY,
+                            Age.YOUNG,
+                            Age.ADULT,
+                            Age.SENIOR,
                             name='dog_age'))
     mix = db.Column(db.Boolean())
-    size = db.Column(db.Enum(DogSize.SMALL,
-                             DogSize.MEDIUM,
-                             DogSize.LARGE,
-                             DogSize.XLARGE))
+    size = db.Column(db.Enum(Size.SMALL,
+                             Size.MEDIUM,
+                             Size.LARGE,
+                             Size.XLARGE))
     fee = db.Column(db.Integer)
     description = db.Column(db.Text())
     special_needs = db.Column(db.Boolean())
