@@ -10,6 +10,7 @@ class Pet(db.Model):
     __tablename__ = 'pet'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     type = db.Column(db.String(128), nullable=False)
     gender = db.Column(db.Enum(Gender.M, 
                                Gender.F,
