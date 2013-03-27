@@ -1,22 +1,24 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.login import UserMixin
 from crrr import db
 
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120), nullable=False)
+    username = db.Column(db.String(), unique=True)
+    email = db.Column(db.String(), unique=True)
+    password = db.Column(db.String(), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
     active = db.Column(db.Boolean(), default=True)
 
     # relations
     addresses = db.relationship('Address', lazy='dynamic')
+    pets = db.relationship('Pet', lazy='dynamic')
 
     def __repr__(self):
         return '<User %r: admin=%s>' % (self.username, self.admin)
