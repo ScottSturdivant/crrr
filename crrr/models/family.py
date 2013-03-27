@@ -28,11 +28,13 @@ class Family(db.Model):
                                  FamilyRelations.OTHER,
                                  name='family_relations'))
     name = db.Column(db.String())
+    age = db.Column(db.String(), nullable=True)
 
-    def __init__(self, relation, name, user_id):
-        self.relation = relation
+    def __init__(self, name, relation, user_id, age=None):
         self.name = name
+        self.relation = relation
         self.user_id = user_id
+        self.age = age
 
     def __repr__(self):
         return "<Family: %s is a %s>" % (self.name, self.relation)
