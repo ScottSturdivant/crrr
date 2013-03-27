@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     addresses = db.relationship('Address', lazy='dynamic')
     pets = db.relationship('Pet', lazy='dynamic')
     relations = db.relationship('Family', lazy='dynamic')
+    employment = db.relationship('Employment', uselist=False)
 
     def __repr__(self):
         role = 'Admin' if self.role else 'User'
