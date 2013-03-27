@@ -36,14 +36,14 @@ class Dog(db.Model):
     __tablename__ = 'dog'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
+    name = db.Column(db.String())
     status = db.Column(db.Enum(DogStatus.ADOPTABLE,
                                DogStatus.ADOPTED,
                                DogStatus.HOLD,
                                DogStatus.PENDING,
                                name='dog_status'))
-    breed = db.Column(db.String(120))
-    sex = db.Column(db.String(1))
+    breed = db.Column(db.String())
+    sex = db.Column(db.String())
     age = db.Column(db.Enum(DogAge.PUPPY,
                             DogAge.YOUNG,
                             DogAge.ADULT,

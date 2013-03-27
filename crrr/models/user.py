@@ -21,7 +21,8 @@ class User(db.Model, UserMixin):
     pets = db.relationship('Pet', lazy='dynamic')
 
     def __repr__(self):
-        return '<User %r: admin=%s>' % (self.username, self.admin)
+        role = 'Admin' if self.role else 'User'
+        return '<User %r: role=%s>' % (self.username, role)
 
     def is_active(self):
         return self.active
