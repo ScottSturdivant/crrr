@@ -39,7 +39,6 @@ class Dog(db.Model):
     archive = db.Column(db.Boolean())
     happy_tails = db.Column(db.Text())
 
-
 class Address(Form):
     addr_1     = TextField("Address Line 1", [validators.Length(min=1, max=128), validators.Required()])
     addr_2     = TextField("Address Line 2", [validators.Optional(), validators.Length(max=128)])

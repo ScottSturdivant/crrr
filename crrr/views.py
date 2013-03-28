@@ -1,5 +1,5 @@
 from flask import request, session, render_template, flash, g, url_for, redirect
-from flaskext.mail import Message
+from flask.ext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
 from flask.ext.sqlalchemy import Pagination
 from crrr import app, mail, login_manager

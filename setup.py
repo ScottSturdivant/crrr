@@ -5,6 +5,15 @@ The CRRR website.
 
 from setuptools import setup, find_packages
 
+requires = [
+        'Flask',
+        'Flask-WTF',
+        'pytest',
+        'Flask-Mail',
+        'Flask-Sqlalchemy',
+        'Flask-Login',
+        ]
+
 setup(
     author='Scott Sturdivant',
     author_email='scott.sturdivant@gmail.com',
@@ -14,5 +23,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['Flask', 'Flask-WTF', 'pytest'],
+    install_requires=requires,
 )
