@@ -60,7 +60,7 @@ class Dog(db.Model):
     home_without_dogs = db.Column(db.Boolean())
     home_without_cats = db.Column(db.Boolean())
     home_without_kids = db.Column(db.Boolean())
-    spayed = db.Column(db.Boolean())
+    fixed = db.Column(db.Boolean())
     shots = db.Column(db.Boolean())
     housetrained = db.Column(db.Boolean())
     archive = db.Column(db.Boolean())
@@ -74,5 +74,5 @@ class Dog(db.Model):
             setattr(self, key, kwargs[key])
 
     def __repr__(self):
-        return '<Dog %r: adopted=%s>' % (self.name, self.adopted)
+        return '<Dog %r: adopted=%s>' % (self.name, self.status)
 
