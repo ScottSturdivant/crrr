@@ -15,29 +15,6 @@ from flask.ext.wtf import (
     validators
     )
 
-class Dog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = TextField('Name', validators=[validators.Required(), validators.Length(min=1, max=120)])
-    adopted = SelectField('Status', choices=[('True', 'Adopted'), ('False', 'Adoptable')])
-    breed = TextField('Breed', db.Column(db.String(120))
-    sex = db.Column(db.String(1))
-    age = db.Column(db.String(120))
-    mix = db.Column(db.Boolean())
-    size = db.Column(db.String(120))
-    fee = db.Column(db.Integer)
-    description = db.Column(db.Text())
-    special_needs = db.Column(db.Boolean())
-    home_without_dogs = db.Column(db.Boolean())
-    home_without_cats = db.Column(db.Boolean())
-    home_without_kids = db.Column(db.Boolean())
-    spayed = db.Column(db.Boolean())
-    shots = db.Column(db.Boolean())
-    housetrained = db.Column(db.Boolean())
-    photo1_url = db.Column(db.String(120))
-    photo2_url = db.Column(db.String(120))
-    photo3_url = db.Column(db.String(120))
-    archive = db.Column(db.Boolean())
-    happy_tails = db.Column(db.Text())
 
 class Address(Form):
     addr_1     = TextField("Address Line 1", [validators.Length(min=1, max=128), validators.Required()])
