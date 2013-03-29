@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         role = 'Admin' if self.role else 'User'
-        return '<User %r: role=%s>' % (self.username, role)
+        return '<User %s: role=%s>' % (self.username, role)
 
     def is_active(self):
         return self.active
