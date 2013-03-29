@@ -29,7 +29,12 @@ class App(db.Model):
     archive = db.Column(db.Boolean, default=False)
 
     # relationships
-    applicant = db.relationship('User', foreign_keys=[user_id], backref='apps')
-    assignee  = db.relationship('User', foreign_keys=[assignee_id])
-    dog = db.relationship('Dog', backref='apps')
+    applicant = db.relationship('User', foreign_keys=[user_id], backref='apps',
+                                uselist=False)
+    assignee  = db.relationship('User', foreign_keys=[assignee_id],
+                                uselist=False)
+    dog = db.relationship('Dog', backref='apps', uselist=False)
 
+
+    def __repr__(self):
+        return "<App for %s is %s>" % (self.dog, self.status)
