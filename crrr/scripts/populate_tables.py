@@ -55,7 +55,7 @@ def import_dogs(dog_csv):
             dog.shots = str_to_bool(shots)
             dog.housetrained = str_to_bool(house)
             dog.archive = str_to_bool(archive)
-            dog.happy_tails = tails.strip()
+            dog.happy_tails = tails.strip('"\n') if tails.strip('"\n') else None
 
             pictures = []
             for url in [url1, url2, url3]:
