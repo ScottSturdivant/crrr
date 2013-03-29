@@ -25,6 +25,11 @@ class Address(db.Model):
     state = db.Column(db.String(), nullable=False)
     zip = db.Column(db.String(), nullable=False)
     duration = db.Column(db.String(), nullable=True)
+    clinic = db.Column(db.String())
+    vet_name = db.Column(db.String())
+
+    # relations
+    phones = db.relationship('Phone', lazy='dynamic')
 
     def __repr__(self):
         if self.line_2:
