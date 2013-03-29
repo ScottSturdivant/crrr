@@ -6,7 +6,6 @@ class Picture(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     dog_id = db.Column(db.Integer, db.ForeignKey('dog.id'))
-    title = db.Column(db.String(), nullable=False, index=True)
     file_url = db.Column(db.String(), nullable=False)
     thumb_url = db.Column(db.String(), nullable=False)
 
@@ -14,5 +13,5 @@ class Picture(db.Model):
         self.title = tile
 
     def __repr__(self):
-        return "<Picture %s>" % (self.title)
+        return "<Picture %s>" % (self.file_url)
 
