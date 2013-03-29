@@ -9,9 +9,6 @@ class Picture(db.Model):
     file_url = db.Column(db.String(), nullable=False)
     thumb_url = db.Column(db.String(), nullable=False)
 
-    def __init__(self, title):
-        self.title = tile
-
     def __repr__(self):
         return "<Picture %s>" % (self.file_url)
 
