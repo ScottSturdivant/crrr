@@ -13,6 +13,7 @@ class Phone(db.Model):
     number = db.Column(db.String())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteer.id'))
     location = db.Column(db.Enum(Types.HOME,
                                  Types.WORK,
                                  Types.CELL,
