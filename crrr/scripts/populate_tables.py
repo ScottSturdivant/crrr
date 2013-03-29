@@ -10,6 +10,7 @@ from crrr.models import (
         User,
         Address,
         App,
+        Picture,
         Profile,
         Pet,
         Employment,
@@ -55,6 +56,12 @@ def import_dogs(dog_csv):
             dog.housetrained = str_to_bool(house)
             dog.archive = str_to_bool(archive)
             dog.happy_tails = tails.strip()
+
+            pictures = []
+            for url in [url1, url2, url3]:
+                if url:
+                    pictures.append(Picture(file_url=url, thumb_url="tb_"+url))
+            dog.pictures.extend(pictures)
 
             print "Created: ", dog
 
