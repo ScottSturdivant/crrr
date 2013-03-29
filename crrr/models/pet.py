@@ -11,14 +11,16 @@ class Pet(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     type = db.Column(db.String(), nullable=False)
+    name = db.Column(db.String())
     gender = db.Column(db.Enum(Gender.M, 
                                Gender.F,
                                name='pet_gender'),
                        nullable=False)
+    age = db.Column(db.String())
     altered = db.Column(db.Boolean, nullable=False)
-    name = db.Column(db.String(), nullable=False)
-    whathappened = db.Column(db.Text, nullable=False)
+    whathappened = db.Column(db.Text)
 
     def __repr__(self):
         return "<Pet: %s>" % (self.name)
