@@ -69,10 +69,6 @@ class Dog(db.Model):
     # relations
     pictures = db.relationship('Picture', lazy='dynamic')
 
-    def __init__(self, **kwargs):
-        for key in kwargs:
-            setattr(self, key, kwargs[key])
-
     def __repr__(self):
         return '<Dog %r: adopted=%s>' % (self.name, self.status)
 

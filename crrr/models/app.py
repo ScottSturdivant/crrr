@@ -31,4 +31,5 @@ class App(db.Model):
     # relationships
     applicant = db.relationship('User', foreign_keys=[user_id], backref='apps')
     assignee  = db.relationship('User', foreign_keys=[assignee_id])
+    dog = db.relationship('Dog', backref='apps')
 
