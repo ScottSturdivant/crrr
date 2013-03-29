@@ -24,6 +24,7 @@ class Address(db.Model):
     city = db.Column(db.String(), nullable=False)
     state = db.Column(db.String(), nullable=False)
     zip = db.Column(db.String(), nullable=False)
+    duration = db.Column(db.String(), nullable=True)
 
     def __repr__(self):
         if self.line_2:
