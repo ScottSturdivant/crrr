@@ -15,12 +15,16 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
     active = db.Column(db.Boolean(), default=True)
+    first_name = db.Column(db.String())
+    last_name = db.Column(db.String())
 
     # relations
     addresses = db.relationship('Address', lazy='dynamic')
     pets = db.relationship('Pet', lazy='dynamic')
     relations = db.relationship('Family', lazy='dynamic')
-    employment = db.relationship('Employment', uselist=False)
+    employment = db.relationship('Employment', lazy='dynamic')
+    phones = db.relationship('Phone', lazy='dynamic')
+    profile = db.relationship('Profile', uselist=False)
 
     def __repr__(self):
         role = 'Admin' if self.role else 'User'
