@@ -1,8 +1,8 @@
 from crrr import db
 
 class Status(object):
-    FULL = 'full'
-    PART = 'part'
+    FULL = 'full time'
+    PART = 'part time'
     NONE = 'unemployed'
 
 
