@@ -8,3 +8,4 @@ from phone import Phone
 from picture import Picture
 from profile import Profile
 from user import User
+from volunteer import Volunteeer
