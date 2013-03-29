@@ -4,6 +4,7 @@ from employment import Employment
 from dog import Dog
 from family import Family
 from pet import Pet
+from phone import Phone
 from picture import Picture
 from profile import Profile
 from user import User
