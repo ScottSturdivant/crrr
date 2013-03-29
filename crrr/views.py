@@ -70,7 +70,7 @@ def faq():
 def available_dogs():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
-    dogs = Dog.query.filter_by(adopted=False).all()
+    dogs = Dog.query.filter_by(status='adoptable').order_by(Dog.name).all()
     return render_template('available.html', dogs=dogs)
 
 @app.route('/application/', methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ PER_PAGE = 10
 def happy_tails(page):
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.adopted == True).order_by(Dog.name).paginate(page, PER_PAGE)
+    pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.status == 'adopted').order_by(Dog.name).paginate(page, PER_PAGE)
     return render_template('happy_tails.html', dogs=pagination.items, pagination=pagination)
 
 @app.route('/volunteer/', methods=['GET', 'POST'])
