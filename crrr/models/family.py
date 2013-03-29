@@ -1,6 +1,6 @@
 from crrr import db
 
-class FamilyRelations(object):
+class Relations(object):
     NA = 'N/A'
     SPOUSE = 'spouse'
     PARTNER = 'partner'
@@ -17,24 +17,21 @@ class Family(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    relation = db.Column(db.Enum(FamilyRelations.NA,
-                                 FamilyRelations.SPOUSE,
-                                 FamilyRelations.PARTNER,
-                                 FamilyRelations.BROTHER,
-                                 FamilyRelations.SISTER,
-                                 FamilyRelations.SON,
-                                 FamilyRelations.DAUGHTER,
-                                 FamilyRelations.FRIEND,
-                                 FamilyRelations.OTHER,
+    relation = db.Column(db.Enum(Relations.NA,
+                                 Relations.SPOUSE,
+                                 Relations.PARTNER,
+                                 Relations.BROTHER,
+                                 Relations.SISTER,
+                                 Relations.SON,
+                                 Relations.DAUGHTER,
+                                 Relations.FRIEND,
+                                 Relations.OTHER,
                                  name='family_relations'))
     name = db.Column(db.String())
     age = db.Column(db.String(), nullable=True)
 
-    def __init__(self, name, relation, user_id, age=None):
-        self.name = name
-        self.relation = relation
-        self.user_id = user_id
-        self.age = age
-
     def __repr__(self):
         return "<Family: %s is a %s>" % (self.name, self.relation)
+
+    def __nonzero__(self):
+        return False if self.relation == Relations.NA else True
