@@ -72,4 +72,14 @@ class Profile(db.Model):
     fence = db.Column(db.Enum(*yes_no,
                               name='profile_fence'))
     fence_details = db.Column(db.Text)
+    ridgeback_gender = db.Column(db.Enum('either', 'male', 'female',
+                                         name='profile_ridgeback_gender'))
+    ridgeback_age = db.Column(db.String())
+    ridgeback_ridges = db.Column(db.Enum('either', 'ridged', 'ridgeless',
+                                         name='profile_ridgeback_ridges'))
+    ridgeback_purebred = db.Column(db.Enum('either', 'purebred', 'mixed',
+                                           name='profile_ridgeback_purebred'))
+    ridgeback_health_problems = db.Column(db.String())
+    ridgeback_social_problems = db.Column(db.String())
+                                       
 
