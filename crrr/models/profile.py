@@ -1,37 +1,11 @@
 from crrr import db
 
-locations = [
-    'house',
-    'garage',
-    'basement'
-    'laundry room',
-    'yard',
-    'outdoor kennel',
-    'tie out',
-    'crate',
-    'dog run',
-    'other'
-    ]
-
-reasons = [
-    'companion',
-    'guard dog',
-    'gift',
-    'breeding',
-    'protection',
-    'competition',
-    'agility',
-    'lure coursing',
-    'obedience',
-    'other',
-    ]
-
 housing = ['house','townhome','apartment','condo',
            'mobile home','ranch','farm','duplex','other']
 
 ownership = ['own', 'rent']
 
-proof = ['yes', 'no', 'n/a']
+proof = ['yes', 'no', 'na']
 
 yes_no = ['yes', 'no']
 
@@ -46,16 +20,13 @@ class Profile(db.Model):
     home = db.Column(db.String())
     needs = db.Column(db.Text)
     alone_time = db.Column(db.String())
-    dog_kept_home = db.Column(db.Enum(*locations,
-                                      name='profile_dog_kept_home'))
-    dog_kept_away = db.Column(db.Enum(*locations,
-                                      name='profile_dog_kept_away'))
+    dog_kept_home = db.Column(db.String())
+    dog_kept_away = db.Column(db.String())
     dog_door = db.Column(db.String())
     transport = db.Column(db.String())
     crate = db.Column(db.String())
     sleep = db.Column(db.String())
-    why_ridgebacks = db.Column(db.Enum(*reasons,
-                                       name='profile_why_ridgebacks'))
+    why_ridgebacks = db.Column(db.String())
     before_pets = db.Column(db.Text)
     expenses = db.Column(db.String())
     day_in_the_life = db.Column(db.Text)
