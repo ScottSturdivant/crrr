@@ -4,6 +4,7 @@ This script is intended to take data from csv files dumped from the original
 mysql database and add them to the dev or production databases.
 """
 import argparse
+import os
 from crrr import db
 from crrr.models import (
         Dog,
@@ -81,7 +82,7 @@ def import_users(user_csv):
 
             user = User()
             user.username  = uname.strip('"')
-            user.password  = password
+            user.password  = os.environ.get('ADMIN_PASSWORD', password)
             user.firstname = fname
             user.lastname  = lname
             user.role = 1
