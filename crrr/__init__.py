@@ -29,5 +29,10 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.setup_app(app)
 login_manager.login_view = '/login'
-import crrr.views
+
+# Views
+import crrr.views.views
+import crrr.views.user
+
+#import crrr.views
 import crrr.models

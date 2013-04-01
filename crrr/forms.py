@@ -1,5 +1,6 @@
 import re
 from crrr.states import STATES
+from crrr.models import User
 from flask.ext.wtf import (
     Form,
     IntegerField,
@@ -15,6 +16,36 @@ from flask.ext.wtf import (
     validators
     )
 
+class CreateUser(Form):
+    username = TextField("User Name", [validators.Required('A username is required.')])
+    email = TextField('Email', [validators.Email("This doesn't appear to be a valid email address."),
+                                validators.Required('An email address is required.')])
+    password = PasswordField('Password', [validators.Required("You're going to need a password."),
+                                          validators.EqualTo('confirm', message='Passwords must match.')])
+    confirm = PasswordField('Repeat Password')
+    register = SubmitField('Register')
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user = User.query.filter(User.username==self.username.data).first()
+        if user:
+            self.username.errors.append('This username is already taken.')
+            return False
+
+        user = User.query.filter(User.email==self.email.data).first()
+        if user:
+            self.email.errors.append('This email address is already in use.')
+            return False
+
+        self.user = user
+        return True
 
 class Address(Form):
     addr_1     = TextField("Address Line 1", [validators.Length(min=1, max=128), validators.Required()])

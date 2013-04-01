@@ -14,3 +14,6 @@ class Confirm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     hash = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return "<Confirm user id: %d, hash=%s>" % (self.user_id, self.hash)

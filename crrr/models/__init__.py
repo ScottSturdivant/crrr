@@ -1,5 +1,6 @@
 from address import Address
 from app import App
+from confirm import Confirm
 from employment import Employment
 from dog import Dog
 from family import Family

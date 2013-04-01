@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(), unique=True)
     password = db.Column(db.String(), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
-    active = db.Column(db.Boolean(), default=True)
+    active = db.Column(db.Boolean(), default=False)
     first_name = db.Column(db.String())
     last_name = db.Column(db.String())
 
@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     employment = db.relationship('Employment', lazy='dynamic')
     phones = db.relationship('Phone', lazy='dynamic')
     profile = db.relationship('Profile', uselist=False)
+    confirmation = db.relationship('Confirm', uselist=False)
 
     def __repr__(self):
         role = 'Admin' if self.role else 'User'
