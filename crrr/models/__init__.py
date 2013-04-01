@@ -8,5 +8,6 @@ from pet import Pet
 from phone import Phone
 from picture import Picture
 from profile import Profile
+from reset import Reset
 from user import User
 from volunteer import Volunteer

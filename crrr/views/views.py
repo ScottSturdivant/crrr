@@ -1,6 +1,6 @@
 from flask import request, session, render_template, flash, g, url_for, redirect
 from flask.ext.mail import Message
-from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.login import login_required, login_user, logout_user, current_user
 from flask.ext.sqlalchemy import Pagination
 from crrr import app, mail, login_manager
 from crrr.models import User, Dog
@@ -20,19 +20,10 @@ def login():
     g.title = 'CRRR - Login'
     form = Login()
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        remember = form.remember_me.data
-        user = User.query.filter_by(username=username).first()
-        if user:
-            if user.check_password(password):
-                login_user(user, remember=remember)
-                flash('You have logged in.')
-                return redirect(request.args.get("next") or url_for("index"))
-            else:
-                return render_template('login.html', form=form, error='Invalid password.')
-        else:
-            return render_template('login.html', form=form, error='Invalid user name.')
+        user = User.query.filter(User.username==form.username.data).first()
+        login_user(user, remember=form.remember_me.data)
+        flash('You have logged in.')
+        return redirect(request.args.get("next") or url_for("index"))
     return render_template('login.html', form=form)
 
 @app.route('/logout/')
@@ -121,3 +112,7 @@ def page_not_found(error):
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
+
+@app.before_request
+def before_request():
+    g.user = current_user

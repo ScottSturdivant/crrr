@@ -1,10 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if error %}
-<strong>{{ error }}</strong>
-{% endif %}
-{% if form.errors %}
-{% for error in form.errors %}
+{% if form.login_errors %}
+{% for error in form.login_errors %}
 {{ error }}
 {% endfor %}
 {% endif %}
@@ -15,4 +12,6 @@
     <div>{{ form.remember_me.label }}: {{ form.remember_me() }}</div>
     <div>{{ form.submit() }}</div>
 </form>
+<div><a href="{{ url_for('register') }}">Register</a></div>
+<div><a href="{{ url_for('reset') }}">Reset Password</a></div>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    <div>{{ form.hidden_tag() }}</div>
+    <div>{{ form.email.label }}: {{ form.email }}</div>
+    {% if form.email.errors %}
+        <ul class="errors">{% for error in form.email.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    <div>{{ form.send }}</div>
+</form>
+{% endblock %}

@@ -15,9 +15,9 @@
 
 {% macro render(field, colon=True) -%}
   {% if field.flags.required %}
-    {{ field.label(class="label long sub required") }}{% if colon %}:{% endif %}
+    {{ with_errors(field.label(class="label long sub required")) }}{% if colon %}:{% endif %}
   {% else %}
-    {{ field.label(class="label long sub") }}{% if colon %}:{% endif %}
+    {{ with_errors(field.label(class="label long sub")) }}{% if colon %}:{% endif %}
   {% endif %}
     {{ field() }}
   <br />
@@ -51,4 +51,16 @@
       }}">Next &raquo;</a>
   {% endif %}
   </div>
+{% endmacro %}
+
+{% macro with_errors(field) %}
+    <div class="form_field">
+    {% if field.errors %}
+        {% set css_class = 'has_error ' + kwargs.pop('class', '') %}
+        {{ field(class=css_class, **kwargs) }}
+        <ul class="errors">{% for error in field.errors %}<li>{{ error|e }}</li>{% endfor %}</ul>
+    {% else %}
+        {{ field(**kwargs) }}
+    {% endif %}
+    </div>
 {% endmacro %}

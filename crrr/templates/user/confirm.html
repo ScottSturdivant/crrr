@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>Great {{ user.username }}!  Your account has now been confirmed!  Feel free to <a href="{{
+        url_for('login') }}">Login</a></div>
+{% endblock %}

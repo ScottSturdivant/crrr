@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    <div>{{ form.hidden_tag() }}</div>
+    <div>{{ form.password.label }}: {{ form.password }}</div>
+    {% if form.password.errors %}
+        <ul class="errors">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    <div>{{ form.confirm.label }}: {{ form.confirm}}</div>
+    <div>{{ form.reset }}</div>
+</form>
+{% endblock %}

@@ -16,6 +16,35 @@ from flask.ext.wtf import (
     validators
     )
 
+
+class Email(Form):
+    email = TextField('Email', [validators.Email("This doesn't appear to be a valid email address."),
+                                validators.Required('An email address is required.')])
+    send = SubmitField('Send')
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+        
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user = User.query.filter(User.email==self.email.data).first()
+        if user is None:
+            self.email.errors.append('Sorry, we have no record for this email address.')
+            return False
+
+        self.user = user
+        return True
+
+class ResetPassword(Form):
+    password = PasswordField('Password', [validators.Required("You're goign to need a password."),
+                                          validators.EqualTo('confirm', message='Passwords must match.')])
+    confirm = PasswordField('Repeat Password')
+    reset = SubmitField('Reset')
+
 class CreateUser(Form):
     username = TextField("User Name", [validators.Required('A username is required.')])
     email = TextField('Email', [validators.Email("This doesn't appear to be a valid email address."),
@@ -111,6 +140,31 @@ class Login(Form):
     password = PasswordField("Password", [validators.Required()])
     remember_me = BooleanField(label='Remember me')
     submit = SubmitField('Submit')
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.login_errors = []
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user = User.query.filter(User.username==self.username.data).first()
+        if user is None:
+            self.login_errors.append('Login failed.')
+            return False
+
+        if not user.check_password(self.password.data):
+            self.login_errors.append('Login failed.')
+            return False
+
+        if not user.active:
+            self.login_errors.append('This account is inactive.')
+            return False
+
+        return True
+
 
 class Application(PersonalInfo):
     address_length = TextField("How long have you lived at this address?", [validators.Optional()])
