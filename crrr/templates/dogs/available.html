@@ -21,7 +21,7 @@
       <img border="0" src="/images/{{ dog.id }}/tb_{{ dog.photo3_url }}" />
       </a>
       {% endif %}
-      <a href="{{ url_for('application') }}?dog={{ dog.name }}">Adopt me!</a>
+      <a href="{{ url_for('root.application') }}?dog={{ dog.name }}">Adopt me!</a>
     </div> <!-- DOG_THUMBNAILS -->
     <div class="dog_info">
       <table>

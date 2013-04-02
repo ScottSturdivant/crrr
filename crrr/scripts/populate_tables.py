@@ -6,17 +6,21 @@ mysql database and add them to the dev or production databases.
 import argparse
 import os
 from crrr import db
-from crrr.models import (
+from crrr.dogs.models import (
         Dog,
+        Picture,
+        )
+from crrr.user.models import (
         User,
         Address,
-        App,
-        Picture,
         Profile,
         Pet,
         Employment,
         Family,
         Phone
+        )
+from crrr.root.models import (
+        App,
         )
 CODEC = 'utf-8'
 
@@ -82,7 +86,7 @@ def import_users(user_csv):
 
             user = User()
             user.username  = uname.strip('"')
-            user.password  = os.environ.get('ADMIN_PASSWORD', password)
+            user.set_password(os.environ.get('ADMIN_PASSWORD', password))
             user.firstname = fname
             user.lastname  = lname
             user.role = 1
