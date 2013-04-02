@@ -53,14 +53,14 @@ def volunteer():
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
 
-#@app.errorhandler(404)
-#def page_not_found(error):
-#    return render_template('page_not_found.html'), 404
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
 
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
 
-#@app.before_request
-#def before_request():
-#    g.user = current_user
+@app.before_request
+def before_request():
+    g.user = current_user
