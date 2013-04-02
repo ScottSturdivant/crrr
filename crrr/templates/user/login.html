@@ -2,16 +2,45 @@
 {% block content %}
 {% if form.login_errors %}
 {% for error in form.login_errors %}
-{{ error }}
+<div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ error }}
+</div>
 {% endfor %}
 {% endif %}
+<div class="span5 offset4">
 <form method="POST" action="">
-    <div>{{ form.hidden_tag() }}</div>
-    <div>{{ form.username.label }}: {{ form.username() }}</div>
-    <div>{{ form.password.label }}: {{ form.password() }}</div>
-    <div>{{ form.remember_me.label }}: {{ form.remember_me() }}</div>
-    <div>{{ form.submit() }}</div>
+    <fieldset>
+        <legend>Login</legend>
+        <div>{{ form.hidden_tag() }}</div>
+        {{ form.username.label }}
+        {% if form.username.errors %}
+        {% for error in form.username.errors %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endfor %}
+        {% endif %}
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span>
+            {{ form.username(placeholder="Username") }}
+        </div>
+        <label for="password">Password (<a href="{{ url_for('user.reset') }}">Reset Password</a>)</label>
+        {% if form.password.errors %}
+        {% for error in form.password.errors %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endfor %}
+        {% endif %}
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-key"></i></span>
+            {{ form.password(placeholder="Password") }}
+        </div>
+        <label class="checkbox">
+            <input type="checkbox"> Remember me
+        </label>
+        <div class="form-actions">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('user.register') }}"><button type="button" class="btn">Register</button></a>
+        </div>
+        </fieldset>
 </form>
-<div><a href="{{ url_for('user.register') }}">Register</a></div>
-<div><a href="{{ url_for('user.reset') }}">Reset Password</a></div>
+</div>
 {% endblock %}

@@ -115,6 +115,7 @@ def reset():
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
     g.title = 'CRRR - Login'
+    g.login = True
     form = Login()
     if form.validate_on_submit():
         user = User.query.filter(User.username==form.username.data).first()

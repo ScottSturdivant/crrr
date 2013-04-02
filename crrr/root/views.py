@@ -14,13 +14,13 @@ mod = Blueprint('root', __name__, url_prefix='/')
 @mod.route('/')
 def index():
     g.index = True
-    return render_template('index.html')
+    return render_template('root/index.html')
 
 @mod.route('about/')
 def about():
     g.about = True
     g.title = "CRRR - About"
-    return render_template('about.html')
+    return render_template('root/about.html')
 
 @mod.route('faq/')
 def faq():

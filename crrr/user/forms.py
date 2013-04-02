@@ -111,10 +111,10 @@ class PersonalInfo(Address):
 
 
 class Login(Form):
-    username = TextField("Username", [validators.Length(max=12)])
+    username = TextField("Username", [validators.Required()])
     password = PasswordField("Password", [validators.Required()])
     remember_me = BooleanField(label='Remember me')
-    submit = SubmitField('Submit')
+    submit = SubmitField('Login')
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -127,11 +127,11 @@ class Login(Form):
 
         user = User.query.filter(User.username==self.username.data).first()
         if user is None:
-            self.login_errors.append('Login failed.')
+            self.login_errors.append('Incorrect username or password.')
             return False
 
         if not user.check_password(self.password.data):
-            self.login_errors.append('Login failed.')
+            self.login_errors.append('Incorrect username or password.')
             return False
 
         if not user.active:
