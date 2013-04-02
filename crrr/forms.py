@@ -1,6 +1,6 @@
 import re
 from crrr.states import STATES
-from crrr.models import User
+from crrr.user.models import User
 from flask.ext.wtf import (
     Form,
     IntegerField,

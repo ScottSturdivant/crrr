@@ -1,19 +1,19 @@
 <ul id="nav">
   <li class="first{% if g.index %} current{% endif %}"><a href="/">Home</a></li>
   {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
-  <li class="{% if g.admin %}current{% endif %}"><a href={{ url_for('admin')
+  <li class="{% if g.admin %}current{% endif %}"><a href={{ url_for('root.admin')
       }}>Admin</a></li>
   {% endif %}
-  <li class="{% if g.about %}current{% endif %}"><a href={{ url_for('about') }}>The Breed</a></li>
-  <li class="{% if g.faq %}current{% endif %}"><a href={{ url_for('faq') }}>FAQs</a></li>
-  <li class="{% if g.available_dogs %}current{% endif %}"><a href={{ url_for('available_dogs') }}>Available Dogs</a></li>
-  <li class="{% if g.happy_tails %}current{% endif %}"><a href={{ url_for('happy_tails') }}>Happy Tails</a></li>
-  <li class="{% if g.application %}current{% endif %}"><a href={{ url_for('application') }}>Application</a></li>
-  <li class="{% if g.volunteer %} current{% endif %}"><a href={{ url_for('volunteer') }}>Volunteer</a></li>
+  <li class="{% if g.about %}current{% endif %}"><a href={{ url_for('root.about') }}>The Breed</a></li>
+  <li class="{% if g.faq %}current{% endif %}"><a href={{ url_for('root.faq') }}>FAQs</a></li>
+  <li class="{% if g.available_dogs %}current{% endif %}"><a href={{ url_for('root.available_dogs') }}>Available Dogs</a></li>
+  <li class="{% if g.happy_tails %}current{% endif %}"><a href={{  url_for('root.happy_tails') }}>Happy Tails</a></li>
+  <li class="{% if g.application %}current{% endif %}"><a href={{ url_for('root.application') }}>Application</a></li>
+  <li class="{% if g.volunteer %} current{% endif %}"><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
   {% if g.user.is_authenticated() %}
-  <li class="last {% if g.logout %} current{% endif %}"><a href={{url_for('logout') }}>Logout</a></li>
+  <li class="last {% if g.logout %} current{% endif %}"><a href={{url_for('user.logout') }}>Logout</a></li>
   {% else %}
-  <li class="last {% if g.logout %} current{% endif %}"><a href={{url_for('login') }}>Login</a></li>
+  <li class="last {% if g.logout %} current{% endif %}"><a href={{url_for('user.login') }}>Login</a></li>
   {% endif %}
 </ul>
 <div class="blank">&nbsp;</div> <!-- blank -->

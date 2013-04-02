@@ -4,25 +4,28 @@ from datetime import (
         timedelta,
         datetime
         )
-from flask import render_template, flash, url_for, abort
-from flask.ext.login import login_required
+from flask import Blueprint, render_template, flash, url_for, abort, g, redirect, request
+from flask.ext.login import login_required, login_user, logout_user
 from crrr import app, db
-from crrr.models import (
+from crrr.user.models import (
         User,
         Confirm,
         Reset,
         )
-from crrr.forms import (
+from crrr.user.forms import (
         CreateUser,
         ResetPassword,
         Email,
         Login,
         )
 
+mod = Blueprint('user', __name__, url_prefix='/user')
+
+
 def create_hash():
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(32))
 
-@app.route('/user/register/', methods=['GET', 'POST'])
+@mod.route('/register/', methods=['GET', 'POST'])
 def register():
     form = CreateUser()
     if form.validate_on_submit():
@@ -37,12 +40,12 @@ def register():
         db.session.add(user)
         db.session.commit()
         # TODO: send email with confirmation link
-        flash('A confirmation email has ben sent your way.')
+        flash('A confirmation email has been sent your way.')
         return "User %s created with confirmation hash: %s" % (user, hash)
     else:
         return render_template('user/register.html', form=form)
 
-@app.route('/user/confirm/<hash>')
+@mod.route('/confirm/<hash>')
 def confirm(hash):
     result = db.session.query(Confirm, User).join(User).\
                       filter(Confirm.hash==hash).\
@@ -57,12 +60,12 @@ def confirm(hash):
     db.session.commit()
     return render_template('user/confirm.html', user=user)
 
-@app.route('/user/edit/')
+@mod.route('/edit/')
 @login_required
 def edit():
     return 'Edit'
 
-@app.route('/user/reset/<hash>/', methods=['GET', 'POST'])
+@mod.route('/reset/<hash>/', methods=['GET', 'POST'])
 def reset_hash(hash):
     result = db.session.query(User, Reset).join(Reset).\
                         filter(Reset.hash==hash).\
@@ -91,11 +94,11 @@ def reset_hash(hash):
         db.session.commit()
         flash('Your password was successfully reset.')
         login = Login()
-        return render_template('login.html', form=login)
+        return render_template('user/login.html', form=login)
     else:
-        return render_template('/user/reset_hash.html', form=form)
+        return render_template('user/reset_hash.html', form=form)
 
-@app.route('/user/reset/', methods=['GET', 'POST'])
+@mod.route('/reset/', methods=['GET', 'POST'])
 def reset():
     form = Email()
     if form.validate_on_submit():
@@ -107,4 +110,23 @@ def reset():
         flash('An email has been sent with instructions for resetting your password.')
         return render_template('index.html')
     else:
-        return render_template('/user/reset.html', form=form)
+        return render_template('user/reset.html', form=form)
+
+@mod.route('/login/', methods=['GET', 'POST'])
+def login():
+    g.title = 'CRRR - Login'
+    form = Login()
+    if form.validate_on_submit():
+        user = User.query.filter(User.username==form.username.data).first()
+        login_user(user, remember=form.remember_me.data)
+        flash('You have logged in.')
+        return redirect(request.args.get("next") or url_for("root.index"))
+    return render_template('user/login.html', form=form)
+
+@mod.route('/logout/')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('root.index'))
+
