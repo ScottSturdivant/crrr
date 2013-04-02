@@ -15,9 +15,9 @@
 
 {% macro render(field, colon=True) -%}
   {% if field.flags.required %}
-    {{ with_errors(field.label(class="label long sub required")) }}{% if colon %}:{% endif %}
+    {{ field.label(class="label long sub required") }}{% if colon %}:{% endif %}
   {% else %}
-    {{ with_errors(field.label(class="label long sub")) }}{% if colon %}:{% endif %}
+    {{ field.label(class="label long sub") }}{% if colon %}:{% endif %}
   {% endif %}
     {{ field() }}
   <br />

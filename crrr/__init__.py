@@ -37,6 +37,3 @@ from crrr.dogs.views import mod as dogsModule
 app.register_blueprint(userModule)
 app.register_blueprint(rootModule)
 app.register_blueprint(dogsModule)
-
-#import crrr.views
-import crrr.models

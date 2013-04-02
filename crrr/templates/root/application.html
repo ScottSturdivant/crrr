@@ -14,7 +14,7 @@ visit to make sure the dog will be going to a safe place, and to chat about
 what you are looking for in a dog.  That way we can help match the right dog
 with the right home. </p>
 <div id="application">
-  <form method="POST" action={{ url_for('application') }}>
+  <form method="POST" action={{ url_for('root.application') }}>
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
     {% if form.errors %}

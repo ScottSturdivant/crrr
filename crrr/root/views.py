@@ -4,7 +4,7 @@ from flask.ext.login import login_required, login_user, logout_user, current_use
 from crrr import app, mail, login_manager
 from crrr.user.models import User
 from crrr.dogs.models import Dog
-from crrr.forms import (
+from crrr.root.forms import (
     Volunteer,
     Application,
     )
@@ -37,7 +37,7 @@ def about():
 def faq():
     g.faq = True
     g.title = "CRRR - FAQ"
-    return render_template('faq.html')
+    return render_template('root/faq.html')
 
 @mod.route('application/', methods=['GET', 'POST'])
 def application():
@@ -46,7 +46,7 @@ def application():
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
         pass
-    return render_template('application.html', form=form)
+    return render_template('root/application.html', form=form)
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
 def volunteer():
@@ -59,10 +59,10 @@ def volunteer():
                       sender=(name, form.email.data),
                       recipients=[app.config.get('CRRR_EMAIL'),
                                   (name, form.email.data)])
-        msg.html = render_template('email_volunteer.html', form=form),
+        msg.html = render_template('root/email_volunteer.html', form=form),
         mail.send(msg)
-        return render_template('volunteer.html')
-    return render_template('volunteer.html', form=form)
+        return render_template('root/volunteer.html')
+    return render_template('root/volunteer.html', form=form)
 
 @app.errorhandler(404)
 def page_not_found(error):

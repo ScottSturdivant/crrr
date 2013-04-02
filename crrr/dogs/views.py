@@ -5,7 +5,7 @@ from flask.ext.sqlalchemy import Pagination
 from crrr import app, mail, login_manager
 from crrr.user.models import User
 from crrr.dogs.models import Dog
-from crrr.forms import (
+from crrr.root.forms import (
     Volunteer,
     Application,
     )
