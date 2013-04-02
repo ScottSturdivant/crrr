@@ -1,27 +1,39 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     {% block head %}
+    <meta charset="utf-8" />
     {% if g.title %}
       <title>{{ g.title }}</title>
     {% else %}
       <title>Colorado Rhodesian Ridgeback Rescue</title>
     {% endif %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" media="screen" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" href="{{ url_for('static', filename='animated_favicon1.gif') }}" type="image/gif">
     <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
-    <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='geo.js')}} "></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
     {% endblock %}
   </head>
 <body>
-  <div id="heading">
-    {% include "includes/heading.html" %}
-  </div>  <!--heading-->
-  <div id="menu">
+  <header role="banner">
+  <div class="container">
+  <div class="row-fluid">
+  <div class="span12">
+    {% include "includes/header.html" %}
     {% include "includes/nav.html" %}
-  </div> <!--menu-->
-  <div id="content">
+  </div>
+  </div>
+  </div>
+  </header>
+  <main role="main">
+  <div class="container">
+  <div class="row-fluid">
+  <div id="content" class="span12">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul class=flashes
@@ -31,8 +43,17 @@
       </ul>
     {% endif %}
   {% endwith %}
-  {% block content %}{% endblock %}</div><!-- CONTENT -->
-  <div id="footer">
+  {% block content %}{% endblock %}
+  </div><!-- CONTENT -->
+  </div>
+  </div>
+  </main>
+  <footer role="contentinfo">
+  <div class="container">
+  <div class="row-fluid">
     {% include "includes/footer.html" %}
-  </div> <!--footer-->
+  </div>
+  </div>
+  </footer>
 </body>
+</html>

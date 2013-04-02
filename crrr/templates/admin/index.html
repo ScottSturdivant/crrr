@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-Welcome.  <a href="{{ url_for('logout') }}">Logout</a>
+Welcome.  <a href="{{ url_for('user.logout') }}">Logout</a>
 <table class="dogs">
   <tr>
     <th>Name</th>
@@ -10,9 +10,9 @@ Welcome.  <a href="{{ url_for('logout') }}">Logout</a>
     <th>Status</th>
     <th>
     {% if request.args.get("showarchiveddogs") %}
-    <a href="{{ url_for('admin') }}">Archived</a></th>
+    <a href="{{ url_for('admin.index') }}">Archived</a></th>
     {% else %}
-    <a href="{{ url_for('admin', showarchiveddogs=True) }}">Archived</a>
+    <a href="{{ url_for('admin.index', showarchiveddogs=True) }}">Archived</a>
     {% endif %}
     </th>
   </tr>

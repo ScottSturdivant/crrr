@@ -1,2 +1,2 @@
-from app import App
+from application import App
 from volunteer import Volunteer

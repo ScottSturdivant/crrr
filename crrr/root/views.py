@@ -16,17 +16,6 @@ def index():
     g.index = True
     return render_template('index.html')
 
-@mod.route('admin/')
-@login_required
-def admin():
-    g.title = "CRRR - Admin"
-    show_archived_dogs = request.args.get('showarchiveddogs')
-    if show_archived_dogs:
-        dogs = Dog.query.order_by(Dog.name).all()
-    else:
-        dogs = Dog.query.filter_by(archive=False).order_by(Dog.name).all()
-    return render_template('admin.html', dogs=dogs)
-
 @mod.route('about/')
 def about():
     g.about = True
@@ -64,14 +53,14 @@ def volunteer():
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template('page_not_found.html'), 404
+#@app.errorhandler(404)
+#def page_not_found(error):
+#    return render_template('page_not_found.html'), 404
 
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
 
-@app.before_request
-def before_request():
-    g.user = current_user
+#@app.before_request
+#def before_request():
+#    g.user = current_user

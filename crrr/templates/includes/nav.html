@@ -1,4 +1,5 @@
-<ul id="nav">
+<nav role="navigation">
+<ul>
   <li class="first{% if g.index %} current{% endif %}"><a href="/">Home</a></li>
   {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
   <li class="{% if g.admin %}current{% endif %}"><a href={{ url_for('root.admin')
@@ -16,4 +17,4 @@
   <li class="last {% if g.logout %} current{% endif %}"><a href={{url_for('user.login') }}>Login</a></li>
   {% endif %}
 </ul>
-<div class="blank">&nbsp;</div> <!-- blank -->
+</nav>
