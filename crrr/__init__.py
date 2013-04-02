@@ -33,8 +33,10 @@ login_manager.login_view = '/login'
 # Blueprints
 from crrr.user.views import mod as userModule
 from crrr.root.views import mod as rootModule
+from crrr.dogs.views import mod as dogsModule
 app.register_blueprint(userModule)
 app.register_blueprint(rootModule)
+app.register_blueprint(dogsModule)
 
 #import crrr.views
 import crrr.models

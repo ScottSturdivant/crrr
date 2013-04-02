@@ -6,8 +6,8 @@
   {% endif %}
   <li class="{% if g.about %}current{% endif %}"><a href={{ url_for('root.about') }}>The Breed</a></li>
   <li class="{% if g.faq %}current{% endif %}"><a href={{ url_for('root.faq') }}>FAQs</a></li>
-  <li class="{% if g.available_dogs %}current{% endif %}"><a href={{ url_for('root.available_dogs') }}>Available Dogs</a></li>
-  <li class="{% if g.happy_tails %}current{% endif %}"><a href={{  url_for('root.happy_tails') }}>Happy Tails</a></li>
+  <li class="{% if g.available_dogs %}current{% endif %}"><a href={{ url_for('dogs.available') }}>Available Dogs</a></li>
+  <li class="{% if g.happy_tails %}current{% endif %}"><a href={{ url_for('dogs.happy_tails') }}>Happy Tails</a></li>
   <li class="{% if g.application %}current{% endif %}"><a href={{ url_for('root.application') }}>Application</a></li>
   <li class="{% if g.volunteer %} current{% endif %}"><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
   {% if g.user.is_authenticated() %}
