@@ -15,10 +15,13 @@ from flask.ext.wtf import (
     HiddenField,
     validators
     )
+from flask.ext.wtf.html5 import (
+    EmailField,
+    )
 
 
 class Email(Form):
-    email = TextField('Email', [validators.Email("This doesn't appear to be a valid email address."),
+    email = EmailField('Email', [validators.Email("This doesn't appear to be a valid email address."),
                                 validators.Required('An email address is required.')])
     send = SubmitField('Send')
 
@@ -47,7 +50,7 @@ class ResetPassword(Form):
 
 class CreateUser(Form):
     username = TextField("User Name", [validators.Required('A username is required.')])
-    email = TextField('Email', [validators.Email("This doesn't appear to be a valid email address."),
+    email = EmailField('Email', [validators.Email("This doesn't appear to be a valid email address."),
                                 validators.Required('An email address is required.')])
     password = PasswordField('Password', [validators.Required("You're going to need a password."),
                                           validators.EqualTo('confirm', message='Passwords must match.')])
@@ -90,7 +93,7 @@ class Address(Form):
 class PersonalInfo(Address):
     first_name = TextField("First Name", [validators.Length(min=1, max=25), validators.Required()])
     last_name  = TextField("Last Name", [validators.Length(min=1, max=35), validators.Required()])
-    email      = TextField("Email", [validators.Email(), validators.Required()])
+    email      = EmailField("Email", [validators.Email(), validators.Required()])
     phone_h    = TextField("Phone (h)", 
                  [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
     phone_c    = TextField("Phone (c)", 
