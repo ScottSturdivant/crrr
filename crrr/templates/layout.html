@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" media="screen" >
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" media="screen" >
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" href="{{ url_for('static', filename='animated_favicon1.gif') }}" type="image/gif">
     <script src="http://code.jquery.com/jquery.js"></script>
@@ -40,29 +41,26 @@
   </div>
   </header>
   <main role="main">
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div id="flashes" class="span12">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <ul class="flashes">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-      </div><!-- FLASHES-->
-    </div>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div id="flashes" class="span12">
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
   {% block content %}{% endblock %}
-  </div>
-  </div>
   </main>
   <footer role="contentinfo">
   <div class="container-fluid">
-  <div class="row-fluid">
     {% include "includes/footer.html" %}
-  </div>
   </div>
   </footer>
 </body>

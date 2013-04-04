@@ -19,7 +19,7 @@ def available():
     dogs = Dog.query.filter_by(status='adoptable').order_by(Dog.name).all()
     return render_template('dogs/available.html', dogs=dogs)
 
-PER_PAGE = 10
+PER_PAGE = 20
 @mod.route('/happy_tails/', defaults={'page': 1})
 @mod.route('/happy_tails/page/<int:page>')
 def happy_tails(page):

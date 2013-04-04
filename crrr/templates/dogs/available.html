@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if dogs %}
+<div class="row-fluid">
 <div class="span3">
     <div id="toc">
     </div>
@@ -56,6 +57,7 @@
     </div> <!-- DOG_INFO -->
   {% endfor %}
   </div>
+</div>
 {% else %}
 <p>Bummer!  There are presently no dogs available for adoption.  Please check back
 soon!</p>
