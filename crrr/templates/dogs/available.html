@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if dogs %}
-<div id="available_dogs">
-{% for dog in dogs %}
-  <div id="dog">
-    <div id="dog_name"><h2>{{ dog.name }}</h2></div>
+<div class="span3">
+    <div id="toc">
+    </div>
+</div>
+  <div class="span9">
+  {% for dog in dogs %}
+  <div id="{{ dog.name }}">
+    <div id="dog_name"><h3>{{ dog.name }}</h3></div>
     <div class="dog_thumbnails">
       {% if dog.photo1_url %}
       <a href="/images/{{ dog.id }}/{{ dog.photo1_url }}" target="_blank">
@@ -47,13 +51,11 @@
         </tr>
       </table>
       <br />
-      <em>Notes:</em><br />
       {{ dog.description }}
       <br />
     </div> <!-- DOG_INFO -->
-  </div><!-- DOG -->
-{% endfor %}
-</div> <!-- AVAILABLE_DOGS-->
+  {% endfor %}
+  </div>
 {% else %}
 <p>Bummer!  There are presently no dogs available for adoption.  Please check back
 soon!</p>
