@@ -12,6 +12,8 @@ requires = [
         'Flask-Mail',
         'Flask-Sqlalchemy',
         'Flask-Login',
+        'Flask-Uploads',
+        'PIL',
         ]
 
 setup(

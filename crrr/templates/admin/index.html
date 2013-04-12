@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-Welcome.  <a href="{{ url_for('user.logout') }}">Logout</a>
+<h3><a href="{{ url_for('dogs.add') }}">Add Dog</a></h3>
 <table class="dogs">
   <tr>
     <th>Name</th>
@@ -18,12 +18,12 @@ Welcome.  <a href="{{ url_for('user.logout') }}">Logout</a>
   </tr>
 {% for dog in dogs %}
   <tr>
-    <td>{{ dog.name }}</td>
-    <td>{{ dog.breed }}</td>
-    <td>{{ dog.age }}</td>
-    <td>{{ dog.sex }}</td>
-    <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
-    <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
+      <td><a href="{{ url_for('dogs.edit', id=dog.id) }}">{{ dog.name }}</a></td>
+      <td>{{ dog.breed }}</td>
+      <td>{{ dog.getAge() }}</td>
+      <td>{{ dog.getSex()|capitalize|truncate(1, True, '') }}</td>
+      <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
+      <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
   </tr>
 {% endfor %}
 </table>

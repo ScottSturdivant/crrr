@@ -5,7 +5,9 @@ from datetime import datetime
 from contextlib import closing
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
+from flask.ext.uploads import UploadSet, configure_uploads, IMAGES, UploadNotAllowed
 
+# For jinja footer template
 def get_year():
     return datetime.now().year
 
@@ -14,7 +16,12 @@ def url_for_other_page(page):
     args['page'] = page
     return url_for(request.endpoint, **args)
 
+# Defaults
+UPLOADED_PHOTOS_DEST = '/tmp/photos'
+
+# Application
 app = Flask(__name__)
+app.config.from_object(__name__)
 app.config['MAIL_FAIL_SILENTLY '] = False
 app.config['CRRR_EMAIL'] = 'adoptions@coloradorhodesianridgebackrescue.org'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/crrr_test.db'
@@ -29,6 +36,10 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.setup_app(app)
 login_manager.login_view = 'user.login'
+
+# Uploads
+uploaded_photos = UploadSet('photos', IMAGES)
+configure_uploads(app, uploaded_photos)
 
 # Models
 from crrr.user.models import *
