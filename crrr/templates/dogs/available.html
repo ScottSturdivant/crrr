@@ -2,11 +2,7 @@
 {% block content %}
 {% if dogs %}
 <div class="row-fluid">
-<div class="span3">
-    <div id="toc">
-    </div>
-</div>
-  <div class="span9">
+<div class="span12">
   {% for dog in dogs %}
   <div id="{{ dog.name }}">
     <div id="dog_name"><h3>{{ dog.name }}</h3></div>

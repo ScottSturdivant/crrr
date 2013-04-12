@@ -3,11 +3,7 @@
 {% block content %}
 {% if dogs %}
 <div class="row-fluid">
-    <div class="span3">
-        <div id="toc">
-        </div>
-    </div>
-    <div class="span9">
+    <div class="span12">
         <div id="happy_tails">
         {% for dog in dogs %}
           <div id="happy_tails_dog">
@@ -26,10 +22,9 @@
             <div class="text">{{ dog.happy_tails }}</div>
           </div> <!-- HAPPY_TAILS_DOG -->   
         {% endfor %}
-        </div>
+        </div> <!-- HAPPY_TAILS -->
     </div>
 </div>
-</div> <!-- HAPPY_TAILS -->
 {{ render_pagination(pagination) }}
 {% else %}
 <p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
