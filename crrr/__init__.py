@@ -31,9 +31,9 @@ login_manager.setup_app(app)
 login_manager.login_view = 'user.login'
 
 # Models
-#from crrr.user.models import *
-#from crrr.dogs.models import *
-#from crrr.root.models import *
+from crrr.user.models import *
+from crrr.dogs.models import *
+from crrr.root.models import *
 
 # Blueprints
 from crrr.user.views import mod as userModule
