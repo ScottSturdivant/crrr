@@ -5,7 +5,7 @@ from datetime import (
         datetime
         )
 from flask import Blueprint, render_template, flash, url_for, abort, g, redirect, request
-from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.login import login_required, login_user, logout_user, current_user
 from crrr import app, db
 from crrr.user.models import (
         User,
@@ -20,7 +20,6 @@ from crrr.user.forms import (
         )
 
 mod = Blueprint('user', __name__, url_prefix='/user')
-
 
 def create_hash():
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(32))
@@ -60,10 +59,16 @@ def confirm(hash):
     db.session.commit()
     return render_template('user/confirm.html', user=user)
 
+@mod.route('/<int:id>/edit/')
 @mod.route('/edit/')
 @login_required
-def edit():
-    return 'Edit'
+def edit(id=None):
+    user = current_user
+    # Only an admin should be able to edit another user's information.
+    if id and user.role != 0:
+        return "Huh"
+
+    return 'Edit' + str( user.id)
 
 @mod.route('/reset/<hash>/', methods=['GET', 'POST'])
 def reset_hash(hash):

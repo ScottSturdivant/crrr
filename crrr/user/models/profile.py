@@ -1,13 +1,5 @@
 from crrr import db
-
-housing = ['house','townhome','apartment','condo',
-           'mobile home','ranch','farm','duplex','other']
-
-ownership = ['own', 'rent']
-
-proof = ['yes', 'no', 'na']
-
-yes_no = ['yes', 'no']
+from crrr.user import constants as USER
 
 
 class Profile(db.Model):
@@ -34,23 +26,34 @@ class Profile(db.Model):
     activity_level = db.Column(db.Text)
     away_care = db.Column(db.Text)
     give_up = db.Column(db.Text)
-    housing = db.Column(db.Enum(*housing, name='profile_housing'))
-    own_rent = db.Column(db.Enum(*ownership, name='profile_own_rent'))
-    landlord_proof = db.Column(db.Enum(*proof,
-                                       name='profile_landlord_proof'))
-    yard = db.Column(db.Enum(*yes_no,
-                             name='profile_yard'))
-    fence = db.Column(db.Enum(*yes_no,
-                              name='profile_fence'))
+    housing = db.Column(db.SmallInteger)
+    own_rent = db.Column(db.SmallInteger)
+    landlord_proof = db.Column(db.SmallInteger)
+    yard = db.Column(db.Boolean)
+    fence = db.Column(db.Boolean)
     fence_details = db.Column(db.Text)
-    ridgeback_gender = db.Column(db.Enum('either', 'male', 'female',
-                                         name='profile_ridgeback_gender'))
+    ridgeback_gender = db.Column(db.SmallInteger)
     ridgeback_age = db.Column(db.String())
-    ridgeback_ridges = db.Column(db.Enum('either', 'ridged', 'ridgeless',
-                                         name='profile_ridgeback_ridges'))
-    ridgeback_purebred = db.Column(db.Enum('either', 'purebred', 'mixed',
-                                           name='profile_ridgeback_purebred'))
+    ridgeback_ridges = db.Column(db.SmallInteger)
+    ridgeback_purebred = db.Column(db.SmallInteger)
     ridgeback_health_problems = db.Column(db.String())
     ridgeback_social_problems = db.Column(db.String())
                                        
+    def getHousing(self):
+        return USER.HOME_TYPES[self.housing]
+
+    def getOwnRent(self):
+        return USER.OWNERSHIP[self.own_rent]
+
+    def getLandlordProof(self):
+        return USER.LANDLORD_PROOF[self.landlord_proof]
+
+    def getRidgebackGender(self):
+        return USER.GENDER_PREFERENCE[self.ridgeback_gender]
+
+    def getRidgebackRidges(self):
+        return USER.RIDGED_PREFERENCE[self.ridgeback_ridges]
+
+    def getRidgebackPurebred(self):
+        return USER.PUREBRED_PREFERENCE[self.ridgeback_purebred]
 

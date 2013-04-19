@@ -1,10 +1,5 @@
 from crrr import db
-
-class Location(object):
-    HOME = 'home'
-    WORK = 'work'
-    VET  = 'vet'
-
+from crrr.user import constants as USER
 
 class Address(db.Model):
     """
@@ -15,10 +10,7 @@ class Address(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    location = db.Column(db.Enum(Location.HOME,
-                                 Location.WORK,
-                                 Location.VET,
-                                 name='name_location'))
+    location = db.Column(db.SmallInteger)
     line_1 = db.Column(db.String(), nullable=False)
     line_2 = db.Column(db.String(), nullable=True)
     city = db.Column(db.String(), nullable=False)
@@ -44,4 +36,7 @@ class Address(db.Model):
                                      self.state.upper(),
                                      self.zip)
 
-        return "<%s: %s>" % (self.location.capitalize(), addr)
+        return "<%s: %s>" % (self.getLocation().capitalize(), addr)
+
+    def getLocation(self):
+        return USER.LOCATIONS[self.location]

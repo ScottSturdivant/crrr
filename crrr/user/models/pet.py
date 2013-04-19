@@ -1,8 +1,5 @@
 from crrr import db
-
-class Gender(object):
-    M = 'm'
-    F = 'f'
+from crrr.dogs import constants as DOGS
 
 
 class Pet(db.Model):
@@ -14,10 +11,7 @@ class Pet(db.Model):
 
     type = db.Column(db.String(), nullable=False)
     name = db.Column(db.String())
-    gender = db.Column(db.Enum(Gender.M, 
-                               Gender.F,
-                               name='pet_gender'),
-                       nullable=False)
+    gender = db.Column(db.SmallInteger(), nullable=False)
     age = db.Column(db.String())
     altered = db.Column(db.Boolean, nullable=False)
     whathappened = db.Column(db.Text)
@@ -25,3 +19,5 @@ class Pet(db.Model):
     def __repr__(self):
         return "<Pet: %s>" % (self.name)
 
+    def getGender(self):
+        return DOGS.SEX[self.gender]
