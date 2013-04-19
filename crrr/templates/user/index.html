@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if dogs %}
+Dogs you have applied for:
+<table class="dogs">
+  <tr>
+    <th>Name</th>
+    <th>Breed</th>
+    <th>Age</th>
+    <th>Sex</th>
+    <th>Status</th>
+    <th>
+    {% if request.args.get("showarchiveddogs") %}
+    <a href="{{ url_for('user.index') }}">Archived</a></th>
+    {% else %}
+    <a href="{{ url_for('user.index', showarchiveddogs=True) }}">Archived</a>
+    {% endif %}
+    </th>
+  </tr>
+  {% for dog in dogs %}
+  <tr>
+      <td><a href="{{ url_for('dogs.edit', id=dog.id) }}">{{ dog.name }}</a></td>
+      <td>{{ dog.breed }}</td>
+      <td>{{ dog.getAge() }}</td>
+      <td>{{ dog.getSex()|capitalize|truncate(1, True, '') }}</td>
+      <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
+      <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+You haven't applied for any dogs yet. :-(
+{% endif %}
+{% endblock %}

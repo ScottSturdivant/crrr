@@ -86,10 +86,6 @@ class Address(Form):
     state      = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)))
     zip_code   = TextField("Zip Code", [validators.Required(), validators.Regexp('^(\d{5}(-\d{4})?)?$')])
 
-    def __init__(self, *args, **kwargs):
-        kwargs['csrf_enabled'] = False
-        super(Address, self).__init__(*args, **kwargs)
-
 class PersonalInfo(Address):
     first_name = TextField("First Name", [validators.Length(min=1, max=25), validators.Required()])
     last_name  = TextField("Last Name", [validators.Length(min=1, max=35), validators.Required()])
@@ -100,10 +96,8 @@ class PersonalInfo(Address):
                  [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
     phone_w    = TextField("Phone (w)", 
                  [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
-
-    def __init__(self, *args, **kwargs):
-        kwargs['csrf_enabled'] = False
-        super(PersonalInfo, self).__init__(*args, **kwargs)
+    duration   = TextField("How long has you lived at this address?")
+    submit     = SubmitField('Save')
 
     def __iter__(self):
         """Re-order the way the fields are rendered."""

@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if form.errors %}
+{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+  {% for error in field_errors %}
+  <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ form[field_name].label(style="display: inline;") }}:  {{ error }}
+  </div>
+  {% endfor %}
+{% endfor %}
+{% endif %}
+<div class="span5 offset4">
+<form method="POST" action="" class="form-horizontal">
+    <legend>Personal Information</legend>
+    <div>{{ form.hidden_tag() }}</div>
+
+    <div class="control-group">
+        {{ form.first_name.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.first_name }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.last_name.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.last_name }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.addr_1.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.addr_1 }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.addr_2.label(class="control-label") }}
+        <div class="controls">
+        {{ form.addr_2 }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.city.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.city }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.state.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.state }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.zip_code.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.zip_code }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.phone_h.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.phone_h }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.phone_c.label(class="control-label") }}
+        <div class="controls">
+        {{ form.phone_c }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.phone_w.label(class="control-label") }}
+        <div class="controls">
+        {{ form.phone_w }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.email.label(class="control-label required") }}
+        <div class="controls">
+        {{ form.email }}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {{ form.duration.label(class="control-label") }}
+        <div class="controls">
+        {{ form.duration}}
+        </div>
+    </div>
+
+    <div class="form-actions">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+</div>
+{% endblock %}

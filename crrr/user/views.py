@@ -17,6 +17,7 @@ from crrr.user.forms import (
         ResetPassword,
         Email,
         Login,
+        PersonalInfo,
         )
 
 mod = Blueprint('user', __name__, url_prefix='/user')
@@ -113,7 +114,7 @@ def reset():
         db.session.add(reset)
         db.session.commit()
         flash('An email has been sent with instructions for resetting your password.')
-        return render_template('index.html')
+        return render_template('root.index.html')
     else:
         return render_template('user/reset.html', form=form)
 
@@ -126,7 +127,7 @@ def login():
         user = User.query.filter(User.username==form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         flash('You have logged in.')
-        return redirect(request.args.get("next") or url_for("root.index"))
+        return redirect(request.args.get("next") or url_for("user.index"))
     return render_template('user/login.html', form=form)
 
 @mod.route('/logout/')
@@ -136,3 +137,12 @@ def logout():
     flash('You have been logged out.')
     return redirect(url_for('root.index'))
 
+@mod.route('/')
+def index():
+    dogs = []
+    return render_template('user/index.html', dogs=dogs)
+
+@mod.route('/profile/', methods=['GET', 'POST'])
+def profile():
+    form = PersonalInfo(obj=current_user)
+    return render_template('user/profile.html', form=form)
