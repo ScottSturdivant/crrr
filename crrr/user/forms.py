@@ -1,8 +1,8 @@
 import re
 from crrr.states import STATES
 from crrr.user.models import User
-from flask.ext.wtf import (
-    Form,
+from flask.ext.wtf import Form
+from wtforms import (
     IntegerField,
     TextField,
     SelectField,

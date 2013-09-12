@@ -1,8 +1,8 @@
 from crrr import uploaded_photos, app
 from crrr.dogs import constants as DOG
 from flask.ext.uploads import UploadNotAllowed
-from flask.ext.wtf import (
-    Form,
+from flask.ext.wtf import Form
+from wtforms import (
     IntegerField,
     TextField,
     SelectField,
