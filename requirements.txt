@@ -1,4 +1,3 @@
--e git+git@github.com:SirScott/crrr.git@48335692295979347c1e0fd4f056d16780bcea8f#egg=Colorado_Rhodesian_Ridgeback_Rescue-dev
 Flask==0.10.1
 Flask-Login==0.2.7
 Flask-Mail==0.9.0
