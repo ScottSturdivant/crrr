@@ -42,7 +42,7 @@ if not app.debug:
                                'CRRR website error.',
                                credentials=(app.config['LOG_USERNAME'], app.config['LOG_PASSWORD']),
                                secure=())
-    mail_handler.setLevel(logger.ERROR)
+    mail_handler.setLevel(logging.ERROR)
     mail_handler.setFormatter(Formatter('''
         Message type:       %(levelname)s
         Location:           %(pathname)s:%(lineno)d
@@ -60,7 +60,7 @@ if not app.debug:
     file_handler = RotatingFileHandler(app.config['LOG_FILE_NAME'],
                                        maxBytes=10*1024*1024,
                                        backupCount=5)
-    file_handler.setLevel(logger.DEBUG)
+    file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(Formatter(
             '%(asctime)s %(levelname)s: %(message)s '
                 '[in %(pathname)s:%(lineno)d]'
