@@ -34,6 +34,9 @@ class Dog(db.Model):
     def getStatus(self):
         return DOG.STATUS[self.status]
 
+    def setStatus(self, status):
+        self.status = [k for k,v in DOG.STATUS.items() if v==status][0]
+
     def getSex(self):
         return DOG.SEX[self.sex]
 
