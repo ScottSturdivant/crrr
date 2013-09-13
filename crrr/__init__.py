@@ -28,6 +28,46 @@ app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\x
 app.config.from_envvar('CRRR_SETTINGS')
 app.jinja_env.globals.update(get_year=get_year)
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+
+# Logging
+if not app.debug:
+    # We'll send emails for anything that's important, and shove everything
+    # else into a file.
+    import logging
+    from logging import Formatter
+    from logging.handlers import SMTPHandler, RotatingFileHandler
+    mail_handler = SMTPHandler((app.config['LOG_SMTP_SERVER'], app.config['LOG_SMTP_PORT']),
+                               app.config['LOG_FROM_ADDR'],
+                               app.config['LOG_TO_ADDRS'],
+                               'CRRR website error.',
+                               credentials=(app.config['LOG_USERNAME'], app.config['LOG_PASSWORD']),
+                               secure=())
+    mail_handler.setLevel(logger.ERROR)
+    mail_handler.setFormatter(Formatter('''
+        Message type:       %(levelname)s
+        Location:           %(pathname)s:%(lineno)d
+        Module:             %(module)s
+        Function:           %(funcName)s
+        Time:               %(asctime)s
+
+        Message:
+
+        %(message)s
+        '''))
+    app.logger.addHandler(mail_handler)
+
+    # For for file handling...
+    file_handler = RotatingFileHandler(app.config['LOG_FILE_NAME'],
+                                       maxBytes=10*1024*1024,
+                                       backupCount=5)
+    file_handler.setLevel(logger.DEBUG)
+    file_handler.setFormatter(Formatter(
+            '%(asctime)s %(levelname)s: %(message)s '
+                '[in %(pathname)s:%(lineno)d]'
+                ))
+    app.logger.addHandler(file_handler)
+
+
 # Create a mail handler
 mail = Mail(app)
 # And a database
