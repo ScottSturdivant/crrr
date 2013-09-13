@@ -1,4 +1,3 @@
-import sqlite3
 from flask import Flask, g, request, url_for
 from flask.ext.mail import Mail
 from datetime import datetime
