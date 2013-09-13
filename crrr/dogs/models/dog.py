@@ -29,7 +29,10 @@ class Dog(db.Model):
     pictures = db.relationship('Picture')
 
     def __repr__(self):
-        return '<Dog %r: adopted=%s>' % (self.name, self.status)
+        return '<Dog %r: adopted=%s>' % (self.name, self.getStatus(self.status))
+
+    def getStatus(self):
+        return DOG.STATUS[self.status]
 
     def getSex(self):
         return DOG.SEX[self.sex]
