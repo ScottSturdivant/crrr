@@ -67,6 +67,9 @@ if not app.debug:
                 ))
     app.logger.addHandler(file_handler)
 
+    # Finally, we're really interested in everything the app has to tell us.
+    app.logger.setLevel(logging.DEBUG)
+
 
 # Create a mail handler
 mail = Mail(app)
