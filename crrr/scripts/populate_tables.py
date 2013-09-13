@@ -44,7 +44,7 @@ def import_dogs(dog_csv):
             dog = Dog()
             dog.id = int(id.strip('"'))
             dog.name = name
-            dog.status = status.lower()
+            dog.setStatus(status.lower())
             dog.breed = breed
             dog.sex = sex
             dog.age = age.lower()
