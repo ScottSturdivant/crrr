@@ -8,8 +8,8 @@
     <div id="dog_name"><h3>{{ dog.name }}</h3></div>
     {% for picture in dog.pictures %}
     <div class="dog_thumbnails">
-        <a href="{{ url_for('static', filename=picture.file_url) }}" target="_blank">
-            <img src="{{ url_for('static', filename=picture.thumb_url) }}" />
+        <a href="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.file_url) }}" target="_blank">
+            <img src="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.thumb_url) }}" />
         </a>
     </div>
     {% endfor %}

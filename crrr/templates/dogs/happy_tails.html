@@ -9,15 +9,11 @@
           <div id="happy_tails_dog">
             <div class="header"><h3>{{ dog.name }}</h3></div>
             <div class="pictures {{ loop.cycle('odd', 'even') }}">
-            {% if dog.photo1_url %}
-              <a href=/images/{{ dog.id }}/{{ dog.photo1_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo1_url }}" /></a>
-            {% endif %}
-            {% if dog.photo2_url %}
-              <a href=/images/{{ dog.id }}/{{ dog.photo2_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo2_url }}" /></a>
-            {% endif %}
-            {% if dog.photo3_url %}
-              <a href=/images/{{ dog.id }}/{{ dog.photo3_url }}><img src="/images/{{ dog.id }}/tb_{{ dog.photo3_url }}" /></a>
-            {% endif %}
+            {% for picture in dog.pictures %}
+              <a href={{ url_for('static', filename='images/'+dog.id|string+'/'+ picture.file_url) }}>
+              <img src={{ url_for('static', filename='images/'+dog.id|string+'/'+picture.thumb_url) }} />
+              </a>
+            {% endfor %}
             </div> <!-- PICTURES -->
             <div class="text">{{ dog.happy_tails }}</div>
           </div> <!-- HAPPY_TAILS_DOG -->   
