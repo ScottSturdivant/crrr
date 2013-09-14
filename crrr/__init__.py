@@ -36,11 +36,11 @@ if not app.debug:
     import logging
     from logging import Formatter
     from logging.handlers import SMTPHandler, RotatingFileHandler
-    mail_handler = SMTPHandler((app.config['LOG_SMTP_SERVER'], app.config['LOG_SMTP_PORT']),
-                               app.config['LOG_FROM_ADDR'],
-                               app.config['LOG_TO_ADDRS'],
+    mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+                               app.config['MAIL_DEFAULT_SENDER'],
+                               app.config['ADMINS'],
                                'CRRR website error.',
-                               credentials=(app.config['LOG_USERNAME'], app.config['LOG_PASSWORD']),
+                               credentials=(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),
                                secure=())
     mail_handler.setLevel(logging.ERROR)
     mail_handler.setFormatter(Formatter('''
@@ -55,7 +55,6 @@ if not app.debug:
         %(message)s
         '''))
     app.logger.addHandler(mail_handler)
-
     # For for file handling...
     file_handler = RotatingFileHandler(app.config['LOG_FILE_NAME'],
                                        maxBytes=10*1024*1024,
