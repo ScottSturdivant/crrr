@@ -3,3 +3,4 @@ venv
 *.egg-info
 *.swp
 *.csv
+crrr/static/images
