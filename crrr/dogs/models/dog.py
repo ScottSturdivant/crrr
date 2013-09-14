@@ -40,8 +40,13 @@ class Dog(db.Model):
     def getSex(self):
         return DOG.SEX[self.sex]
 
+    def setSex(self, sex):
+        self.sex = [k for k,v in DOG.SEX.items() if v==sex][0]
+
     def getSize(self):
         return DOG.SIZE[self.size]
 
+    def setSize(self, size):
+        self.size = [k for k,v in DOG.SIZE.items() if v==size][0]
     def getAge(self):
         return DOG.AGE[self.age]
