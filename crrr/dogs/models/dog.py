@@ -48,5 +48,9 @@ class Dog(db.Model):
 
     def setSize(self, size):
         self.size = [k for k,v in DOG.SIZE.items() if v==size][0]
+
     def getAge(self):
         return DOG.AGE[self.age]
+
+    def setAge(self, age):
+        self.age = [k for k,v in DOG.AGE.items() if v==age][0]
