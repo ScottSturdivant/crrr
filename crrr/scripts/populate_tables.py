@@ -50,7 +50,7 @@ def import_dogs(dog_csv):
             dog.setSex(sex)
             dog.age = age.lower()
             dog.mix = str_to_bool(mix)
-            dog.setSize(size))
+            dog.setSize(size)
             dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
             dog.description = unicode(desc.strip(), CODEC, 'ignore')
             dog.special_needs = str_to_bool(special)
