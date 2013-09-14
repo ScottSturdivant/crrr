@@ -91,7 +91,6 @@ def import_users(user_csv):
             user.firstname = fname
             user.lastname  = lname
             user.role = 1
-            user.id = i
 
             # If there was an address associated with a user, add it too
             addr = addr.replace('"', '').strip()
