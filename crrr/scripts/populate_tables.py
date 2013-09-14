@@ -46,10 +46,11 @@ def import_dogs(dog_csv):
             dog.name = name
             dog.setStatus(status.lower())
             dog.breed = breed
+            sex = 'male' if sex == 'M' else 'female'
             dog.setSex(sex)
             dog.age = age.lower()
             dog.mix = str_to_bool(mix)
-            dog.setSize(size.lower())
+            dog.setSize(size))
             dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
             dog.description = unicode(desc.strip(), CODEC, 'ignore')
             dog.special_needs = str_to_bool(special)
