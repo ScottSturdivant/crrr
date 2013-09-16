@@ -6,7 +6,8 @@ from datetime import (
         )
 from flask import Blueprint, render_template, flash, url_for, abort, g, redirect, request
 from flask.ext.login import login_required, login_user, logout_user
-from crrr import app, db
+from flask_mail import Message
+from crrr import app, db, mail
 from crrr.user.models import (
         User,
         Confirm,
@@ -39,9 +40,14 @@ def register():
         user.confirmation = confirm
         db.session.add(user)
         db.session.commit()
-        # TODO: send email with confirmation link
+        # Send an email with confirmation link
+        msg = Message('Your CRRR account has been created!',
+                      sender='info@crrr.org',
+                      recipients=[user.email])
+        msg.body = 'Please visit %s to complete your account registration.' % (url_for('user.confirm', hash=hash, _external=True))
+        mail.send(msg)
         flash('A confirmation email has been sent your way.')
-        return "User %s created with confirmation hash: %s" % (user, hash)
+        return redirect(url_for("user.login"))
     else:
         return render_template('user/register.html', form=form)
 
