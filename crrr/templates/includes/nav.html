@@ -1,8 +1,5 @@
 <nav role="navigation">
-<div class="navbar">
-    <div class="navbar-inner">
 <ul class="nav">
-    <a class="brand" href="#">CRRR</a>
   <li{% if g.index %} class="active"{% endif %}><a href="/">Home</a></li>
   {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
   <li{% if g.admin %} class="active"{% endif %}><a href={{ url_for('root.admin') }}>Admin</a></li>
@@ -19,6 +16,4 @@
   <li {% if g.login %} class="active"{% endif %}><a href={{url_for('user.login') }}>Login</a></li>
   {% endif %}
 </ul>
-</div>
-</div>
 </nav>

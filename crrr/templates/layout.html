@@ -9,55 +9,30 @@
       <title>Colorado Rhodesian Ridgeback Rescue</title>
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" media="screen" >
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" media="screen" >
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/animated_favicon1.gif') }}" type="image/gif">
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
     <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
-    <style>
-        html { background: transparent; }
-        body { background: #E8E8E8; }
-        .container { background: white; }
-    </style>
     {% endblock %}
   </head>
 <body>
   <header role="banner">
-  <div class="container-fluid">
-  <div class="row-fluid">
-  <div class="span12">
     {% include "includes/header.html" %}
     {% include "includes/nav.html" %}
-  </div>
-  </div>
-  </div>
   </header>
   <main role="main">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
-      <div class="container-fluid">
-        <div class="row-fluid">
-          <div id="flashes" class="span12">
-            <ul class="flashes">
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
   {% endwith %}
   {% block content %}{% endblock %}
   </main>
   <footer role="contentinfo">
-  <div class="container-fluid">
     {% include "includes/footer.html" %}
-  </div>
   </footer>
 </body>
 </html>
