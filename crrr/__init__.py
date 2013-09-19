@@ -39,9 +39,8 @@ if not app.debug:
     mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                                app.config['MAIL_DEFAULT_SENDER'],
                                app.config['ADMINS'],
-                               'CRRR website error.',
-                               credentials=(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),
-                               secure=())
+                               'CRRR website error.'
+                              )
     mail_handler.setLevel(logging.ERROR)
     mail_handler.setFormatter(Formatter('''
         Message type:       %(levelname)s
