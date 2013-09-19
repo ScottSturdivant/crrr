@@ -34,6 +34,10 @@ body,
     margin-right: auto;
 }
 
+.avail-dog-desc {
+    margin-top: 10px;
+}
+
 /* Add transition to containers so they can push in and out */
 #layout,
 #menu,
@@ -141,10 +145,11 @@ dd {
      min-height: 80px;
      margin: 0;
      color: #333;
-     padding: 1em 2em;
+     padding: 0.5em;
      text-align: center;
      border-bottom: 3px solid #eee;
      background: #fff;
+     line-height: 80px; /* centers the h1 text vertically */
  }
     .header h1 {
         font-family: "omnes-pro", sans-serif;
@@ -186,10 +191,11 @@ aside {
     }
 
     .content .content-subhead {
-        margin: 30px 0 20px 0;
+        margin: 0px 0 20px 0;
         font-weight: 300;
         color: #888;
         position: relative;
+        font-size: 400%;
     }
 
     .content .content-spaced {
