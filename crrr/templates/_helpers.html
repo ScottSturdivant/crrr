@@ -30,27 +30,25 @@
 {%- endmacro %}
 
 {% macro render_pagination(pagination) %}
-  <div class="pagination pagination-centered">
-  <ul>
+  <ul class="pure-paginator">
   {% if pagination.has_prev%}
-  <li><a href="{{ url_for_other_page(pagination.page - 1) }}"><i class="icon-double-angle-left"></i>Prev</a></li>
+  <li><a href="{{ url_for_other_page(pagination.page - 1) }}" class="pure-button prev">&#171;</a></li>
   {% endif %}
   {%- for page in pagination.iter_pages() %}
     {% if page %}
       {% if page != pagination.page %}
-      <li><a href="{{ url_for_other_page(page) }}">{{ page }}</a></li>
+      <li><a href="{{ url_for_other_page(page) }}" class="pure-button">{{ page }}</a></li>
       {% else %}
-      <li class="active"><a href="#">{{ page }}</a></li>
+      <li><a href="#" class="pure-button pure-button-active">{{ page }}</a></li>
       {% endif %}
     {% else %}
-      <li><span class="ellipsis">…</span></li>
+      <li><span class="ellipsis pure-button">…</span></li>
     {% endif %}
   {%- endfor %}
   {% if pagination.has_next %}
-  <li><a href="{{ url_for_other_page(pagination.page + 1) }}">Next<i class="icon-double-angle-right"></i></a></li>
+  <li><a href="{{ url_for_other_page(pagination.page + 1) }}" class="pure-button next">&#187;</a></li>
   {% endif %}
   </ul>
-  </div>
 {% endmacro %}
 
 {% macro render_errors(field) %}

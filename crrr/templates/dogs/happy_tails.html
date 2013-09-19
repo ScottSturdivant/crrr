@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% from "_helpers.html" import render_pagination %}
 {% block content %}
+<div class="pure-u-1">
 {% if dogs %}
 <div class="row-fluid">
     <div class="span12">
@@ -26,4 +27,5 @@
 <p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
 around to it yet.  Please check back soon!</p>
 {% endif %}
+</div>
 {% endblock %}

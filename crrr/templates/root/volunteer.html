@@ -1,16 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 {% from "_helpers.html" import render, bool_render %}
+<div class="pure-u-1">
 {% if form %}
+<div>
 The CRRR depends on support from community members like yourself to be able to
 provide a caring environment for our rescued Ridgebacks. We have numerous
 oportunities for helping out, ranging from the time and emotionally intensive
 fostering of dogs, to the shuffling of paperwork, to the screening of potential
 adopters. If you are in any way interested in assisting us, please fill out the
-form below. Thank you for your interest!
+form below. Thank you for your interest!</div>
 <div id="application">
   <div class="application" style="margin-bottom: 0px; border-bottom: 0px;">
-    <form method="POST" action="/volunteer">
+    <form method="POST" action="/volunteer" class="pure-form">
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Volunteer Application</h1></div>
     <div class="subheading"><h2>Personal Information</h2></div>
@@ -42,10 +44,12 @@ form below. Thank you for your interest!
     {{ bool_render(form.adopter_check) }}
     {{ bool_render(form.donate_crate) }}
     {{ bool_render(form.donate_supplies) }}
-    <div class="subheading"><input type="submit" value="Send" /></div>
+    <div class="subheading"><input type="submit" value="Send" class="pure-button"/></div>
   </div> <!-- APPLICATION -->
+</div>
 </form>
 {% else %}
 Thank you for your interest in becoming a volunteer.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.<br />
 {% endif %}
+</div>
 {% endblock %}

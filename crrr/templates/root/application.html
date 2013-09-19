@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 {% from "_helpers.html" import render %}
+<div class="pure-u-1">
 {% if form %}
 <p>Congratulations!  You've taken the first step towards adopting your
 Ridgeback by seeking out the application.  Please be sure to fill in all fields
@@ -14,7 +15,7 @@ visit to make sure the dog will be going to a safe place, and to chat about
 what you are looking for in a dog.  That way we can help match the right dog
 with the right home. </p>
 <div id="application">
-  <form method="POST" action={{ url_for('root.application') }}>
+  <form method="POST" action={{ url_for('root.application') }} class="pure-form">
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
     {% if form.errors %}
@@ -138,7 +139,7 @@ provide your veterinarian's name, address, and telephone number.<br />
     {{ render(form.ridgebackpurebred, colon=False) }}
     {{ render(form.ridgebackhealthproblems, colon=False) }}
     {{ render(form.ridgebacksocialproblems, colon=False) }}
-    <div class="subheading">{{ form.submit() }}</div>
+    <div class="subheading">{{ form.submit(class="pure-button") }}</div>
   </form>
 </div> <!-- Application -->
 <p>If you have questions or need more info, please contact Inge Trump, CRRR coordinator:<br />
@@ -150,4 +151,5 @@ provide your veterinarian's name, address, and telephone number.<br />
 {% else %}
 Thank you for your interest in becoming a volunteer.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.<br />
 {% endif %}
+</div>
 {% endblock %}
