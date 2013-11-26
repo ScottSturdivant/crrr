@@ -3,19 +3,8 @@
 {% from "_helpers.html" import render %}
 <div class="pure-u-1">
 {% if form %}
-<p>Congratulations!  You've taken the first step towards adopting your
-Ridgeback by seeking out the application.  Please be sure to fill in all fields
-denoted with red text as they are required.  Upon completion of the form, you
-should be contacted by a Colorado Rhodesian Ridgeback Rescue representative
-after your information has been reviewed.  (This can take a week, please be
-patient!)  The next step in our process will be for a volunteer to arrange a
-home visit.  (Don't panic, we aren't interested in your housekeeping, and we
-don't care how big or little your house is!)  This is just an informal, short
-visit to make sure the dog will be going to a safe place, and to chat about
-what you are looking for in a dog.  That way we can help match the right dog
-with the right home. </p>
-<div id="application">
-  <form method="POST" action={{ url_for('root.application') }} class="pure-form">
+<div>
+  <form method="POST" action={{ url_for('root.application') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
     {% if form.errors %}
@@ -29,117 +18,135 @@ in properly:</p>
       {% endfor %}
     </ul>
     {% endif %}
-    <div class="subheading"><h2>Personal Information</h2></div>
-    {{ render(form.first_name) }}
-    {{ render(form.last_name) }}
-    {{ render(form.addr_1) }}
-    {{ render(form.addr_2) }}
-    {{ render(form.city) }}
-    {{ render(form.state) }}
-    {{ render(form.zip_code) }}
-    {{ render(form.phone_h) }}
-    {{ render(form.phone_c) }}
-    {{ render(form.phone_w) }}
-    {{ render(form.email) }}
-    {{ render(form.address_length) }}
-    <div class="subheading"></h2>Employment</h2></div>
-    {{ render(form.employer) }} 
-    {{ render(form.occupation) }} 
-    {{ render(form.employment_type) }} 
-    <div class="subheading"><h2>Family</h2></div>
-    Please select the relationship to you of all the adults in your household:
-    <table class="family_subtable">
-      <tr>
-        <th>&nbsp;</th>
-        <th>Relation</th>
-        <th>Name</th>
-      </tr>
-      {% for relation, name in [(form.relation1, form.name1), (form.relation2, form.name2),
-                                (form.relation3, form.name3), (form.relation4, form.name4),
-                                (form.relation5, form.name5)] %}
-      <tr>
-        <td>{{ loop.index }}. </td>
-        <td>{{ relation() }}</td>
-        <td>{{ name() }}</td>
-      </tr>
-      {% endfor %}
-    </table>      
-    {{ render(form.kids, colon=False) }}
-     <div class="subheading"><h2>Veterinarian Reference</h2></div>
-    If you currently own or have owned a pet in the past five years, please
-provide your veterinarian's name, address, and telephone number.<br />
-    {{ render(form.ref1_firstname) }}
-    {{ render(form.ref1_lastname) }}
-    {{ render(form.ref1_address1) }}
-    {{ render(form.ref1_address2) }}
-    {{ render(form.ref1_city) }}
-    {{ render(form.ref1_state) }}
-    {{ render(form.ref1_zip) }}
-    {{ render(form.ref1_phone) }}
-    <div class="subheading"><h2>Pets</h2></div>
-    <table class="pets_subtable">
-      <tr>
-        <th>&nbsp;</th>
-        <th><span class="definition" title="Cat / Dog / Bird / Etc">Type</span></th>
-        <th>Sex</th>
-        <th>Age</th>
-        <th>Spayed /<br />Neutered?</th>
-        <th>Name</th>
-        <th>If no longer owned, what happened?</th>
-      </tr>
-      {% for type, sex, age, name, altered, what in [(form.pet_1_species, form.pet_1_sex, form.pet_1_age, form.pet_1_name, form.pet_1_altered, form.pet_1_whathappened),
-                                                     (form.pet_2_species, form.pet_2_sex, form.pet_2_age, form.pet_2_name, form.pet_2_altered, form.pet_2_whathappened), 
-                                                     (form.pet_3_species, form.pet_3_sex, form.pet_3_age, form.pet_3_name, form.pet_3_altered, form.pet_3_whathappened), 
-                                                     (form.pet_4_species, form.pet_4_sex, form.pet_4_age, form.pet_4_name, form.pet_4_altered, form.pet_4_whathappened), 
-                                                     (form.pet_5_species, form.pet_5_sex, form.pet_5_age, form.pet_5_name, form.pet_5_altered, form.pet_5_whathappened)] %}
-      <tr>
-        <td>{{ loop.index }}.  </td>
-        <td>{{ type() }}</td>
-        <td>{{ sex() }}</td>
-        <td>{{ age() }}</td>
-        <td>{{ altered() }}</td>
-        <td>{{ name() }}</td>
-        <td>{{ what() }}</td>
-      </tr>
-    {% endfor %}
-    </table>
-    <div class="subheading"><h2>Pet Care</h2></div>
-    {{ render(form.freefeed) }}
-    {{ render(form.whocares, colon=False) }}
-    {{ render(form.home, colon=False) }}
-    {{ render(form.needs, colon=False) }}
-    {{ render(form.alonetime, colon=False) }}
-    {{ render(form.dogkepthome) }}
-    {{ render(form.dogkeptaway) }}
-    {{ render(form.dogdoor, colon=False) }}
-    {{ render(form.transport, colon=False) }}
-    {{ render(form.crate, colon=False) }}
-    {{ render(form.sleep, colon=False) }}
-    {{ render(form.whyridgebacks) }}
-    {{ render(form.before, colon=False) }}
-    {{ render(form.expenses, colon=False) }}
-    <div class="subheading"><h2>A Day In The Life...</h2></div>
-    {{ render(form.dayinthelife) }}
-    {{ render(form.dogasfamily, colon=False) }}
-    {{ render(form.activitylevel) }}
-    {{ render(form.awaycare, colon=False) }}
-    {{ render(form.giveup, colon=False) }}
-    <div class="subheading"><h2>Housing</h2></div>
-    {{ render(form.housing, colon=False) }}
-    {{ render(form.ownrent, colon=False) }}
-    {{ render(form.landlordproof, colon=False) }}
-    {{ render(form.yard, colon=False) }}
-    {{ render(form.fence, colon=False) }}
-    {{ render(form.fencedetails, colon=False) }}
-    <div class="subheading"><h2>Ridgeback Preferences</h2></div>
-    {{ render(form.ridgebackname, colon=False) }}
-    {{ render(form.ridgebackgender, colon=False) }}
-    {{ render(form.ridgebackage) }}
-    {{ render(form.ridgebackridges, colon=False) }}
-    {{ render(form.ridgebackpurebred, colon=False) }}
-    {{ render(form.ridgebackhealthproblems, colon=False) }}
-    {{ render(form.ridgebacksocialproblems, colon=False) }}
-    <div class="subheading">{{ form.submit(class="pure-button") }}</div>
+    <fieldset>
+      <legend>Personal Information</legend>
+      {{ render(form.first_name) }}
+      {{ render(form.last_name) }}
+      {{ render(form.addr_1) }}
+      {{ render(form.addr_2) }}
+      {{ render(form.city) }}
+      {{ render(form.state) }}
+      {{ render(form.zip_code) }}
+      {{ render(form.phone_h) }}
+      {{ render(form.phone_c) }}
+      {{ render(form.phone_w) }}
+      {{ render(form.email) }}
+      {{ render(form.address_length, colon=False) }}
+    </fieldset>
+    <fieldset>
+      <legend>Employment</legend>
+      {{ render(form.employer) }} 
+      {{ render(form.occupation) }} 
+      {{ render(form.employment_type) }}
+    </fieldset>
+    <fieldset>
+      <legend>Family</legend>
+      Please select the relationship to you of all the adults in your household:
+      <table class="family_subtable">
+        <tr>
+          <th>&nbsp;</th>
+          <th>Relation</th>
+          <th>Name</th>
+        </tr>
+        {% for relation, name in [(form.relation1, form.name1), (form.relation2, form.name2),
+                                  (form.relation3, form.name3), (form.relation4, form.name4),
+                                  (form.relation5, form.name5)] %}
+        <tr>
+          <td>{{ loop.index }}. </td>
+          <td>{{ relation() }}</td>
+          <td>{{ name() }}</td>
+        </tr>
+        {% endfor %}
+      </table>      
+      {{ render(form.kids, colon=False) }}
+    </fieldset>
+    <fieldset>
+      <legend>Veterinarian Reference</legend>
+      If you currently own or have owned a pet in the past five years, please
+      provide your veterinarian's name, address, and telephone number.<br />
+      {{ render(form.ref1_firstname) }}
+      {{ render(form.ref1_lastname) }}
+      {{ render(form.ref1_address1) }}
+      {{ render(form.ref1_address2) }}
+      {{ render(form.ref1_city) }}
+      {{ render(form.ref1_state) }}
+      {{ render(form.ref1_zip) }}
+      {{ render(form.ref1_phone) }}
+    </fieldset>
+    <fieldset>
+      <legend>Pets</legend>
+      <table class="pets_subtable">
+        <tr>
+          <th>&nbsp;</th>
+          <th><span class="definition" title="Cat / Dog / Bird / Etc">Type</span></th>
+          <th>Sex</th>
+          <th>Age</th>
+          <th>Spayed /<br />Neutered?</th>
+          <th>Name</th>
+          <th>If no longer owned, what happened?</th>
+        </tr>
+        {% for type, sex, age, name, altered, what in [(form.pet_1_species, form.pet_1_sex, form.pet_1_age, form.pet_1_name, form.pet_1_altered, form.pet_1_whathappened),
+                                                       (form.pet_2_species, form.pet_2_sex, form.pet_2_age, form.pet_2_name, form.pet_2_altered, form.pet_2_whathappened), 
+                                                       (form.pet_3_species, form.pet_3_sex, form.pet_3_age, form.pet_3_name, form.pet_3_altered, form.pet_3_whathappened), 
+                                                       (form.pet_4_species, form.pet_4_sex, form.pet_4_age, form.pet_4_name, form.pet_4_altered, form.pet_4_whathappened), 
+                                                       (form.pet_5_species, form.pet_5_sex, form.pet_5_age, form.pet_5_name, form.pet_5_altered, form.pet_5_whathappened)] %}
+        <tr>
+          <td>{{ loop.index }}.  </td>
+          <td>{{ type() }}</td>
+          <td>{{ sex() }}</td>
+          <td>{{ age() }}</td>
+          <td>{{ altered() }}</td>
+          <td>{{ name() }}</td>
+          <td>{{ what() }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </fieldset>
+    <fieldset>
+      <legend>Pet Care</legend>
+      {{ render(form.freefeed, colon=False) }}
+      {{ render(form.whocares, colon=False) }}
+      {{ render(form.home, colon=False) }}
+      {{ render(form.needs, colon=False) }}
+      {{ render(form.alonetime, colon=False) }}
+      {{ render(form.dogkepthome) }}
+      {{ render(form.dogkeptaway) }}
+      {{ render(form.dogdoor, colon=False) }}
+      {{ render(form.transport, colon=False) }}
+      {{ render(form.crate, colon=False) }}
+      {{ render(form.sleep, colon=False) }}
+      {{ render(form.whyridgebacks, colon=False) }}
+      {{ render(form.before, colon=False) }}
+      {{ render(form.expenses, colon=False) }}
+    </fieldset>
+    <fieldset>
+      <legend>A Day In The Life...</legend>
+      {{ render(form.dayinthelife) }}
+      {{ render(form.dogasfamily, colon=False) }}
+      {{ render(form.activitylevel) }}
+      {{ render(form.awaycare, colon=False) }}
+      {{ render(form.giveup, colon=False) }}
+    </fieldset>
+    <fieldset>
+      <legend>Housing</legend>
+      {{ render(form.housing, colon=False) }}
+      {{ render(form.ownrent, colon=False) }}
+      {{ render(form.landlordproof, colon=False) }}
+      {{ render(form.yard, colon=False) }}
+      {{ render(form.fence, colon=False) }}
+      {{ render(form.fencedetails, colon=False) }}
+    </fieldset>
+    <fieldset>
+      <legend>Ridgeback Preferences</legend>
+      {{ render(form.ridgebackname, colon=False) }}
+      {{ render(form.ridgebackgender, colon=False) }}
+      {{ render(form.ridgebackage) }}
+      {{ render(form.ridgebackridges, colon=False) }}
+      {{ render(form.ridgebackpurebred, colon=False) }}
+      {{ render(form.ridgebackhealthproblems, colon=False) }}
+      {{ render(form.ridgebacksocialproblems, colon=False) }}
+    </fieldset>
+    <div class="pure-controls">{{ form.submit(class="pure-button pure-button-primary") }}</div>
   </form>
 </div> <!-- Application -->
 <p>If you have questions or need more info, please contact Inge Trump, CRRR coordinator:<br />
@@ -149,7 +156,17 @@ provide your veterinarian's name, address, and telephone number.<br />
 </ul>
 </p>
 {% else %}
-Thank you for your interest in becoming a volunteer.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.<br />
+<p>Congratulations!  You've taken the first step towards adopting your
+Ridgeback by seeking out the application.  Please be sure to fill in all fields
+denoted with red text as they are required.  Upon completion of the form, you
+should be contacted by a Colorado Rhodesian Ridgeback Rescue representative
+after your information has been reviewed.  (This can take a week, please be
+patient!)  The next step in our process will be for a volunteer to arrange a
+home visit.  (Don't panic, we aren't interested in your housekeeping, and we
+don't care how big or little your house is!)  This is just an informal, short
+visit to make sure the dog will be going to a safe place, and to chat about
+what you are looking for in a dog.  That way we can help match the right dog
+with the right home. </p>
 {% endif %}
 </div>
 {% endblock %}

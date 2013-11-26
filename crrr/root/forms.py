@@ -176,15 +176,15 @@ class Application(PersonalInfo):
                                   choices=[(val, val.capitalize()) for val in choices])
     # Family
     choices = ['N/A', 'spouse', 'partner', 'brother', 'sister', 'son', 'daughter', 'friend', 'other']
-    relation1 = SelectField("Relation", choices=[(val, val.capitalize()) for val in choices])
+    relation1 = SelectField("Relation", choices=[(val, val[0].upper() + val[1:]) for val in choices])
     name1 = TextField("Name", [validators.Optional(), validators.Length(max=128)])
-    relation2 = SelectField("Relation", choices=[(val, val.capitalize()) for val in choices])
+    relation2 = SelectField("Relation", choices=[(val, val[0].upper() + val[1:]) for val in choices])
     name2 = TextField("Name", [validators.Optional(), validators.Length(max=128)])
-    relation3 = SelectField("Relation", choices=[(val, val.capitalize()) for val in choices])
+    relation3 = SelectField("Relation", choices=[(val, val[0].upper() + val[1:]) for val in choices])
     name3 = TextField("Name", [validators.Optional(), validators.Length(max=128)])
-    relation4 = SelectField("Relation", choices=[(val, val.capitalize()) for val in choices])
+    relation4 = SelectField("Relation", choices=[(val, val[0].upper() + val[1:]) for val in choices])
     name4 = TextField("Name", [validators.Optional(), validators.Length(max=128)])
-    relation5 = SelectField("Relation", choices=[(val, val.capitalize()) for val in choices])
+    relation5 = SelectField("Relation", choices=[(val, val[0].upper() + val[1:]) for val in choices])
     name5 = TextField("Name", [validators.Optional(), validators.Length(max=128)])
     kids = TextField("If you have kids, what are their ages and names?",
                     [validators.Optional(), validators.Length(max=256)])

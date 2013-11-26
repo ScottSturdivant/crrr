@@ -38,6 +38,14 @@ body,
     margin-top: 10px;
 }
 
+/* --------------------------
+ * Application Form
+ * --------------------------
+*/
+
+#application.pure-form-aligned .pure-control-group label { width: 33.3333% }
+#application.pure-form-aligned .pure-control-group input { width: 50.0% }
+
 /* Add transition to containers so they can push in and out */
 #layout,
 #menu,

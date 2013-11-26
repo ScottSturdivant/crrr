@@ -34,7 +34,8 @@ def application():
     g.title = "CRRR - Application"
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
-        pass
+        # TODO: Send form via email
+        return render_template('root/application.html')
     return render_template('root/application.html', form=form)
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
