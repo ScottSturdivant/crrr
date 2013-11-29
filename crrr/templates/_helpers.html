@@ -36,9 +36,9 @@
 {%- endmacro %}
 
 {% macro bool_render(field) -%}
-  {{ field() }}
-  {{ field.label(class="label long sub") }}
-  <br />
+<div class="pure-controls">
+  {{ field.label(class="pure-checkbox", text=field() + " " + field.label.text) }}
+</div>
 {%- endmacro %}
 
 {% macro render_pagination(pagination) %}

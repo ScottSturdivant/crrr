@@ -123,6 +123,8 @@ class Volunteer(PersonalInfo):
     other = BooleanField(label='Other')
     other_input = TextField(label='OtherInput')
 
+    submit = SubmitField('Volunteer')
+
     def __init__(self, *args, **kwargs):
         kwargs['csrf_enabled'] = False
         super(Volunteer, self).__init__(*args, **kwargs)
@@ -307,5 +309,5 @@ class Application(PersonalInfo):
     ridgebacksocialproblems = TextField('Are you willing to adopt a dog with social problems?',
                                         [validators.Length(min=1, max=1024)])
 
-    submit = SubmitField('Submit')
+    submit = SubmitField('Apply')
 
