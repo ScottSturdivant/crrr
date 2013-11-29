@@ -44,6 +44,8 @@ def volunteer():
     g.title = "CRRR - Volunteer"
     form = Volunteer()
     if form.validate_on_submit():
+        app.logger.info('Volunteer application submitted.')
+        app.logger.debug(form)
         name = form.first_name.data + " " + form.last_name.data
         msg = Message("%s Volunteer Application Submittal" % name,
                       sender=(name, form.email.data),
