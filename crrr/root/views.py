@@ -44,12 +44,14 @@ def volunteer():
     g.title = "CRRR - Volunteer"
     form = Volunteer()
     if form.validate_on_submit():
+        app.logger.info('Volunteer application submitted.')
+        app.logger.debug(form.data)
         name = form.first_name.data + " " + form.last_name.data
         msg = Message("%s Volunteer Application Submittal" % name,
                       sender=(name, form.email.data),
                       recipients=[app.config.get('CRRR_EMAIL'),
                                   (name, form.email.data)])
-        msg.html = render_template('root/email_volunteer.html', form=form),
+        msg.html = render_template('root/email_volunteer.html', form=form)
         mail.send(msg)
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
