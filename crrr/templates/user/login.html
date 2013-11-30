@@ -7,8 +7,8 @@
     {% endfor %}
   </ul>
 {% endif %}
-<div class="pure-u-2-5"></div>
-<div class="pure-u-1-5"> 
+<div class="pure-u-1-5"></div>
+<div class="pure-u-2-5"> 
     <form method="POST" action={{ url_for('user.login') }} class="pure-form pure-form-aligned">
       <fieldset>
         {{ form.hidden_tag() }}
@@ -30,5 +30,5 @@
       </fieldset>
     </form>
 </div>
-<div class="pure-u-2-5"></div>
+<div class="pure-u-1-5"></div>
 {% endblock %}
