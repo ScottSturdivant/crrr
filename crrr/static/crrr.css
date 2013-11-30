@@ -905,8 +905,7 @@ the menu have 100% height and be fixed on the page as the rest of it scrolls.
     /*
     This styles the selected menu item `<li>`.
     */
-    #menu .pure-menu-selected,
-    #menu .pure-menu-heading {
+    #menu .pure-menu-selected {
         background: #1f8dd6;
     }
         /*
