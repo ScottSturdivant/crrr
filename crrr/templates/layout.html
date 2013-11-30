@@ -30,7 +30,11 @@
   </head>
 <body class="pure-skin-crrr">
     <div id="layout">
-       {% include "includes/nav.html" %}
+       <!-- Menu toggle -->
+       <a href="#menu" id="menuLink" class="pure-menu-link">
+           <span></span>
+       </a>
+       <div id="menu">{% include "includes/nav.html" %}</div>
        <div id="main">
           <header role="banner" class="pure-u-1">
           {% include "includes/header.html" %}
