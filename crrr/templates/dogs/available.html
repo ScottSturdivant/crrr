@@ -2,43 +2,43 @@
 {% block content %}
 {% if dogs %}
   {% for dog in dogs %}
-    <div class="pure-g-r dog">
-    <div class="pure-u-1"><h1 class="header content-subhead">{{ dog.name }}</h1></div>
-    <div class="avail-dog">
-    <div class="pure-g-r">
-    {% for picture in dog.pictures %}
-    <div class="pure-u-1-3 photo-box">
-        <a href="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.file_url) }}" target="_blank">
-            <img class="{{ loop.cycle('photo-l','photo-c','photo-r') }}" src="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.thumb_url) }}" />
-        </a>
-    </div>
-    {% endfor %}
-    </div>
-    <div class="l-box pure-g-r avail-dog-desc">
-    <div class="pure-u-1-8 dog_info">
-      <strong>Size:</strong>  {{ dog.getSize() }}<br />
-      <strong>Age:</strong>  {{ dog.getAge() }} <br />
-      <strong>Sex:</strong>  {{ dog.getSex()|capitalize }}<br />
-      <strong>Mix:</strong>  {% if dog.mix %}Y{% else %}N{% endif %}<br />
-      {% if dog.fee %}<strong>Fee:</strong>  ${{ dog.fee }}<br />{% endif %}
-    </div>
-    <div class="pure-u-5-24 dog_info">
-      <ul>
-        {% if dog.shots %}<li>Up to date on routine shots</li>{% endif %}
-        {% if dog.housetrained %}<li>Housetrained</li>{% endif %}
-        {% if dog.fixed %}<li>{% if dog.getSex() == "male" %}Neutered{% else %}Spayed{% endif %}</li>{% endif %}
-        {% if dog.special_needs %}<li>A special needs animal</li>{% endif %}
-        {% if dog.home_without_dogs %}<li>In need of a home without other dogs</li>{% endif %}
-        {% if dog.home_without_cats %}<li>In need of a home without cats</li>{% endif %}
-        {% if dog.home_without_kids %}<li>In need of a home without children</li>{% endif %}
-      </ul>
-    </div>
-    <div class="pure-u-2-3">
-      {{ dog.description }}
-    </div>
-    </div>
-    </div>
-    </div>
+    <div class="dog">
+      <h1 class="content-subhead">{{ dog.name }}</h1>
+      <div class="avail-dog">
+        <div class="pure-g-r">
+          {% for picture in dog.pictures %}
+            <div class="pure-u-1-3 photo-box">
+              <a href="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.file_url) }}" target="_blank">
+                <img class="{{ loop.cycle('photo-l','photo-c','photo-r') }}" src="{{ url_for('static', filename='images/'+picture.dog_id|string+'/'+picture.thumb_url) }}" />
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="l-box pure-g-r avail-dog-desc">
+          <div class="pure-u-1-8 dog_info">
+            <strong>Size:</strong>  {{ dog.getSize() }}<br />
+            <strong>Age:</strong>  {{ dog.getAge() }} <br />
+            <strong>Sex:</strong>  {{ dog.getSex()|capitalize }}<br />
+            <strong>Mix:</strong>  {% if dog.mix %}Y{% else %}N{% endif %}<br />
+            {% if dog.fee %}<strong>Fee:</strong>  ${{ dog.fee }}<br />{% endif %}
+          </div>
+          <div class="pure-u-5-24 dog_info">
+            <ul>
+              {% if dog.shots %}<li>Up to date on routine shots</li>{% endif %}
+              {% if dog.housetrained %}<li>Housetrained</li>{% endif %}
+              {% if dog.fixed %}<li>{% if dog.getSex() == "male" %}Neutered{% else %}Spayed{% endif %}</li>{% endif %}
+              {% if dog.special_needs %}<li>A special needs animal</li>{% endif %}
+              {% if dog.home_without_dogs %}<li>In need of a home without other dogs</li>{% endif %}
+              {% if dog.home_without_cats %}<li>In need of a home without cats</li>{% endif %}
+              {% if dog.home_without_kids %}<li>In need of a home without children</li>{% endif %}
+            </ul>
+          </div>
+          <div class="pure-u-2-3">
+            {{ dog.description }}
+          </div>
+        </div> <!-- avail-dog-desc -->
+      </div> <!-- avail-dog -->
+    </div> <!-- dog -->
   {% endfor %}
 {% else %}
 <p>Bummer!  There are presently no dogs available for adoption.  Please check back
