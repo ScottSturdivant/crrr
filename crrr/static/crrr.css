@@ -475,6 +475,7 @@ a.pure-button-primary {
     .header,
     .content {
         font-size: 87.5%;
+        padding: 0;
     }
 
     .header,
