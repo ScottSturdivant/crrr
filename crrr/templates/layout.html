@@ -29,26 +29,28 @@
     {% endblock %}
   </head>
 <body class="pure-skin-crrr">
-    <div class="pure-g-r">
-            <header role="banner" class="pure-u-1">
-            {% include "includes/header.html" %}
-            {% include "includes/nav.html" %}
-            </header>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <div class="pure-u-1">
-                    <ul class="flashes">
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
+    <div id="layout" class="pure-g-r">
+       {% include "includes/nav.html" %}
+       <div id="main">
+          <header role="banner" class="pure-u-1">
+          {% include "includes/header.html" %}
+          </header>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="pure-u-1">
+                <ul class="flashes">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
             {% endif %}
-            {% endwith %}
-            <div class="content pure-u-1">{% block content %}{% endblock %}</div>
-            <footer role="contentinfo" class="pure-u-1">
-                {% include "includes/footer.html" %}
-            </footer>
-    </div>
+          {% endwith %}
+          <div class="content pure-u-1">{% block content %}{% endblock %}</div>
+          <footer role="contentinfo" class="pure-u-1">
+          {% include "includes/footer.html" %}
+          </footer>
+        </div> <!-- main -->
+    </div> <!-- layout -->
 </body>
 </html>
