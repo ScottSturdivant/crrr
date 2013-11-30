@@ -1,19 +1,23 @@
-<div class="pure-menu pure-menu-open pure-menu-horizontal">
-<ul class="nav">
-  <li{% if g.index %} class="pure-menu-selected"{% endif %}><a href="/">Home</a></li>
-  {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
-  <li{% if g.admin %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.admin') }}>Admin</a></li>
-  {% endif %}
-  <li{% if g.about %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.about') }}>The Breed</a></li>
-  <li{% if g.faq %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.faq') }}>FAQs</a></li>
-  <li{% if g.available_dogs %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.available') }}>Available Dogs</a></li>
-  <li{% if g.happy_tails %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.happy_tails') }}>Happy Tails</a></li>
-  <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.application') }}>Application</a></li>
-  <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
-  {% if g.user.is_authenticated() %}
-  <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.logout') }}>Logout</a></li>
-  {% else %}
-  <li {% if g.login %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.login') }}>Login</a></li>
-  {% endif %}
-</ul>
+<div class="pure-menu pure-menu-open">
+    <a class="pure-menu-heading" href="http://crrr.org">CRRR
+        <span></span>
+    </a>
+
+    <ul>
+      <li{% if g.index %} class="pure-menu-selected"{% endif %}><a href="/">Home</a></li>
+      {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
+      <li{% if g.admin %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.admin') }}>Admin</a></li>
+      {% endif %}
+      <li{% if g.about %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.about') }}>The Breed</a></li>
+      <li{% if g.faq %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.faq') }}>FAQs</a></li>
+      <li{% if g.available_dogs %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.available') }}>Available Dogs</a></li>
+      <li{% if g.happy_tails %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.happy_tails') }}>Happy Tails</a></li>
+      <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.application') }}>Application</a></li>
+      <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
+      {% if g.user.is_authenticated() %}
+      <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.logout') }}>Logout</a></li>
+      {% else %}
+      <li {% if g.login %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.login') }}>Login</a></li>
+      {% endif %}
+    </ul>
 </div>
