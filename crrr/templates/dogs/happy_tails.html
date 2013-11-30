@@ -4,17 +4,17 @@
 {% if dogs %}
   <div id="happy_tails">
     {% for dog in dogs %}
-      <div id="happy_tails_dog">
-        <div class="header"><h3>{{ dog.name }}</h3></div>
-        <div class="pictures {{ loop.cycle('odd', 'even') }}">
-          {% for picture in dog.pictures %}
+      <div class="header"><h3>{{ dog.name }}</h3></div>
+      <div class="pure-g-r {{ loop.cycle('odd', 'even') }}">
+        {% for picture in dog.pictures %}
+          <div class="pure-u-1-3 photo-box">
             <a href={{ url_for('static', filename='images/'+dog.id|string+'/'+ picture.file_url) }}>
-            <img src={{ url_for('static', filename='images/'+dog.id|string+'/'+picture.thumb_url) }} />
+              <img src={{ url_for('static', filename='images/'+dog.id|string+'/'+picture.thumb_url) }} />
             </a>
-          {% endfor %}
-        </div> <!-- PICTURES -->
-        <div class="text">{{ dog.happy_tails }}</div>
-      </div> <!-- HAPPY_TAILS_DOG -->   
+          </div>
+        {% endfor %}
+      </div> <!-- PICTURES -->
+      <div class="text">{{ dog.happy_tails }}</div>
     {% endfor %}
   </div> <!-- HAPPY_TAILS -->
 {{ render_pagination(pagination) }}
