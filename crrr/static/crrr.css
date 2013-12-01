@@ -505,6 +505,8 @@ a.pure-button-primary {
         display: block;
         float: none;
     }
+
+    #application.pure-form-aligned .pure-controls { margin-left: 0; }
         
 }
 
