@@ -191,8 +191,9 @@ aside {
 /* The content div is placed as a wrapper around all the docs */
 .content {
     margin: 0 auto;
-    padding: 0 3em;
+    padding: 0 2em;
     margin-bottom: 50px;
+    line-height: 1.6em;
 }
     .content p {
         line-height: 1.6em;
@@ -698,33 +699,6 @@ a.pure-button-secondary {
 }
 
 
-@media (max-width: 767px) {
-    .hero {
-        margin: 2em 0 auto;
-    }
-        .hero-titles {
-            padding: 0 1em;
-        }
-        .hero h1 {
-            font-size: 250%;
-            font-weight: 300; /* slightly thicker to compensate for font-size */
-        }
-        .hero h2 {
-            font-size: 165%;
-        }
-
-    /* by default l-hbox becomes padding: 1.3em; at <= 767px. However, this makes the heading
-    too far away from the content, so adding this in here. */
-    h3.l-hbox,
-    p.l-hbox {
-        padding: 0 1.3em;
-    }
-
-    a.size-chart-label {
-        font-size: 0.75em;
-        padding: 0.6667em;
-    }
-}
 
 /**
  * Baby Blue theme for RainbowJS
@@ -813,17 +787,6 @@ This is the parent `<div>` that contains the menu and the content area.
 #layout {
     padding-left: 150px; /* left col width "#menu" */
     left: 0;
-}
-
-/*
-The content `<div>` is where all your content goes.
-*/
-.content {
-    margin: 0 auto;
-    padding: 0 2em;
-    /* max-width: 800px; */
-    margin-bottom: 50px;
-    line-height: 1.6em;
 }
 
 .header {
@@ -1017,5 +980,33 @@ Hides the menu at `767px`, but modify this based on your app's needs.
 
     #layout.active .pure-menu-link {
         left: 150px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        margin: 2em 0 auto;
+    }
+        .hero-titles {
+            padding: 0 1em;
+        }
+        .hero h1 {
+            font-size: 250%;
+            font-weight: 300; /* slightly thicker to compensate for font-size */
+        }
+        .hero h2 {
+            font-size: 165%;
+        }
+
+    /* by default l-hbox becomes padding: 1.3em; at <= 767px. However, this makes the heading
+    too far away from the content, so adding this in here. */
+    h3.l-hbox,
+    p.l-hbox {
+        padding: 0 1.3em;
+    }
+
+    a.size-chart-label {
+        font-size: 0.75em;
+        padding: 0.6667em;
     }
 }
