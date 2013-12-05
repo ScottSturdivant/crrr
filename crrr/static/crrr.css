@@ -47,12 +47,6 @@ body,
 #application.pure-form-aligned .pure-control-group input { width: 50.0% }
 #application.pure-form-aligned .pure-controls { margin-left: 34%; }
 
-/* --------------------------
- * Contact Info Presentation
- * --------------------------
-*/
-#contact.h1, p { text-align: center; } 
-
 /* Add transition to containers so they can push in and out */
 #layout,
 #menu,
