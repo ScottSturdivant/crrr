@@ -1,14 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="contact pure-u-1">
-<h1>Contact Info</h1><br>
-<h5>Inge Trump</h5><br>
-<i>Coordinator</i><br>
-<i class="icon-phone">(303) 689 - 2159</i><br>
-<i class="icon-envelope"><a href="contact/adoptions+coloradorhodesianridgebackrescue+org"rel="nofollow">Email</a></i>
+<div class="contact">
+  <h1>Contact Info</h1><br>
+  <h5>Inge Trump</h5><br>
+  <i>Coordinator</i><br>
+  <i class="icon-phone">(303) 689 - 2159</i><br>
+  <i class="icon-envelope"><a href="contact/adoptions+coloradorhodesianridgebackrescue+org"rel="nofollow">Email</a></i>
 </div>
-<div class="pure-u-1">
-
+<div>
 <p>Colorado Rhodesian Ridgeback Rescue, CRRR, is an all-volunteer group
 dedicated to providing rescue, care, and screened adoptions of pure bred and
 mixed breed Rhodesian Ridgebacks in need.  A "rescue dog" is one that needs a
@@ -38,9 +37,9 @@ consider <a href={{ url_for('root.volunteer') }}>volunteering</a> if you would b
 provide a foster home for one of these great dogs until the right "forever"
 home can be found.</p>
 </div>
-<div id="puppy_info" class="pure-u-1">
-   <h1>Thinking about buying a puppy?</h1>
+<aside>
+   <h2>Thinking about buying a puppy?</h2>
    <p>Please make sure you go through a reputable breeder!</p>
    <p>Click <a href="http://www.illinoissheltierescue.com/puppymillstory.html" target="_blank">here</a> to learn about the relationship between puppy mills and pet shops, and <a href="http://www.illinoissheltierescue.com/howtobuyapuppy.html" target="_blank">here</a> for an informative article about choosing a reputable breeder.</p>
-</div> <!-- div id="puppy_info" -->
+</aside>
 {% endblock %}
