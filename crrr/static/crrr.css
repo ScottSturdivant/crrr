@@ -51,7 +51,7 @@ body,
  * Contact Info Presentation
  * --------------------------
 */
-#contact h1, p { text-align: center; } 
+#contact.h1, p { text-align: center; } 
 
 /* Add transition to containers so they can push in and out */
 #layout,
