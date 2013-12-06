@@ -2,6 +2,7 @@
 {% block content %}
 {% from "_helpers.html" import render %}
 {% if form %}
+<h1 class="content-subheading">CRRR Adoption Application</h1></div>
 <p>Congratulations!  You've taken the first step towards adopting your
 Ridgeback by seeking out the application.  Please be sure to fill in all fields
 denoted with red text as they are required.  Upon completion of the form, you
@@ -15,7 +16,6 @@ what you are looking for in a dog.  That way we can help match the right dog
 with the right home. </p>
   <form method="POST" action={{ url_for('root.application') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
-    <div class="heading"><h1>CRRR Adoption Application</h1></div>
     {% if form.errors %}
     <p class="missing">Oh no!  Your application hasn't passed our validation!  Please ensure the following required fields are filled
 in properly:</p>
