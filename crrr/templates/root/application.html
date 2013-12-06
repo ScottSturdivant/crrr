@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 {% from "_helpers.html" import render %}
-<div class="pure-u-1">
 {% if form %}
-<div>
   <form method="POST" action={{ url_for('root.application') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
@@ -148,7 +146,6 @@ in properly:</p>
     </fieldset>
     <div class="pure-controls">{{ form.submit(class="pure-button pure-button-primary") }}</div>
   </form>
-</div> <!-- Application -->
 <p>If you have questions or need more info, please contact Inge Trump, CRRR coordinator:<br />
 <ul>
   <li>(h) -- (303) 689-2159</li>
@@ -168,5 +165,4 @@ visit to make sure the dog will be going to a safe place, and to chat about
 what you are looking for in a dog.  That way we can help match the right dog
 with the right home. </p>
 {% endif %}
-</div>
 {% endblock %}
