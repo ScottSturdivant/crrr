@@ -80,7 +80,7 @@ class Address(Form):
     addr_1     = TextField("Address Line 1", [validators.Length(min=1, max=128), validators.Required()])
     addr_2     = TextField("Address Line 2", [validators.Optional(), validators.Length(max=128)])
     city       = TextField("City", [validators.Length(min=1, max=128), validators.Required()])
-    state      = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)))
+    state      = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)), default="CO")
     zip_code   = TextField("Zip Code", [validators.Required(), validators.Regexp('^(\d{5}(-\d{4})?)?$')])
 
     def __init__(self, *args, **kwargs):
@@ -196,7 +196,7 @@ class Application(PersonalInfo):
     ref1_address1  = TextField("Address Line 1", [validators.Required(), validators.Length(min=1, max=128)])
     ref1_address2  = TextField("Address Line 2", [validators.Optional(), validators.Length(max=128)])
     ref1_city      = TextField("City", [validators.Required(), validators.Length(min=1, max=128)])
-    ref1_state     = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)))
+    ref1_state     = SelectField("State", [validators.Required()], choices=sorted(zip(STATES,STATES)), default="CO")
     ref1_zip       = TextField("Zip Code", [validators.Required(), validators.Regexp('^(\d{5}(-\d{4})?)?$')])
     ref1_phone     = TextField("Phone", 
                                [validators.Regexp('^(\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4}))?$')])
