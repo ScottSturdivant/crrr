@@ -2,6 +2,17 @@
 {% block content %}
 {% from "_helpers.html" import render %}
 {% if form %}
+<p>Congratulations!  You've taken the first step towards adopting your
+Ridgeback by seeking out the application.  Please be sure to fill in all fields
+denoted with red text as they are required.  Upon completion of the form, you
+should be contacted by a Colorado Rhodesian Ridgeback Rescue representative
+after your information has been reviewed.  (This can take a week, please be
+patient!)  The next step in our process will be for a volunteer to arrange a
+home visit.  (Don't panic, we aren't interested in your housekeeping, and we
+don't care how big or little your house is!)  This is just an informal, short
+visit to make sure the dog will be going to a safe place, and to chat about
+what you are looking for in a dog.  That way we can help match the right dog
+with the right home. </p>
   <form method="POST" action={{ url_for('root.application') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
     <div class="heading"><h1>CRRR Adoption Application</h1></div>
@@ -153,16 +164,5 @@ in properly:</p>
 </ul>
 </p>
 {% else %}
-<p>Congratulations!  You've taken the first step towards adopting your
-Ridgeback by seeking out the application.  Please be sure to fill in all fields
-denoted with red text as they are required.  Upon completion of the form, you
-should be contacted by a Colorado Rhodesian Ridgeback Rescue representative
-after your information has been reviewed.  (This can take a week, please be
-patient!)  The next step in our process will be for a volunteer to arrange a
-home visit.  (Don't panic, we aren't interested in your housekeeping, and we
-don't care how big or little your house is!)  This is just an informal, short
-visit to make sure the dog will be going to a safe place, and to chat about
-what you are looking for in a dog.  That way we can help match the right dog
-with the right home. </p>
 {% endif %}
 {% endblock %}
