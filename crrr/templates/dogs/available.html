@@ -22,14 +22,14 @@
           {% if dog.fee %}<strong>Fee:</strong>  ${{ dog.fee }}<br />{% endif %}
         </div>
         <div class="pure-u-5-24 dog_info">
-          <ul>
-            {% if dog.shots %}<li>Up to date on routine shots</li>{% endif %}
-            {% if dog.housetrained %}<li>Housetrained</li>{% endif %}
-            {% if dog.fixed %}<li>{% if dog.getSex() == "male" %}Neutered{% else %}Spayed{% endif %}</li>{% endif %}
-            {% if dog.special_needs %}<li>A special needs animal</li>{% endif %}
-            {% if dog.home_without_dogs %}<li>In need of a home without other dogs</li>{% endif %}
-            {% if dog.home_without_cats %}<li>In need of a home without cats</li>{% endif %}
-            {% if dog.home_without_kids %}<li>In need of a home without children</li>{% endif %}
+          <ul class="fa-ul">
+              {% if dog.shots %}<li><i class="fa-li fa fa-check"></i>Up to date on routine shots</li>{% endif %}
+              {% if dog.housetrained %}<li><i class="fa-li fa fa-check"></i>Housetrained</li>{% endif %}
+              {% if dog.fixed %}<li><i class="fa-li fa fa-check"></i>{% if dog.getSex() == "male" %}Neutered{% else %}Spayed{% endif %}</li>{% endif %}
+              {% if dog.special_needs %}<li><i class="fa-li fa fa-check"></i>A special needs animal</li>{% endif %}
+              {% if dog.home_without_dogs %}<li><i class="fa-li fa fa-check"></i>In need of a home without other dogs</li>{% endif %}
+              {% if dog.home_without_cats %}<li><i class="fa-li fa fa-check"></i>In need of a home without cats</li>{% endif %}
+              {% if dog.home_without_kids %}<li><i class="fa-li fa fa-check"></i>In need of a home without children</li>{% endif %}
           </ul>
         </div>
         <div class="pure-u-2-3">
