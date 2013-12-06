@@ -38,6 +38,9 @@ body,
     margin-top: 10px;
 }
 
+.required {
+    color: rgb(202, 60, 60);
+}
 /* --------------------------
  * Application Forms
  * --------------------------
