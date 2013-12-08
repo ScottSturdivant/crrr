@@ -33,7 +33,7 @@
           </ul>
         </div>
         <div class="pure-u-2-3">
-          {{ dog.description }}
+          {{ dog.description|replace('\r','')|replace('\\n','')|trim }}
         </div>
       </div> <!-- avail-dog-desc -->
     </div> <!-- avail-dog -->
