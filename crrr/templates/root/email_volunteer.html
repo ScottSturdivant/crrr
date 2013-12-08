@@ -1,27 +1,59 @@
-<div id="application">
-  <table class="application" style="margin-bottom: 0px; border-bottom: 0px;">
-    <tr>
-      <th colspan="2">CRRR Volunteer Application</th>
-    </tr>
-    <tr>
-      <th colspan="2" class="subheading">Personal Information</th>
-    </tr>
-    {% for field in form.personal_info %}
-    <tr>
-      <td>{{ field.label(class="label required") }}:</td>
-      <td>{{ field() }}</td>
-    </tr>
-    {% endfor %}
-    <tr>
-      <th colspan="2" class="subheading">Volunteering Information</th>
-    </tr>
-    {% for field in form.volunteer_for %}
-      {% if field.data %}
-      <tr>
-        <td>{{ field() }}</td>
-        <td>{{ field.label(class="label") }}</td>
-      </tr>
-      {% endif %}
-    {% endfor %}
-  </table>
-</div>
+{% extends "email_layout.html" %}
+{% block content %}
+{% from "_helpers.html" import render, bool_render %}
+{% if form %}
+<h1>CRRR Volunteer Application</h1>
+<p>
+The CRRR depends on support from community members like yourself to be able to
+provide a caring environment for our rescued Ridgebacks. We have numerous
+oportunities for helping out, ranging from the time and emotionally intensive
+fostering of dogs, to the shuffling of paperwork, to the screening of potential
+adopters. If you are in any way interested in assisting us, please fill out the
+form below. Thank you for your interest!
+</p>
+    <form method="POST" action={{ url_for('root.volunteer') }} class="pure-form pure-form-aligned" id="application">
+    {{ form.hidden_tag() }}
+    {% if form.errors %}
+    <p class="missing">Oh no!  Your application hasn't passed our validation!
+    Please ensure the following required fields are filled in properly:</p>
+    <ul class="missing">
+      {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+          <li>{{ form[field_name].label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <fieldset>
+        <legend>Personal Information</legend>
+        {{ render(form.first_name) }}
+        {{ render(form.last_name) }}
+        {{ render(form.addr_1) }}
+        {{ render(form.addr_2) }}
+        {{ render(form.city) }}
+        {{ render(form.state) }}
+        {{ render(form.zip_code) }}
+        {{ render(form.phone_h) }}
+        {{ render(form.phone_c) }}
+        {{ render(form.phone_w) }}
+        {{ render(form.email) }}
+    </fieldset>
+    <fieldset>
+        <legend>Volunteering Information</legend>
+        Please select all that you are able to assist with:<br />
+        {{ bool_render(form.foster) }}
+        {{ bool_render(form.transport) }}
+        {{ bool_render(form.home_check) }}
+        {{ bool_render(form.adopter_check) }}
+        {{ bool_render(form.donate_crate) }}
+        {{ bool_render(form.donate_supplies) }}
+        <div class="pure-controls">
+            {{ form.other_input.label(text=form.other() + " " + form.other_input(placeholder="Other..", class="pure-input-2-3")) }}
+        </div>
+    </fieldset>
+    <div class="pure-controls">{{ form.submit(class="pure-button pure-button-primary") }}</div>
+    </form>
+{% else %}
+Thank you for your interest in becoming a volunteer.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.<br />
+{% endif %}
+{% endblock %}

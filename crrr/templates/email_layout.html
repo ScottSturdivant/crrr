@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>Colorado Rhodesian Ridgeback Rescue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='crrr.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/animated_favicon1.gif') }}" type="image/gif">
+    {% endblock %}
+  </head>
+<body class="pure-skin-crrr">
+    <div id="layout">
+       <div id="main">
+          <header role="banner">
+          {% include "includes/header.html" %}
+          </header>
+          <div class="content">{% block content %}{% endblock %}</div>
+          <footer role="contentinfo">
+          {% include "includes/footer.html" %}
+          </footer>
+        </div> <!-- main -->
+    </div> <!-- layout -->
+</body>
+</html>
