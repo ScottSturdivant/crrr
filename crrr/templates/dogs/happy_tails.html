@@ -14,9 +14,9 @@
                 </a>
               {% endfor %}
             </div>
-            <div class="pure-u-2-3">{{ dog.happy_tails|strip }}</div>
+            <div class="pure-u-2-3">{{ dog.happy_tails|trim }}</div>
           {% else %}
-            <div class="pure-u-2-3">{{ dog.happy_tails|strip }}</div>
+            <div class="pure-u-2-3">{{ dog.happy_tails|trim }}</div>
             <div class="pure-u-1-3">
               {% for picture in dog.pictures %}
                 <a href={{ url_for('static', filename='images/'+dog.id|string+'/'+ picture.file_url) }}>
