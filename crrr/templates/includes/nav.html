@@ -16,8 +16,6 @@
       <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
       {% if g.user.is_authenticated() %}
       <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.logout') }}>Logout</a></li>
-      {% else %}
-      <li {% if g.login %} class="pure-menu-selected"{% endif %}><a href={{url_for('admin.login') }}>Login</a></li>
       {% endif %}
     </ul>
 </div>
