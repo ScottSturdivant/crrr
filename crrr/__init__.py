@@ -76,23 +76,21 @@ db = SQLAlchemy(app)
 # And a login manager
 login_manager = LoginManager()
 login_manager.setup_app(app)
-login_manager.login_view = 'user.login'
+login_manager.login_view = 'admin.login'
 
 # Uploads
 uploaded_photos = UploadSet('photos', IMAGES)
 configure_uploads(app, uploaded_photos)
 
 # Models
-from crrr.user.models import *
+from crrr.admin.models import *
 from crrr.dogs.models import *
 from crrr.root.models import *
 
 # Blueprints
-from crrr.user.views import mod as userModule
 from crrr.root.views import mod as rootModule
 from crrr.dogs.views import mod as dogsModule
 from crrr.admin.views import mod as adminModule
 app.register_blueprint(rootModule)
-app.register_blueprint(userModule)
 app.register_blueprint(dogsModule)
 app.register_blueprint(adminModule)
