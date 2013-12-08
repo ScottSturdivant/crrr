@@ -18,7 +18,7 @@ from crrr.admin.forms import (
         )
 
 
-mod = Blueprint('admin', __name__, url_prefix='/admin/')
+mod = Blueprint('admin', __name__, url_prefix='/admin')
 
 @mod.route('/')
 @login_required
