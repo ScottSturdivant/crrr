@@ -34,6 +34,10 @@ body,
     margin-right: auto;
 }
 
+.avail-dog-name {
+    border-bottom: 3px solid #eee;
+}
+
 .avail-dog-desc {
     margin-top: 10px;
 }

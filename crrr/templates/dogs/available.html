@@ -2,7 +2,9 @@
 {% block content %}
 {% if dogs %}
   {% for dog in dogs %}
-    <h1 class="content-subhead">{{ dog.name }}</h1>
+    <div class="header">
+      <h1 class="content-subhead avail-dog-name">{{ dog.name }}</h1>
+    </div>
     <div class="avail-dog">
       <div class="pure-g-r">
         {% for picture in dog.pictures %}
