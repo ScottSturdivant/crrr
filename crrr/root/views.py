@@ -1,5 +1,6 @@
 from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
 from flask.ext.mail import Message
+from flask.ext.login import current_user
 from crrr import app, mail
 from crrr.dogs.models import Dog
 from crrr.root.forms import (
