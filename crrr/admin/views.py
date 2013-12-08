@@ -139,3 +139,6 @@ def logout():
     flash('You have been logged out.')
     return redirect(url_for('root.index'))
 
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)

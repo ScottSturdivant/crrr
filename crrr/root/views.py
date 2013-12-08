@@ -1,8 +1,6 @@
 from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
 from flask.ext.mail import Message
-from flask.ext.login import login_required, login_user, logout_user, current_user
-from crrr import app, mail, login_manager
-from crrr.root.models import User
+from crrr import app, mail
 from crrr.dogs.models import Dog
 from crrr.root.forms import (
     Volunteer,
@@ -59,10 +57,6 @@ def volunteer():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
-
-@login_manager.user_loader
-def load_user(userid):
-    return User.query.get(userid)
 
 @app.before_request
 def before_request():
