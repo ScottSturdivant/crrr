@@ -16,14 +16,14 @@
         {% endfor %}
       </div>
       <div class="l-box pure-g-r avail-dog-desc">
-        <div class="pure-u-1-8 dog_info">
+        <div class="pure-u-1-8 avail-dog-info">
           <strong>Size:</strong>  {{ dog.getSize() }}<br />
           <strong>Age:</strong>  {{ dog.getAge() }} <br />
           <strong>Sex:</strong>  {{ dog.getSex()|capitalize }}<br />
           <strong>Mix:</strong>  {% if dog.mix %}Y{% else %}N{% endif %}<br />
           {% if dog.fee %}<strong>Fee:</strong>  ${{ dog.fee }}<br />{% endif %}
         </div>
-        <div class="pure-u-5-24 dog_info">
+        <div class="pure-u-5-24 avail-dog-info">
           <ul class="fa-ul">
               {% if dog.shots %}<li><i class="fa-li fa fa-check"></i>Up to date on routine shots</li>{% endif %}
               {% if dog.housetrained %}<li><i class="fa-li fa fa-check"></i>Housetrained</li>{% endif %}

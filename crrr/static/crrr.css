@@ -38,6 +38,10 @@ body,
     border-bottom: 3px solid #eee;
 }
 
+.avail-dog-info {
+    word-wrap: break-word;
+}
+
 .avail-dog-desc {
     margin-top: 10px;
 }
