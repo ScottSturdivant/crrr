@@ -1,6 +1,6 @@
 import re
 from crrr.states import STATES
-from crrr.user.models import User
+from crrr.admin.models import User
 from flask.ext.wtf import Form
 from wtforms import (
     IntegerField,

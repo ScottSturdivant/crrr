@@ -5,7 +5,7 @@ from flask.ext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user, current_user
 from flask.ext.sqlalchemy import Pagination
 from crrr import app, mail, login_manager, db
-from crrr.user.models import User
+from crrr.admin.models import User
 from crrr.dogs.models import Dog, Picture
 from crrr.dogs import constants as DOG
 from crrr.dogs.forms import AddDog, EditDog
