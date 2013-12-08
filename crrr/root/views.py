@@ -2,7 +2,7 @@ from flask import request, session, render_template, flash, g, url_for, redirect
 from flask.ext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user, current_user
 from crrr import app, mail, login_manager
-from crrr.user.models import User
+from crrr.root.models import User
 from crrr.dogs.models import Dog
 from crrr.root.forms import (
     Volunteer,
