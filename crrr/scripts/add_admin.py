@@ -21,6 +21,7 @@ def add_user(username, firstname, lastname):
     user.firstname = firstname
     user.lastname = lastname
     user.role = ROLE_ADMIN
+    user.active = True
 
     print "Created: ", user
 
