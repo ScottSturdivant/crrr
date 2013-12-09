@@ -1,9 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if dogs %}
-  {% for dog in dogs %}
-    {{ dog.name }}
-  {% endfor %}
+  <table class="pure-table pure-table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>Status</th>
+        <th>Archived</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for dog in dogs %}
+      <tr>
+        <td>{{ dog.name }}</td>
+        <td>{{ dog.breed }}</td>
+        <td>{{ dog.getAge() }}</td>
+        <td>{{ dog.getSex() }}</td>
+        <td>{{ dog.getStatus() }}</td>
+        <td>{{ dog.archive }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 {% else %}
 <p>No dogs present yet!  Go <a href={{ url_for('dogs.add') }}>add</a> some!</p>
 {% endif %}
