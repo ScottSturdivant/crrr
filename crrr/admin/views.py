@@ -129,7 +129,7 @@ def login():
         user = User.query.filter(User.username==form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         flash('You have logged in.')
-        return redirect(request.args.get("next") or url_for("root.index"))
+        return redirect(request.args.get("next") or url_for("admin.index"))
     return render_template('admin/login.html', form=form)
 
 @mod.route('/logout/')
