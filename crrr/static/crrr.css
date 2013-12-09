@@ -167,7 +167,6 @@ dd {
      color: #333;
      padding: 0.5em;
      text-align: center;
-     border-bottom: 3px solid #eee;
      background: #fff;
      line-height: 80px; /* centers the h1 text vertically */
  }
@@ -176,6 +175,7 @@ dd {
         margin: 0.2em 0;
         font-size: 3em;
         font-weight: 300;
+        border-bottom: 3px solid #eee;
     }
      .header h2 {
         font-weight: 300;
