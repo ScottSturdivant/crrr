@@ -1,22 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3><a href="{{ url_for('dogs.add') }}">Add Dog</a></h3>
-<table class="dogs">
-  <tr>
-    <th>Name</th>
-    <th>Breed</th>
-    <th>Age</th>
-    <th>Sex</th>
-    <th>Status</th>
-    <th>
-    {% if request.args.get("showarchiveddogs") %}
-    <a href="{{ url_for('admin.index') }}">Archived</a></th>
-    {% else %}
-    <a href="{{ url_for('admin.index', showarchiveddogs=True) }}">Archived</a>
-    {% endif %}
-    </th>
-  </tr>
-{% for dog in dogs %}
+{% if dogs %}
+<table class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Breed</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Status</th>
+      <th>
+        {% if request.args.get("showarchiveddogs") %}
+        <a href="{{ url_for('admin.index') }}">Archived</a></th>
+        {% else %}
+        <a href="{{ url_for('admin.index', showarchiveddogs=True) }}">Archived</a>
+        {% endif %}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for dog in dogs %}
   <tr>
       <td><a href="{{ url_for('dogs.edit', id=dog.id) }}">{{ dog.name }}</a></td>
       <td>{{ dog.breed }}</td>
@@ -25,6 +28,9 @@
       <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
       <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
   </tr>
-{% endfor %}
+  {% endfor %}
 </table>
+{% else %}
+<p>No dogs present yet!  Go <a href={{ url_for('dogs.add') }}>add</a> some!</p>
+{% endif %}
 {% endblock %}
