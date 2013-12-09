@@ -29,6 +29,7 @@ setup(
     entry_points={
         'console_scripts' : [
             'crrr_import = crrr.scripts.populate_tables:main'
+            'crrr_add_admin_user = crrr.scripts.add_admin:main'
             ]
         }
 )
