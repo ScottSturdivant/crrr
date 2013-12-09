@@ -5,20 +5,17 @@
 
     <ul>
       <li{% if g.index %} class="pure-menu-selected"{% endif %}><a href="/">Home</a></li>
-      {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
-      <li{% if g.admin %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.admin') }}>Admin</a></li>
-      {% endif %}
       <li{% if g.about %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.about') }}>The Breed</a></li>
       <li{% if g.faq %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.faq') }}>FAQs</a></li>
       <li{% if g.available_dogs %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.available') }}>Available Dogs</a></li>
       <li{% if g.happy_tails %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.happy_tails') }}>Happy Tails</a></li>
       <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.application') }}>Application</a></li>
       <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
-      {% if g.user.is_authenticated() %}
+      {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
       <li class="pure-menu-heading">Admin</li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs') }}>Dogs</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs') }}>Applications</a></li>
-      <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('user.logout') }}>Logout</a></li>
+      <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('admin.logout') }}>Logout</a></li>
       {% endif %}
     </ul>
 </div>
