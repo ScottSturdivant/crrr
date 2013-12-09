@@ -19,6 +19,12 @@ THUMB_PREFIX = "tb_"
 # PAGINATION
 PER_PAGE = 20
 
+@mod.route('/')
+def index():
+    g.title = 'CRRR - Dogs'
+    dogs = Dog.query.all()
+    return render_template('dogs/index.html', dogs=dogs)
+
 @mod.route('/available/')
 def available():
     g.available_dogs = True
