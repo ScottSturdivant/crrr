@@ -12,7 +12,7 @@
       <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.application') }}>Application</a></li>
       <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
       {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
-      <li class="pure-menu-heading">Admin</li>
+      <li class="pure-menu-heading"><a href={{ url_for('admin.index') }}>Admin</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Dogs</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.add') }}>Add Dog</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Applications</a></li>
