@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if dogs %}
+  {% for dog in dogs %}
+    {% dog.name %}
+  {% endfor %}
+{% else %}
+<p>No dogs present yet!  Go <a href={{ url_for('dogs.add') }}>add</a> some!</p>
+{% endif %}
+{% endblock %}
