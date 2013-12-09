@@ -9,6 +9,7 @@ from crrr import db
 from crrr.admin.models import (
         User,
         Address,
+from crrr.admin.models.user import ROLE_ADMIN
 CODEC = 'utf-8'
 
 def add_user(username, firstname, lastname):
@@ -18,7 +19,7 @@ def add_user(username, firstname, lastname):
     user.set_password(getpass.getpass().strip())
     user.firstname = firstname
     user.lastname = lastname
-    user.role = 1
+    user.role = ROLE_ADMIN
 
     print "Created: ", user
 
