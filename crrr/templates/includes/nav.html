@@ -14,6 +14,7 @@
       {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
       <li class="pure-menu-heading">Admin</li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Dogs</a></li>
+      <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.add') }}>Add Dog</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Applications</a></li>
       <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('admin.logout') }}>Logout</a></li>
       {% endif %}
