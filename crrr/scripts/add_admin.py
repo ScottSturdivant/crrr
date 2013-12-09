@@ -8,7 +8,8 @@ import getpass
 from crrr import db
 from crrr.admin.models import (
         User,
-        Address,
+        Address
+        )
 from crrr.admin.models.user import ROLE_ADMIN
 CODEC = 'utf-8'
 
