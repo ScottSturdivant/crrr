@@ -58,6 +58,17 @@ body,
 #application.pure-form-aligned .pure-control-group input { width: 50.0% }
 #application.pure-form-aligned .pure-controls { margin-left: 34%; }
 
+.pure-form .pure-group input {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pure-form .pure-input-1-2 {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 /* Add transition to containers so they can push in and out */
 #layout,
 #menu,
