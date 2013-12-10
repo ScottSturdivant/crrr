@@ -74,6 +74,10 @@ table.center {
     display: block;
 }
 
+.pure-form textarea.pure-input-1-2 {
+    display: inline;
+}
+
 /* Add transition to containers so they can push in and out */
 #layout,
 #menu,
