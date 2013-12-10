@@ -403,6 +403,12 @@ aside {
         color: #999;
     }
 
+    #menu .pure-menu-heading li {
+        border-bottom-color: #333;
+        border-bottom-width: 1px;
+        padding: 0;
+    }
+
     #menu .pure-menu-selected {
         background: #1f8dd6;
     }
