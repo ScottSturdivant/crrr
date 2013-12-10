@@ -39,7 +39,7 @@ class AddDog(Form):
 
     uploads = FieldList(FileField('Picture'), min_entries=3)
 
-    send = SubmitField('Send')
+    send = SubmitField('Add Dog')
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
