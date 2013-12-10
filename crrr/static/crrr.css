@@ -403,10 +403,14 @@ aside {
         color: #999;
     }
 
-    #menu .pure-menu-heading li {
+    #menu li.pure-menu-heading  {
         border-bottom-color: #333;
         border-bottom-width: 1px;
         padding: 0;
+    }
+
+    #menu li.pure-menu-heading a {
+        color: #fff;
     }
 
     #menu .pure-menu-selected {
