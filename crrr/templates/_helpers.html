@@ -28,9 +28,9 @@
     {% endif %}
   {% endif %}
    {% if field.flags.required %}
-    {{ field(required='') }}
+    {{ field(required='', **kwargs) }}
   {% else %}
-    {{ field() }}
+    {{ field(**kwargs) }}
   {% endif %}
 </div>
 {%- endmacro %}
