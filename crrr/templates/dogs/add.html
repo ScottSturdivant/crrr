@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 {% from "_helpers.html" import render, bool_render %}
+<div class="header">
+  <h1 class="content-subhead">Add A Dog</h1>
+</div>
 <form method="POST" action={{ url_for('dogs.add') }} class="pure-form pure-form-aligned" enctype="multipart/form-data">
-    <legend>Add A Dog</legend>
     {{ form.hidden_tag() }}
     {% if form.errors %}
     <p class="missing">Please address the following errors:</p>
