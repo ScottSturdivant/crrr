@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{% from "_helpers.html" import render, bool_render %}
 <form method="POST" action={{ url_for('dogs.add') }} class="pure-form pure-form-aligned" enctype="multipart/form-data">
     <legend>Add A Dog</legend>
     {{ form.hidden_tag() }}
