@@ -1,98 +1,41 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if form.errors %}
-{% for field_name, field_errors in form.errors|dictsort if field_errors %}
-  {% for error in field_errors %}
-  <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {{ form[field_name].label(style="display: inline;") }}:  {{ error }}
-  </div>
-  {% endfor %}
-{% endfor %}
-{% endif %}
-<div class="span5 offset4">
-<form method="POST" action="" class="form-horizontal" enctype="multipart/form-data">
+<form method="POST" action={{ url_for('dogs.add') }} class="pure-form pure-form-aligned" enctype="multipart/form-data">
     <legend>Add A Dog</legend>
-    <div>{{ form.hidden_tag() }}</div>
+    {{ form.hidden_tag() }}
+    {% if form.errors %}
+    <p class="missing">Please address the following errors:</p>
+    <ul class="missing">
+      {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+          <li>{{ form[field_name].label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-    <div class="control-group">
-        {{ form.name.label(class="control-label required") }}
-        <div class="controls">
-        {{ form.name(placeholder="Name") }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.breed.label(class="control-label") }}
-        <div class="controls">
-        {{ form.breed(value="Rhodesian Ridgeback") }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.sex.label(class="control-label") }}
-        <div class="controls">
-        {{ form.sex() }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.status.label(class="control-label") }}
-        <div class="controls">
-        {{ form.status() }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.age.label(class="control-label") }}
-        <div class="controls">
-        {{ form.age() }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.mix.label(class="control-label") }}
-        <div class="controls">
-        {{ form.mix() }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.size.label(class="control-label") }}
-        <div class="controls">
-        {{ form.size() }}
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.fee.label(class="control-label") }}
-        <div class="controls input-prepend input-append">
-            <span class="add-on">$</span>
-            {{ form.fee(class="span2") }}
-            <span class="add-on">.00</span>
-        </div>
-    </div>
-
-    <div class="control-group">
-        {{ form.description.label(class="control-label") }}
-        <div class="controls">
-        {{ form.description(rows="10") }}
-        </div>
-    </div>
-
-    <div class="control-group">
+    <fieldset>
+        {{ render(form.name) }}
+        {{ render(form.breed) }}
+        {{ render(form.sex) }}
+        {{ render(form.status) }}
+        {{ render(form.age) }}
+        {{ render(form.mix) }}
+        {{ render(form.fee) }}
+        {{ render(form.description(rows="10", class="pure-input-1-2") }}
+    </fieldset>
+    <fieldset>
+        Check all that apply:<br />
         Check all that apply:
-        <div class="controls">
-            <label class="checkbox"><input type="checkbox" value="y" id="special_needs" name="special_needs">Special Needs</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="home_without_dogs" name="home_without_dogs">Home without dogs</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="home_without_cats" name="home_without_cats">Home without cats</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="home_without_kids" name="home_without_kids">Home without kids</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="fixed" name="fixed">Spayed / Neutered</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="shots" name="shots">Up to date with shots</label>
-            <label class="checkbox"><input type="checkbox" value="y" id="housetrained" name="housetrained">Housetrained</label>
-        </div>
-    </div>
-
+        {{ bool_render(form.special_needs) }}
+        {{ bool_render(form.home_without_dogs) }}
+        {{ bool_render(form.home_without_cats) }}
+        {{ bool_render(form.home_without_kids) }}
+        {{ bool_render(form.fixed) }}
+        {{ bool_render(form.shots) }}
+        {{ bool_render(form.housetrained) }}
+    </fieldset>
+    <fieldset>
     {% for picture in form.uploads.entries %}
         <div class="control-group">
             {{ picture.label(class="control-label") }}
@@ -101,10 +44,7 @@
             </div>
         </div>
     {% endfor %}
-
-    <div class="form-actions">
-        {{ form.send(class="btn btn-primary") }}
-    </div>
+    </fieldset>
+    <div class="pure-controls">{{ form.send(class="pure-button pure-button-primary") }}</div>
 </form>
-</div>
 {% endblock %}
