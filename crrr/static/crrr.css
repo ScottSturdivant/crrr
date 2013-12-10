@@ -59,9 +59,9 @@ table.center {
  * --------------------------
 */
 
-#application.pure-form-aligned .pure-control-group label { width: 33.3333% }
-#application.pure-form-aligned .pure-control-group input { width: 50.0% }
-#application.pure-form-aligned .pure-controls { margin-left: 34%; }
+.pure-form-aligned .pure-control-group label { width: 33.3333% }
+.pure-form-aligned .pure-control-group input { width: 50.0% }
+.pure-form-aligned .pure-controls { margin-left: 34%; }
 
 .pure-form .pure-group input {
     margin-left: auto;
