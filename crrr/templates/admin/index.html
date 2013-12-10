@@ -25,7 +25,7 @@
       <td>{{ dog.breed }}</td>
       <td>{{ dog.getAge() }}</td>
       <td>{{ dog.getSex()|capitalize|truncate(1, True, '') }}</td>
-      <td>{% if dog.adopted %}Adopted{% else %}Adoptable{% endif %}</td>
+      <td>{{ dog.getStatus()|capitalize }}</td>
       <td><input type="checkbox" {% if dog.archive %}checked="checked"{% endif %} /></td>
   </tr>
   {% endfor %}
