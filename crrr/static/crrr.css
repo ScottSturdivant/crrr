@@ -8,6 +8,11 @@ body,
     font-family: "proxima-nova", sans-serif;
 }
 
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .photo-box, .text-box {
     overflow: hidden;
     position: relative;
