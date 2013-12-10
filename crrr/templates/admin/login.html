@@ -8,12 +8,12 @@
   </ul>
 {% endif %}
 <form method="POST" action={{ url_for('admin.login') }} class="pure-form">
+  {{ form.hidden_tag() }}
   <fieldset class="pure-group">
-    {{ form.hidden_tag() }}
     {{ form.username(placeholder="Username", required="", class="pure-input-1-2") }}
     {{ form.password(placeholder="Password", required="", class="pure-input-1-2") }}
-    {{ form.submit(class="pure-button pure-input-1-2 pure-button-primary") }}
   </fieldset>
+  {{ form.submit(class="pure-button pure-input-1-2 pure-button-primary") }}
 </form>
-<a href="{{ url_for('admin.reset') }}">Reset Password</a>)</label>
+<a href="{{ url_for('admin.reset') }}">Reset Password</a></label>
 {% endblock %}
