@@ -41,7 +41,7 @@
     <fieldset>
     {% for picture in form.uploads.entries %}
         <div class="control-group">
-            {{ picture.label(class="control-label") }}
+            {{ picture.label(class="control-label", text="Picture "+loop.index|string+":") }}
             <div class="controls">
             {{ picture }}
             </div>
