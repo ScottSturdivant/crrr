@@ -38,7 +38,7 @@ def happy_tails(page):
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
     pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.status==DOG.ADOPTED).order_by(Dog.name).paginate(page, PER_PAGE)
-    return render_template('dogs/happy_tails.html', dogs=pagination.items, pagination=pagination)
+    return render_template('dogs/happy_tails.html', dogs=pagination.items, pagination=pagination, page=page)
 
 @mod.route('/<int:id>/edit', methods=['GET','POST'])
 def edit(id):

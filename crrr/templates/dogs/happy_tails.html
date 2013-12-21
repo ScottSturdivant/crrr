@@ -5,7 +5,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='modal.css') }}">
 {% endblock %}
 {% block content %}
+{% if page == 1 %}<h1>Happy Tale Tails</h1>{% endif %}
 {% if dogs %}
+{% if page == 1 %}
+<p>Thanks to volunteers, adopters, and those who've donated to CRRR, we've been fortunate over the years to rescue many dogs.  We're proud to present their stories!  Should any of them move you, consider <a href={{ url_for('root.application') }}>adopting</a> or <a href={{ url_for('root.volunteer') }}>volunteering</a>.</p>
+{% endif %}
   <div id="image-container" style="overflow:hidden;">
     {% for dog in dogs %}
       {% if dog.pictures %}
@@ -40,7 +44,9 @@
   <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 {{ render_pagination(pagination) }}
 {% else %}
+{% if page == 1 %}
 <p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
 around to it yet.  Please check back soon!</p>
+{% endif %}
 {% endif %}
 {% endblock %}
