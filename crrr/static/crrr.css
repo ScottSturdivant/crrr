@@ -547,7 +547,9 @@ a.pure-button-primary {
         float: none;
     }
 
-    #application.pure-form-aligned .pure-controls { margin-left: 0; }
+    .pure-form-aligned .pure-control-group label { width: 100% }
+    .pure-form-aligned .pure-control-group input { width: 100% }
+    .pure-form-aligned .pure-controls { margin-left: 0; }
         
 }
 
