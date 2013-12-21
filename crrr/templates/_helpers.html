@@ -42,6 +42,7 @@
 {%- endmacro %}
 
 {% macro render_pagination(pagination) %}
+<div class="paginator">
   <ul class="pure-paginator">
   {% if pagination.has_prev%}
   <li><a href="{{ url_for_other_page(pagination.page - 1) }}" class="pure-button prev">&#171;</a></li>
@@ -61,6 +62,7 @@
   <li><a href="{{ url_for_other_page(pagination.page + 1) }}" class="pure-button next">&#187;</a></li>
   {% endif %}
   </ul>
+</div>
 {% endmacro %}
 
 {% macro render_errors(field) %}

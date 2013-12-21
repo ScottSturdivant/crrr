@@ -119,6 +119,10 @@ table.center {
   color: black;
 }
 
+.paginator {
+  margin-top: 50px;
+  text-align: center;
+}
 
 /* --------------------------
  * Application Forms
