@@ -137,13 +137,10 @@ var linearPartitionFitPics = function (images, options) {
 
     for (var i = 0; i < images.length; i++) {
         images[i].aspectRatio = (images[i].width + 2 * options.border) / (images[i].height + 2 * options.border);
-        console.log('ratio, border: ' + images[i].aspectRatio + ' ' + options.border);
         summedWidth += (images[i].aspectRatio * options.preferedImageHeight) + 2 * options.border;
     }
 
     rows = Math.round(summedWidth / options.containerWidth);
-    console.log('container width: ' + options.containerWidth);
-    console.log("rows: " + rows);
 
     if (rows < 1) {
         for (i = 0; i < images.length; i++) {
@@ -160,12 +157,9 @@ var linearPartitionFitPics = function (images, options) {
         for (i = 0; i < partition.length; i++) {
             var row = partition[i];
             var rowWidth = options.containerWidth;
-            console.log('rowLength: ' + row.length);
-            console.log('rowWidth: ' + rowWidth);
 
             if(options.spacing){
                 rowWidth = rowWidth - (options.spacing * (row.length - 1));
-                console.log('rowWidth: ' + rowWidth);
             }
 
             summedRatios = 0;
