@@ -21,6 +21,12 @@ def about():
     g.title = "CRRR - About"
     return render_template('root/about.html')
 
+@mod.route('breed/')
+def breed():
+    g.breed = True
+    g.title = "CRRR - Breed"
+    return render_template('root/breed.html')
+
 @mod.route('faq/')
 def faq():
     g.faq = True
