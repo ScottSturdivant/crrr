@@ -34,7 +34,17 @@
       {% endif %}
     {% endfor %}
   </div> <!-- image-container -->
+{{ render_pagination(pagination) }}
+{% else %}
+{% if page == 1 %}
+<p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
+around to it yet.  Please check back soon!</p>
+{% endif %}
+{% endif %}
+{% endblock %}
 
+{% block end_of_page %}
+  {{ super() }}
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
   <script src={{ url_for('static', filename='js/plugins.js') }}></script>
@@ -43,11 +53,4 @@
   <script src={{ url_for('static', filename='js/resize.js') }}></script>
   <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   <script src={{ url_for('static', filename='js/hovering.js') }}></script>
-{{ render_pagination(pagination) }}
-{% else %}
-{% if page == 1 %}
-<p>There are plenty of happy tales (tails?) to tell, we just haven't gotten
-around to it yet.  Please check back soon!</p>
-{% endif %}
-{% endif %}
 {% endblock %}
