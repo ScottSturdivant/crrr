@@ -1,3 +1,4 @@
+import os
 from flask import Flask, g, request, url_for
 from flask.ext.mail import Mail
 from datetime import datetime
@@ -14,6 +15,9 @@ def url_for_other_page(page):
     args = request.view_args.copy()
     args['page'] = page
     return url_for(request.endpoint, **args)
+
+def get_static_abspath():
+    return os.path.abspath(os.path.join(__file__, 'static'))
 
 # Defaults
 UPLOADED_PHOTOS_DEST = '/tmp/photos'
