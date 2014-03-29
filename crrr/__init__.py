@@ -19,7 +19,7 @@ def url_for_other_page(page):
     return url_for(request.endpoint, **args)
 
 def get_static_abspath():
-    return os.path.abspath(os.path.join(__file__, 'static'))
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
 
 def get_random_header():
     header_img_dir = os.path.join(get_static_abspath(), 'images/headers')
