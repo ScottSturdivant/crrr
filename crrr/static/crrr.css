@@ -166,7 +166,7 @@ table.center {
  * vertically center the text.
  */
 .banner {
-    background: transparent url('http://dev.crrr.org/static/images/boston.jpg') 0 0 no-repeat fixed;
+    background: transparent url('http://dev.crrr.org/static/images/rhodesian-ridgeback-dog-kim-olson-photo-2.jpg') 0 0;
     text-align: center;
     background-size: cover;
     height: 350px;
@@ -180,9 +180,9 @@ table.center {
         vertical-align: middle;
         margin-bottom: 0;
         font-size: 4em;
-        color: white;
-        font-weight: 500;
-        text-shadow: 0 1px 1px black;
+        color: rgb(165, 6, 6);
+        font-weight: 600;
+        text-shadow: 0 3px 3px black;
     }
 
 /* --------------------------
@@ -588,6 +588,11 @@ a.pure-button-primary {
     .content {
         font-size: 87.5%;
         padding: 0;
+    }
+
+    /* shift the banner picture over. */
+    .banner {
+      background-position: -350px;
     }
 
     .header,
