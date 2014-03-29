@@ -23,7 +23,7 @@ def get_static_abspath():
 
 def get_random_header():
     header_img_dir = os.path.join(get_static_abspath(), 'images/headers')
-    header_root = random.choice(glob.glob(os.path.join(header_img_dir), 'Image_*'))
+    header_root = random.choice(glob.glob(os.path.join(header_img_dir, 'Image_*')))
     return os.path.join(header_root, 'Cropped_with_Text.png')
 
 
