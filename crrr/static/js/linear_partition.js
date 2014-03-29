@@ -144,7 +144,7 @@ var linearPartitionFitPics = function (images, options) {
 
     if (rows < 1) {
         for (i = 0; i < images.length; i++) {
-            images[i].width = parseInt(options.preferedImageHeight * photo.aspectRatio, 10);
+            images[i].width = parseInt(options.preferedImageHeight * images[i].aspectRatio, 10);
             images[i].height = options.preferedImageHeight;
         }
     } else {
