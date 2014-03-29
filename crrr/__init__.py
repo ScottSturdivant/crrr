@@ -1,4 +1,6 @@
 import os
+import random
+import glob
 from flask import Flask, g, request, url_for
 from flask.ext.mail import Mail
 from datetime import datetime
@@ -18,6 +20,12 @@ def url_for_other_page(page):
 
 def get_static_abspath():
     return os.path.abspath(os.path.join(__file__, 'static'))
+
+def get_random_header():
+    header_img_dir = os.path.join(get_static_abspath(), 'images/headers')
+    header_root = random.choice(glob.glob(os.path.join(header_img_dir), 'Image_*'))
+    return os.path.join(header_root, 'Cropped_with_Text.png')
+
 
 # Defaults
 UPLOADED_PHOTOS_DEST = '/tmp/photos'
