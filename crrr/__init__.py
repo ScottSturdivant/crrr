@@ -40,6 +40,7 @@ app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\x
 app.config.from_envvar('CRRR_SETTINGS')
 app.jinja_env.globals.update(get_year=get_year)
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+app.jinja_env.globals['get_random_header'] = get_random_header
 
 # Logging
 if not app.debug:
