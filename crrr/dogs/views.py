@@ -1,5 +1,5 @@
 import os
-import Image
+from PIL import Image
 from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user, current_user
