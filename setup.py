@@ -5,16 +5,10 @@ The CRRR website.
 
 from setuptools import setup, find_packages
 
-requires = [
-        'Flask',
-        'Flask-WTF',
-        'pytest',
-        'Flask-Mail',
-        'Flask-Sqlalchemy',
-        'Flask-Login',
-        'Flask-Uploads',
-        'PIL',
-        ]
+
+def get_requirements(suffix=''):
+    with open('requirements%s.txt' % suffix) as f:
+        return [line.strip() for line in f if not line.startswith('#')]
 
 setup(
     author='Scott Sturdivant',
@@ -25,7 +19,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=requires,
+    install_requires=get_requirements(),
     entry_points={
         'console_scripts' : [
             'crrr_import = crrr.scripts.populate_tables:main',
