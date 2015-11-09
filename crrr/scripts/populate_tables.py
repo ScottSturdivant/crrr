@@ -10,7 +10,7 @@ from crrr.dogs.models import (
         Dog,
         Picture,
         )
-from crrr.user.models import (
+from crrr.admin.models import (
         User,
         Address,
         Profile,
