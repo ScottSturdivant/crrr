@@ -51,7 +51,10 @@ def import_dogs(dog_csv):
             dog.setAge(age)
             dog.mix = str_to_bool(mix)
             dog.setSize(size)
-            dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
+            try:
+                dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
+            except:  # The string 'Donation' appears some places..
+                dog.fee
             dog.description = unicode(desc.strip(), CODEC, 'ignore')
             dog.special_needs = str_to_bool(special)
             dog.home_without_dogs = str_to_bool(nodogs)
