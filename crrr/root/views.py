@@ -42,8 +42,8 @@ def application():
     if form.validate_on_submit():
         submitted_at = datetime.now().strftime("%B %d, %Y, %I:%M %p")
         subject = '{} {} Application Submittal'.format(
-            form.firstname.data,
-            form.lastname.data
+            form.first_name.data,
+            form.last_name.data
         )
         sender = 'adoptions@crrr.org'
         msg = Message(subject,
