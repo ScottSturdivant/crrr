@@ -296,7 +296,7 @@ class Application(PersonalInfo):
     fencedetails = TextField('If yes, what is the fencing material and its height?')
     # Ridgeback preferences
     ridgebackname = TextField('If there is a specific Ridgeback you are interested in adopting, what is his / her name?',
-                              [validators.Length(min=1, max=256)])
+                              [validators.Optional(), validators.Length(max=256)])
     ridgebackgender = SelectField('Gender',
                                   choices=[('either', 'Either'), ('male', 'M'), ('female', 'F')])
     ridgebackage = TextField('Age', [validators.Required(), validators.Length(min=1, max=256)])
@@ -305,9 +305,9 @@ class Application(PersonalInfo):
     ridgebackpurebred = SelectField('Purebred vs. Mix',
                                     choices=[('either', 'Either'), ('purebred', 'Purebred'), ('mixed', 'Mixed')])
     ridgebackhealthproblems = TextField('Are you willing to adopt a dog with health problems?',
-                                        [validators.Required(), validators.Length(min=1, max=1024)])
+                                        [validators.Optional(), validators.Length(max=1024)])
     ridgebacksocialproblems = TextField('Are you willing to adopt a dog with social problems?',
-                                        [validators.Required(), validators.Length(min=1, max=1024)])
+                                        [validators.Optional(), validators.Length(max=1024)])
 
     submit = SubmitField('Apply')
 
