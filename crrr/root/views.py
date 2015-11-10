@@ -70,7 +70,7 @@ def volunteer():
             form.first_name.data, form.last_name.data
         )
         sender = app.config.get('CRRR_EMAIL')
-        msg = Message(subject
+        msg = Message(subject,
                       sender=sender,
                       recipients=[sender, form.email.data],
                       html=render_template('root/email_volunteer.html',
