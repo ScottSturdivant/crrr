@@ -25,7 +25,7 @@ def get_random_header_image():
     """Returns a random header image."""
     header_img_dir = os.path.join(get_static_abspath(), 'images/headers')
     header_imgs = glob.glob(os.path.join(header_img_dir, 'header_*'))
-    return random.choice(header_imgs)
+    return os.path.basename(random.choice(header_imgs))
 
 # Defaults
 UPLOADED_PHOTOS_DEST = '/tmp/photos'
