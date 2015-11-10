@@ -3,11 +3,11 @@
 
 <h2>Personal Information</h2>
 {% for field in form.personal_info %}
-<b>{{ field.label }}:</b>&nbsp;&nbsp;<p>{{ field }}</p>
+<b>{{ field.label() }}:</b>&nbsp;&nbsp;<p>{{ field() }}</p>
 {% endfor %}
 <h2>Volunteering For</h2>
 {% for field in form.volunteer_for %}
   {% if field.data %}
-  {{ field.label }}
+  {{ field.label() }}
   {% endif %}
 {% endfor %}
