@@ -43,7 +43,9 @@ def application():
         msg = Message("CRRR Application Submittal",
                       sender=sender,
                       recipients=[sender, form.email],
-                      html=render_template('root/application_email.html'))
+                      html=render_template('root/application_email.html',
+                                           form=form)
+                     )
         mail.send(msg)
         return render_template('root/application.html')
     return render_template('root/application.html', form=form)
