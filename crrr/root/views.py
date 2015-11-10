@@ -1,4 +1,4 @@
-from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
+from flask import request, session, render_template, flash, g, redirect, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import current_user
 from crrr import app, mail
@@ -40,12 +40,7 @@ def application():
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
         # TODO: Send form via email
-        msg = ("Thank you for your application to adopt a rescued Ridgeback.  A"
-               " representative of Colorado Rhodesian Ridgeback Rescue, (CRRR)"
-               ", will be in contact with you.  In the meantime, please browse"
-               " our <a href=\"{link}\">available dogs</a>.")
-        return render_template('root/application.html',
-                               msg=msg.format(link=url_for('dogs.available')))
+        return render_template('root/application.html')
     return render_template('root/application.html', form=form)
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
