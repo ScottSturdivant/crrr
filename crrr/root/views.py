@@ -44,8 +44,8 @@ def application():
                " representative of Colorado Rhodesian Ridgeback Rescue, (CRRR)"
                ", will be in contact with you.  In the meantime, please browse"
                " our <a href=\"{link}\">available dogs.")
-        flash(msg.format(link=url_for('dogs.available')))
-        return render_template('root/application.html')
+        return render_template('root/application.html',
+                               msg=msg.format(link=url_for('dogs.available')))
     return render_template('root/application.html', form=form)
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
