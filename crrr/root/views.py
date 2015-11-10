@@ -43,7 +43,7 @@ def application():
         msg = ("Thank you for your application to adopt a rescued Ridgeback.  A"
                " representative of Colorado Rhodesian Ridgeback Rescue, (CRRR)"
                ", will be in contact with you.  In the meantime, please browse"
-               " our <a href={link}>available dogs.")
+               " our <a href=\"{link}\">available dogs</a>.")
         return render_template('root/application.html',
                                msg=msg.format(link=url_for('dogs.available')))
     return render_template('root/application.html', form=form)
