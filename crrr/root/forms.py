@@ -299,7 +299,7 @@ class Application(PersonalInfo):
                               [validators.Optional(), validators.Length(max=256)])
     ridgebackgender = SelectField('Gender',
                                   choices=[('either', 'Either'), ('male', 'M'), ('female', 'F')])
-    ridgebackage = TextField('Age', [validators.Required(), validators.Length(min=1, max=256)])
+    ridgebackage = TextField('Age', [validators.Optional(), validators.Length(max=256)])
     ridgebackridges = SelectField('With or without a ridge',
                                   choices=[('either', 'Either'), ('ridged', 'Ridged'), ('ridgeless', 'Ridgeless')])
     ridgebackpurebred = SelectField('Purebred vs. Mix',
