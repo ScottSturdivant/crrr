@@ -40,6 +40,11 @@ def application():
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
         # TODO: Send form via email
+        msg = ("Thank you for your application to adopt a rescued Ridgeback.  A"
+               " representative of Colorado Rhodesian Ridgeback Rescue, (CRRR)"
+               ", will be in contact with you.  In the meantime, please browse"
+               " our <a href=\"{link}\">available dogs.")
+        flash(msg.format(link=url_for('dogs.available.')))
         return render_template('root/application.html')
     return render_template('root/application.html', form=form)
 
