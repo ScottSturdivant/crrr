@@ -25,7 +25,7 @@ class Email(Form):
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
         self.user = None
-        
+
     def validate(self):
         rv = Form.validate(self)
         if not rv:
@@ -299,15 +299,15 @@ class Application(PersonalInfo):
                               [validators.Length(min=1, max=256)])
     ridgebackgender = SelectField('Gender',
                                   choices=[('either', 'Either'), ('male', 'M'), ('female', 'F')])
-    ridgebackage = TextField('Age', [validators.Length(min=1, max=256)])
+    ridgebackage = TextField('Age', [validators.Required(), validators.Length(min=1, max=256)])
     ridgebackridges = SelectField('With or without a ridge',
                                   choices=[('either', 'Either'), ('ridged', 'Ridged'), ('ridgeless', 'Ridgeless')])
     ridgebackpurebred = SelectField('Purebred vs. Mix',
                                     choices=[('either', 'Either'), ('purebred', 'Purebred'), ('mixed', 'Mixed')])
     ridgebackhealthproblems = TextField('Are you willing to adopt a dog with health problems?',
-                                        [validators.Length(min=1, max=1024)])
+                                        [validators.Required(), validators.Length(min=1, max=1024)])
     ridgebacksocialproblems = TextField('Are you willing to adopt a dog with social problems?',
-                                        [validators.Length(min=1, max=1024)])
+                                        [validators.Required(), validators.Length(min=1, max=1024)])
 
     submit = SubmitField('Apply')
 
