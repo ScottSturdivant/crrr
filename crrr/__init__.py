@@ -34,7 +34,7 @@ UPLOADED_PHOTOS_DEST = '/tmp/photos'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['MAIL_FAIL_SILENTLY '] = False
-app.config['CRRR_EMAIL'] = 'adoptions@coloradorhodesianridgebackrescue.org'
+app.config['CRRR_EMAIL'] = 'adoptions@crrr.org'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/crrr_test.db'
 app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\xb7\xad\xa4\xc9"
 app.config.from_envvar('CRRR_SETTINGS')
