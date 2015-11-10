@@ -39,8 +39,12 @@ def application():
     g.title = "CRRR - Application"
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
+        subject = '{} {} Application Submittal'.format(
+            form.firstname.data,
+            form.lastname.data
+        )
         sender = 'adoptions@crrr.org'
-        msg = Message("CRRR Application Submittal",
+        msg = Message(subject,
                       sender=sender,
                       recipients=[sender, form.email.data],
                       html=render_template('root/application_email.html',
