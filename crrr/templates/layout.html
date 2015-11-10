@@ -62,9 +62,8 @@
   <script>window.jQuery || document.write('<script type="text/javascript" src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
   <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='ui.js') }}"></script>
   <script language="javascript" type="text/javascript">
-    {% set header = get_headers()|random|string %}
     $(document).ready(function() {
-      $( "#banner").css("background-image", "url({{ url_for('static', filename='images/headers/Image_' + header + '/Cropped_with_Text.png', _external=True) }})")
+      $( "#banner").css("background-image", "url({{ url_for('static', filename='images/headers/' + get_random_header_image(), _external=True) }})")
     });
   </script>
 

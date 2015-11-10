@@ -1,5 +1,6 @@
 import os
 import glob
+import random
 from flask import Flask, g, request, url_for
 from flask.ext.mail import Mail
 from datetime import datetime
@@ -20,9 +21,11 @@ def url_for_other_page(page):
 def get_static_abspath():
     return os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
 
-def get_headers():
+def get_random_header_image():
+    """Returns a random header image."""
     header_img_dir = os.path.join(get_static_abspath(), 'images/headers')
-    return range(1, len((glob.glob(os.path.join(header_img_dir, 'Image_*')))))
+    header_imgs = glob.glob(os.path.join(header_img_dir, 'header_*'))
+    return random.choice(header_imgs)
 
 # Defaults
 UPLOADED_PHOTOS_DEST = '/tmp/photos'
@@ -37,7 +40,7 @@ app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\x
 app.config.from_envvar('CRRR_SETTINGS')
 app.jinja_env.globals.update(get_year=get_year)
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
-app.jinja_env.globals['get_headers'] = get_headers
+app.jinja_env.globals['get_random_header_image'] = get_random_header_image
 
 # Logging
 if not app.debug:
