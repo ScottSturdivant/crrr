@@ -72,6 +72,7 @@ def edit(id):
     return render_template('dogs/edit.html', form=form)
 
 @mod.route('/add/', methods=['GET','POST'])
+@login_required
 def add():
     form = AddDog()
 
