@@ -42,7 +42,7 @@ def application():
         sender = 'adoptions@crrr.org'
         msg = Message("CRRR Application Submittal",
                       sender=sender,
-                      recipients=[sender, form.email],
+                      recipients=[sender, form.email.data],
                       html=render_template('root/application_email.html',
                                            form=form)
                      )
