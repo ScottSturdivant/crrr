@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import request, session, render_template, flash, g, redirect, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import current_user
@@ -39,6 +40,7 @@ def application():
     g.title = "CRRR - Application"
     form = Application(ridgebackname=request.args.get('dog'))
     if form.validate_on_submit():
+        submitted_at = datetime.now().strftime("%B %d, %Y, %I:%M %p")
         subject = '{} {} Application Submittal'.format(
             form.firstname.data,
             form.lastname.data
@@ -48,7 +50,8 @@ def application():
                       sender=sender,
                       recipients=[sender, form.email.data],
                       html=render_template('root/application_email.html',
-                                           form=form)
+                                           form=form,
+                                           submitted_at=submitted_at)
                      )
         mail.send(msg)
         return render_template('root/application.html')
