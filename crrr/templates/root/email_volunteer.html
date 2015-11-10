@@ -1,13 +1,22 @@
+{% from "_helpers.html" import render, bool_render %}
 <h1>Colorado Rhodesian Ridgeback Rescue Volunteer Form</h1>
 <p>Submitted at {{ submitted_at }}</p>
 
 <h2>Personal Information</h2>
-{% for field in form.personal_info %}
-<b>{{ field.label() }}:</b>&nbsp;&nbsp;<p>{{ field() }}</p>
-{% endfor %}
+{{ render(form.first_name) }}
+{{ render(form.last_name) }}
+{{ render(form.addr_1) }}
+{{ render(form.addr_2) }}
+{{ render(form.city) }}
+{{ render(form.state) }}
+{{ render(form.zip_code) }}
+{{ render(form.phone_h) }}
+{{ render(form.phone_c) }}
+{{ render(form.phone_w) }}
 <h2>Volunteering For</h2>
-{% for field in form.volunteer_for %}
-  {% if field.data %}
-  {{ field.label() }}
-  {% endif %}
-{% endfor %}
+{{ bool_render(form.foster) }}
+{{ bool_render(form.transport) }}
+{{ bool_render(form.home_check) }}
+{{ bool_render(form.adopter_check) }}
+{{ bool_render(form.donate_crate) }}
+{{ bool_render(form.donate_supplies) }}
