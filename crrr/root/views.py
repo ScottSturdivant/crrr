@@ -45,7 +45,7 @@ def application():
             form.first_name.data,
             form.last_name.data
         )
-        sender = 'adoptions@crrr.org'
+        sender = app.config.get('CRRR_EMAIL')
         msg = Message(subject,
                       sender=sender,
                       recipients=[sender, form.email.data],
@@ -63,14 +63,20 @@ def volunteer():
     g.title = "CRRR - Volunteer"
     form = Volunteer()
     if form.validate_on_submit():
+        submitted_at = datetime.now().strftime("%B %d, %Y, %I:%M %p")
         app.logger.info('Volunteer application submitted.')
         app.logger.debug(form.data)
-        name = form.first_name.data + " " + form.last_name.data
-        msg = Message("%s Volunteer Application Submittal" % name,
-                      sender=(name, form.email.data),
-                      recipients=[app.config.get('CRRR_EMAIL'),
-                                  (name, form.email.data)])
-        msg.html = render_template('root/email_volunteer.html', form=form)
+        subject = '{} {} Volunteer Application Submittal'.format(
+            form.first_name.data, form.last_name.data
+        )
+        sender = app.config.get('CRRR_EMAIL')
+        msg = Message(subject
+                      sender=sender,
+                      recipients=[sender, form.email.data],
+                      html=render_template('root/email_volunteer.html',
+                                           form=form,
+                                           submitted_at=submitted_at)
+                     )
         mail.send(msg)
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
