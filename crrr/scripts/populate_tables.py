@@ -5,6 +5,7 @@ mysql database and add them to the dev or production databases.
 """
 import argparse
 import os
+from datetime import datetime
 from crrr import db
 from crrr.dogs.models import (
     Dog,
@@ -142,7 +143,7 @@ def import_apps(app_csv):
             # Now to co-erce this data into our new format...
             app = App()
             app.id = row[0].strip('"')
-            app.date = row[2]
+            app.submittal_date = datetime.strptime(row[2], "%Y-%m-%d")
             app.status = row[3].lower()
             app.notes = row[6]
             app.archive = str_to_bool(row[104].strip('"\n'))
