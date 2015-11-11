@@ -1,11 +1,8 @@
 import os
 from PIL import Image
-from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
-from flask.ext.mail import Message
-from flask.ext.login import login_required, login_user, logout_user, current_user
-from flask.ext.sqlalchemy import Pagination
-from crrr import app, mail, login_manager, db
-from crrr.admin.models import User
+from flask import render_template, flash, g, url_for, redirect, Blueprint
+from flask.ext.login import login_required
+from crrr import app, db
 from crrr.dogs.models import Dog, Picture
 from crrr.dogs import constants as DOG
 from crrr.dogs.forms import AddDog, EditDog
@@ -19,28 +16,32 @@ THUMB_PREFIX = "tb_"
 # PAGINATION
 PER_PAGE = 20
 
+
 @mod.route('/')
 def index():
     g.title = 'CRRR - Dogs'
     dogs = Dog.query.all()
     return render_template('dogs/index.html', dogs=dogs)
 
+
 @mod.route('/available/')
 def available():
     g.available_dogs = True
     g.title = "CRRR - Available Dogs"
-    dogs = Dog.query.filter(Dog.status==DOG.ADOPTABLE).order_by(Dog.name).all()
+    dogs = Dog.query.filter(Dog.status == DOG.ADOPTABLE).order_by(Dog.name).all()
     return render_template('dogs/available.html', dogs=dogs)
+
 
 @mod.route('/happy_tails/', defaults={'page': 1})
 @mod.route('/happy_tails/page/<int:page>')
 def happy_tails(page):
     g.happy_tails = True
     g.title = "CRRR - Happy Tails"
-    pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.status==DOG.ADOPTED).order_by(Dog.name).paginate(page, PER_PAGE)
+    pagination = Dog.query.filter(Dog.happy_tails != None).filter(Dog.status == DOG.ADOPTED).order_by(Dog.name).paginate(page, PER_PAGE)  # noqa
     return render_template('dogs/happy_tails.html', dogs=pagination.items, pagination=pagination, page=page)
 
-@mod.route('/<int:id>/edit', methods=['GET','POST'])
+
+@mod.route('/<int:id>/edit', methods=['GET', 'POST'])
 def edit(id):
     g.title = 'CRRR - Edit Dog'
     dog = Dog.query.filter_by(id=id).first_or_404()
@@ -71,7 +72,8 @@ def edit(id):
 
     return render_template('dogs/edit.html', form=form)
 
-@mod.route('/add/', methods=['GET','POST'])
+
+@mod.route('/add/', methods=['GET', 'POST'])
 @login_required
 def add():
     form = AddDog()
@@ -103,5 +105,3 @@ def thumbify(infile):
     img.thumbnail(THUMB_SIZE, Image.ANTIALIAS)
     img.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], THUMB_PREFIX + infile))
     return THUMB_PREFIX + infile
-
-       
