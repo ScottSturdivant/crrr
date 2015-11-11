@@ -148,11 +148,11 @@ def _store_application(form):
 
 
 @mod.route('/all/')
-def all(showarchivedapps=None, dateasc=None):
+def all():
     q = App.query
-    if not showarchivedapps:
+    if not request.args.get('showarchivedapps'):
         q = q.filter(App.archive == False)  # noqa
-    if dateasc:
+    if request.args.get('dateasc'):
         q = q.order_by(asc(App.submittal_date))
     else:
         q = q.order_by(desc(App.submittal_date))
