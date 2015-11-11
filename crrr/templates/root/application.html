@@ -14,7 +14,7 @@ don't care how big or little your house is!)  This is just an informal, short
 visit to make sure the dog will be going to a safe place, and to chat about
 what you are looking for in a dog.  That way we can help match the right dog
 with the right home. </p>
-  <form method="POST" action={{ url_for('root.application') }} class="pure-form pure-form-aligned" id="application">
+  <form method="POST" action={{ url_for('application.apply') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
     {% if form.errors %}
     <p class="missing">Oh no!  Your application hasn't passed our validation!  Please ensure the following required fields are filled

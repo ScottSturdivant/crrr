@@ -8,7 +8,7 @@
 {% if page == 1 %}<h1>Happy Tails Tales</h1>{% endif %}
 {% if dogs %}
 {% if page == 1 %}
-<p>Thanks to volunteers, adopters, and those who've donated to CRRR, we've been fortunate over the years to rescue many dogs.  We're proud to present their stories!  Should any of them move you, consider <a href={{ url_for('root.application') }}>adopting</a> or <a href={{ url_for('root.volunteer') }}>volunteering</a>.</p>
+<p>Thanks to volunteers, adopters, and those who've donated to CRRR, we've been fortunate over the years to rescue many dogs.  We're proud to present their stories!  Should any of them move you, consider <a href={{ url_for('application.apply') }}>adopting</a> or <a href={{ url_for('root.volunteer') }}>volunteering</a>.</p>
 {% endif %}
   <div id="image-container" style="overflow:hidden;">
     {% for dog in dogs %}

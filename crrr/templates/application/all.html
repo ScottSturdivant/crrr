@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if apps %}
+<div class="header">
+    <h1 class="content-subhead">Current Applications</h1>
+</div>
+<table class="pure-table pure-table-striped center">
+  <thead>
+    <tr>
+      <th>Applicant</th>
+      <th>Status</th>
+      <th>
+        {% if request.args.get("dateasc") %}
+        <a href={{ url_for('application.all') }}>Date</a>
+        {% else %}
+        <a href={{ url_for('application.all', dateasc=True) }}>Date</a>
+        {% endif %}
+      </th>
+      <th>
+        {% if request.args.get("showarchivedapps") %}
+        <a href="{{ url_for('application.all') }}">Archived</a></th>
+        {% else %}
+        <a href="{{ url_for('application.all', showarchivedapps=True) }}">Archived</a>
+        {% endif %}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for app in apps %}
+  <tr>
+      <td>{{ app.applicant.last_name|capitalize }}, {{ app.applicant.first_name|capitalize }}</td>
+      <td>{{ app.status }}</td>
+      <td>{{ app.submittal_date.strftime("%Y-%m-%d") }}</td>
+      <td>{{ app.archived }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No applications are currently in the system.</p>
+{% endif %}
+{% endblock %}

@@ -104,6 +104,8 @@ from crrr.root.models import *
 from crrr.root.views import mod as rootModule
 from crrr.dogs.views import mod as dogsModule
 from crrr.admin.views import mod as adminModule
+from crrr.application.views import mod as applicationModule
 app.register_blueprint(rootModule)
 app.register_blueprint(dogsModule)
 app.register_blueprint(adminModule)
+app.register_blueprint(applicationModule)
