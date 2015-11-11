@@ -159,8 +159,8 @@ def import_apps(app_csv):
             if not user:
                 user = User(username=row[17],  # email
                             email=row[17],
-                            first_name=row[7],
-                            last_name=row[8],
+                            first_name=row[7].strip(),
+                            last_name=row[8].strip(),
                             password='changeme',
                             active=False)
 
