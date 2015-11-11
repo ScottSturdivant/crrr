@@ -1,13 +1,14 @@
 from crrr import db
 from datetime import datetime
 
+
 class Status(object):
-    NEW          = 'new'
-    INIT         = 'initial contact made'
-    ARRANGE_HC   = 'arranging hc'
+    NEW = 'new'
+    INIT = 'initial contact made'
+    ARRANGE_HC = 'arranging hc'
     HC_COMPLETED = 'hc completed'
-    APPROVED     = 'approved'
-    UNAPPROVED   = 'unapproved'
+    APPROVED = 'approved'
+    UNAPPROVED = 'unapproved'
 
 
 class App(db.Model):
@@ -25,16 +26,15 @@ class App(db.Model):
                                Status.APPROVED,
                                Status.UNAPPROVED,
                                name='app_status'),
-                               default=Status.NEW)
+                       default=Status.NEW)
     archive = db.Column(db.Boolean, default=False)
 
     # relationships
     applicant = db.relationship('User', foreign_keys=[user_id], backref='apps',
                                 uselist=False)
-    assignee  = db.relationship('User', foreign_keys=[assignee_id],
-                                uselist=False)
+    assignee = db.relationship('User', foreign_keys=[assignee_id],
+                               uselist=False)
     dog = db.relationship('Dog', backref='apps', uselist=False)
-
 
     def __repr__(self):
         return "<App for %s is %s>" % (self.dog, self.status)
