@@ -7,7 +7,7 @@ from datetime import (
 from flask import request, render_template, flash, g, url_for, redirect, Blueprint, abort
 from flask.ext.mail import Message
 from flask.ext.login import login_required, login_user, logout_user
-from crrr import mail, login_manager, db
+from crrr import mail, login_manager, db, app
 from crrr.dogs.models import Dog
 from crrr.admin.models import User, Confirm, Reset
 from crrr.admin.forms import (
@@ -65,6 +65,7 @@ def register():
 
 @mod.route('/confirm/<hash>')
 def confirm(hash):
+    assert False
     result = db.session.query(Confirm, User).\
         join(User).\
         filter(Confirm.hash == hash).\
@@ -80,6 +81,7 @@ def confirm(hash):
     return render_template('admin/confirm.html', user=user)
 
 
+@mod.route('/reset/<hash>/', methods=['GET', 'POST'])
 def reset_hash(hash):
     result = db.session.query(User, Reset).\
         join(Reset).\
@@ -118,13 +120,23 @@ def reset_hash(hash):
 def reset():
     form = Email()
     if form.validate_on_submit():
-        # TODO email
         reset = Reset(hash=create_hash(),
                       user_id=form.user.id)
+        user = User.query.get(form.user.id)
+        subject = 'CRRR Password Reset'
+        sender = app.config.get('CRRR_EMAIL')
+        msg = Message(subject,
+                      sender=sender,
+                      recipients=[user.email],
+                      html=render_template('root/reset_password_email.html',
+                                           reset=reset)
+                      )
+        mail.send(msg)
+
         db.session.add(reset)
         db.session.commit()
         flash('An email has been sent with instructions for resetting your password.')
-        return render_template('index.html')
+        return render_template('root/index.html')
     else:
         return render_template('admin/reset.html', form=form)
 
