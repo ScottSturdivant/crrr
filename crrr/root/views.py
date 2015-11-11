@@ -1,20 +1,22 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
-from flask import request, session, render_template, flash, g, redirect, Blueprint
+from flask import request, render_template, g, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import current_user
 from crrr import app, mail
-from crrr.dogs.models import Dog
 from crrr.root.forms import (
     Volunteer,
     Application,
-    )
+)
 
 mod = Blueprint('root', __name__, url_prefix='/')
+
 
 @mod.route('/')
 def index():
     g.index = True
     return render_template('root/index.html')
+
 
 @mod.route('about/')
 def about():
@@ -22,17 +24,20 @@ def about():
     g.title = "CRRR - About"
     return render_template('root/about.html')
 
+
 @mod.route('breed/')
 def breed():
     g.breed = True
     g.title = "CRRR - Breed"
     return render_template('root/breed.html')
 
+
 @mod.route('faq/')
 def faq():
     g.faq = True
     g.title = "CRRR - FAQ"
     return render_template('root/faq.html')
+
 
 @mod.route('application/', methods=['GET', 'POST'])
 def application():
@@ -52,10 +57,11 @@ def application():
                       html=render_template('root/application_email.html',
                                            form=form,
                                            submitted_at=submitted_at)
-                     )
+                      )
         mail.send(msg)
         return render_template('root/application.html')
     return render_template('root/application.html', form=form)
+
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
 def volunteer():
@@ -76,14 +82,16 @@ def volunteer():
                       html=render_template('root/email_volunteer.html',
                                            form=form,
                                            submitted_at=submitted_at)
-                     )
+                      )
         mail.send(msg)
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
+
 
 @app.before_request
 def before_request():
