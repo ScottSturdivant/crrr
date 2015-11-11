@@ -29,7 +29,7 @@
   {% for app in apps %}
   <tr>
       <td>{{ app.applicant.last_name|capitalize }}, {{ app.applicant.first_name|capitalize }}</td>
-      <td>{{ app.status }}</td>
+      <td>{{ app.status|capitalize }}</td>
       <td>{{ app.submittal_date.strftime("%Y-%m-%d") }}</td>
       <td>{{ app.archived }}</td>
   </tr>
