@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy.sql.expression import asc, desc
 from flask import request, render_template, g, Blueprint
 from flask.ext.mail import Message
+from flask.ext.login import login_required
 from crrr import app, mail, db
 from crrr.root.forms import Application
 from crrr.root.models import App
@@ -148,6 +149,7 @@ def _store_application(form):
 
 
 @mod.route('/all/')
+@login_required
 def all():
     q = App.query
     if not request.args.get('showarchivedapps'):
