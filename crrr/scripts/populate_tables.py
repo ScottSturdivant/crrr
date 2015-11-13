@@ -230,6 +230,7 @@ def import_apps(app_csv):
 
             # Now for the profile!
             p = Profile()
+            p.kid_info = row[32]
             p.free_feed = str_to_bool(row[72])
             p.who_cares = unicode(row[73].strip(), CODEC, 'ignore')
             p.home = unicode(row[74].strip(), CODEC, 'ignore')
