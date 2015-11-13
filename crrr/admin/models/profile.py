@@ -15,6 +15,7 @@ class Profile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    kid_info = db.Column(db.String())
     free_feed = db.Column(db.Boolean)
     who_cares = db.Column(db.String())
     home = db.Column(db.String())
