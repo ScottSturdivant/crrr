@@ -162,6 +162,98 @@ def all():
     return render_template('application/all.html', apps=apps)
 
 
+@mod.route('/<int:id>/')
+@login_required
+def view(id):
+    app = App.query.get_or_404(id)
+    user = app.applicant
+    home_addr = [addr for addr in user.addresses if addr.location == 'home'][0]
+    vet_addr = [addr for addr in user.addresses if addr.location == 'vet'][0]
+    home_phone = [p for p in user.phones if p.location == 'home'][0]
+    cell_phone = [p for p in user.phones if p.location == 'cell'][0]
+    work_phone = [p for p in user.phones if p.location == 'work'][0]
+    work = user.employment[0]
+
+    kwargs = dict(
+        first_name=user.first_name,
+        last_name=user.last_name,
+        addr_1=home_addr.line_1,
+        addr_2=home_addr.line_2,
+        city=home_addr.city,
+        state=home_addr.state,
+        zip_code=home_addr.zip,
+        address_length=home_addr.duration,
+        email=user.email,
+        phone_h=home_phone.number,
+        phone_c=cell_phone.number,
+        phone_w=work_phone.number,
+        employer=work.name,
+        occupation=work.occupation,
+        employment_type=work.status,
+        kids=user.profile.kid_info,
+        ref1_firstname=vet_addr.clinic,
+        ref1_lastname=vet_addr.vet_name,
+        ref1_address1=vet_addr.line_1,
+        ref1_address2=vet_addr.line_2,
+        ref1_city=vet_addr.city,
+        ref1_state=vet_addr.state,
+        ref1_zip=vet_addr.zip,
+        ref1_phone=vet_addr.phones[0].number,
+        # Profile information..
+        freefeed=user.profile.free_feed,
+        whocares=user.profile.who_cares,
+        home=user.profile.home,
+        needs=user.profile.needs,
+        alonetime=user.profile.alone_time,
+        dogkepthome=user.profile.dog_kept_home.split(','),
+        dogkeptaway=user.profile.dog_kept_away.split(','),
+        dogdoor=user.profile.dog_door,
+        transport=user.profile.transport,
+        crate=user.profile.crate,
+        sleep=user.profile.sleep,
+        whyridgebacks=user.profile.why_ridgebacks.split(','),
+        before=user.profile.before_pets,
+        expenses=user.profile.expenses,
+        dayinthelife=user.profile.day_in_the_life,
+        dogasfamily=user.profile.dog_as_family,
+        activitylevel=user.profile.activity_level,
+        awaycare=user.profile.away_care,
+        giveup=user.profile.give_up,
+        housing=user.profile.housing,
+        ownrent=user.profile.own_rent,
+        landlordproof=user.profile.landlord_proof,
+        yard=user.profile.yard,
+        fence=user.profile.fence,
+        fencedetails=user.profile.fence_details,
+        ridgebackname=app.dog.name if app.dog else None,
+        ridgebackgender=user.profile.ridgeback_gender,
+        ridgebackage=user.profile.ridgeback_age,
+        ridgebackridges=user.profile.ridgeback_ridges,
+        ridgebackpurebred=user.profile.ridgeback_purebred,
+        ridgebackhealthproblems=user.profile.ridgeback_health_problems,
+        ridgebacksocialproblems=user.profile.ridgeback_social_problems,
+    )
+    # Set the relationships
+    for i, r in enumerate(user.relations):
+        kwargs.update({
+            'relation{}'.format(i + 1): r.relation,
+            'name{}'.format(i + 1): r.name
+        })
+
+    # Set the pet information
+    for i, pet in enumerate(user.pets):
+        kwargs.update({
+            'pet_{}_species'.format(i + 1): pet.type,
+            'pet_{}_name'.format(i + 1): pet.name,
+            'pet_{}_sex'.format(i + 1): pet.gender,
+            'pet_{}_age'.format(i + 1): pet.age,
+            'pet_{}_altered'.format(i + 1): pet.altered,
+            'pet_{}_whathappened'.format(i + 1): pet.whathappened,
+        })
+    form = Application(**kwargs)
+    return render_template('application/view.html', form=form)
+
+
 @mod.route('/', methods=['GET', 'POST'])
 def apply():
     g.application = True

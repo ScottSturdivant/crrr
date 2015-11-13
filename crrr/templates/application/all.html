@@ -28,7 +28,7 @@
   <tbody>
   {% for app in apps %}
   <tr>
-      <td>{{ app.applicant.last_name|capitalize }}, {{ app.applicant.first_name|capitalize }}</td>
+      <td><a href={{ url_for('application.view', id=app.id) }}>{{ app.applicant.last_name|capitalize }}, {{ app.applicant.first_name|capitalize }}</a></td>
       <td>{{ app.status|capitalize }}</td>
       <td>{{ app.submittal_date.strftime("%Y-%m-%d") }}</td>
       <td>{{ app.archived }}</td>
