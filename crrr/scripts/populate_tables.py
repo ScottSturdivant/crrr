@@ -4,9 +4,12 @@ This script is intended to take data from csv files dumped from the original
 mysql database and add them to the dev or production databases.
 """
 import argparse
+import pkg_resources
 import os
+from alembic import command
 from datetime import datetime
-from crrr import db
+from flask.ext.migrate import _get_config, Migrate
+from crrr import db, app
 from crrr.dogs.models import (
     Dog,
     Picture,
@@ -302,6 +305,10 @@ def main():
         db.drop_all()
         print "Creating all tables."
         db.create_all()
+        print "Stamping alembic @ HEAD."
+        with app.app_context():
+            Migrate(app, db, directory=pkg_resources.resource_filename('crrr', 'migrations'))
+            command.stamp(_get_config(None), 'head')
     if args.dog_csv:
         import_dogs(args.dog_csv)
     if args.user_csv:
