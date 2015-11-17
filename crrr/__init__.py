@@ -28,7 +28,7 @@ def get_random_header_image():
     return os.path.basename(random.choice(header_imgs))
 
 # Defaults
-UPLOADED_PHOTOS_DEST = '/tmp/photos'
+UPLOADS_DEFAULT_DEST = os.path.realpath('.') + '/crrr/static/'
 
 # Application
 app = Flask(__name__)
@@ -36,6 +36,7 @@ app.config.from_object(__name__)
 app.config['MAIL_FAIL_SILENTLY '] = False
 app.config['CRRR_EMAIL'] = 'adoptions@crrr.org'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/crrr_test.db'
+app.config['UPLOADS_DEFAULT_DEST'] = UPLOADS_DEFAULT_DEST
 app.secret_key = "k\x08\r\xdd'\xb0W\xff\xc9\x0b\x9br\x07\xefW\x9c\x80\x18\xbbP\xb7\xad\xa4\xc9"
 app.config.from_envvar('CRRR_SETTINGS')
 app.jinja_env.globals.update(get_year=get_year)
@@ -92,7 +93,7 @@ login_manager.setup_app(app)
 login_manager.login_view = 'admin.login'
 
 # Uploads
-uploaded_photos = UploadSet('photos', IMAGES)
+uploaded_photos = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_photos)
 
 # Models
