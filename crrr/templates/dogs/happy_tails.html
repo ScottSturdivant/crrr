@@ -14,12 +14,12 @@
     {% for dog in dogs %}
       {% if dog.pictures %}
         {% set modalID = 'modal' + loop.index|string %}
-        <div class="happy-tails-container">
+        <div class="happy-tails-container"><a href="#{{ modalID }}" role="button" data-toggle="modal" data-target="#{{ modalID }}">
           <div class="happy-tails-pic" style="background-image:url({{ url_for('static', filename='images/'+dog.id|string+'/'+dog.pictures[0].file_url) }});">
             <img src={{ url_for('static', filename='images/'+dog.id|string+'/'+dog.pictures[0].file_url) }} style="display:none;"/>
           </div>
           <div class="happy-tails-txt">
-            <p><a href="#{{ modalID }}" role="button" data-toggle="modal" data-target="#{{ modalID }}">{{ dog.name }}</a></p>
+            <p>{{ dog.name }}</p>
           </div>
           </a>
           <div id="{{ modalID }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{ modalID }}" aria-hidden="true">
@@ -28,7 +28,7 @@
             </div>
             <div class="modal-body">
               <p>{{ dog.happy_tails|replace('\r','')|replace('\\n','')|trim }}</p>
-            </div>
+            </div></a>
           </div>
         </div>
       {% endif %}
