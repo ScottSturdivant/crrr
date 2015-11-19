@@ -1,8 +1,7 @@
 """
 The CRRR website.
 """
-
-
+import glob
 from setuptools import setup, find_packages
 
 
@@ -20,6 +19,10 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=get_requirements(),
+    package_data={'crrr': glob.glob('migrations/*.py') +
+                  glob.glob('migrations/*.mako') +
+                  glob.glob('migrations/versions/*.py') +
+                  ['migrations/alembic.ini']},
     entry_points={
         'console_scripts': [
             'crrr_import = crrr.scripts.populate_tables:main',
