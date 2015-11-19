@@ -10,7 +10,7 @@ from crrr.dogs.forms import AddDog, EditDog
 mod = Blueprint('dogs', __name__, url_prefix='/dogs')
 
 # Thumbnails
-THUMB_SIZE = (500, 500)
+THUMB_SIZE = (750, 750)
 THUMB_PREFIX = "tb_"
 
 # PAGINATION
