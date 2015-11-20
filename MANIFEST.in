@@ -1,2 +1,3 @@
 recursive-include crrr/templates *
 recursive-include crrr/static *
+recursive-include absio_server/migrations *

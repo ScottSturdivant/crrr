@@ -1,20 +1,13 @@
 """
 The CRRR website.
 """
-
-
+import glob
 from setuptools import setup, find_packages
 
-requires = [
-        'Flask',
-        'Flask-WTF',
-        'pytest',
-        'Flask-Mail',
-        'Flask-Sqlalchemy',
-        'Flask-Login',
-        'Flask-Uploads',
-        'PIL',
-        ]
+
+def get_requirements(suffix=''):
+    with open('requirements%s.txt' % suffix) as f:
+        return [line.strip() for line in f if not line.startswith('#')]
 
 setup(
     author='Scott Sturdivant',
@@ -25,11 +18,16 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=requires,
+    install_requires=get_requirements(),
+    package_data={'crrr': glob.glob('migrations/*.py') +
+                  glob.glob('migrations/*.mako') +
+                  glob.glob('migrations/versions/*.py') +
+                  ['migrations/alembic.ini']},
     entry_points={
-        'console_scripts' : [
+        'console_scripts': [
             'crrr_import = crrr.scripts.populate_tables:main',
-            'crrr_add_admin_user = crrr.scripts.add_admin:main'
-            ]
-        }
+            'crrr_add_admin_user = crrr.scripts.add_admin:main',
+            'crrr_manage = crrr.scripts.manage:main',
+        ]
+    }
 )

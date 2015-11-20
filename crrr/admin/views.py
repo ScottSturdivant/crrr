@@ -1,24 +1,25 @@
 import string
 import random
 from datetime import (
-        timedelta,
-        datetime
-        )
-from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
+    timedelta,
+    datetime
+)
+from flask import request, render_template, flash, g, url_for, redirect, Blueprint, abort
 from flask.ext.mail import Message
-from flask.ext.login import login_required, login_user, logout_user, current_user
-from crrr import app, mail, login_manager, db
+from flask.ext.login import login_required, login_user, logout_user
+from crrr import mail, login_manager, db, app
 from crrr.dogs.models import Dog
 from crrr.admin.models import User, Confirm, Reset
 from crrr.admin.forms import (
-        CreateUser,
-        ResetPassword,
-        Email,
-        Login,
-        )
+    CreateUser,
+    ResetPassword,
+    Email,
+    Login,
+)
 
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
+
 
 @mod.route('/')
 @login_required
@@ -31,8 +32,10 @@ def index():
         dogs = Dog.query.filter_by(archive=False).order_by(Dog.name).all()
     return render_template('admin/index.html', dogs=dogs)
 
+
 def create_hash():
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(32))
+
 
 @mod.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -59,11 +62,14 @@ def register():
     else:
         return render_template('admin/register.html', form=form)
 
+
 @mod.route('/confirm/<hash>')
 def confirm(hash):
-    result = db.session.query(Confirm, User).join(User).\
-                      filter(Confirm.hash==hash).\
-                      first()
+    assert False
+    result = db.session.query(Confirm, User).\
+        join(User).\
+        filter(Confirm.hash == hash).\
+        first()
     if result is None:
         abort(404)
 
@@ -74,10 +80,13 @@ def confirm(hash):
     db.session.commit()
     return render_template('admin/confirm.html', user=user)
 
+
+@mod.route('/reset/<hash>/', methods=['GET', 'POST'])
 def reset_hash(hash):
-    result = db.session.query(User, Reset).join(Reset).\
-                        filter(Reset.hash==hash).\
-                        first()
+    result = db.session.query(User, Reset).\
+        join(Reset).\
+        filter(Reset.hash == hash).\
+        first()
     print result
     if result is None:
         abort(404)
@@ -106,19 +115,31 @@ def reset_hash(hash):
     else:
         return render_template('admin/reset_hash.html', form=form)
 
+
 @mod.route('/reset/', methods=['GET', 'POST'])
 def reset():
     form = Email()
     if form.validate_on_submit():
-        # TODO email
         reset = Reset(hash=create_hash(),
                       user_id=form.user.id)
+        user = User.query.get(form.user.id)
+        subject = 'CRRR Password Reset'
+        sender = app.config.get('CRRR_EMAIL')
+        msg = Message(subject,
+                      sender=sender,
+                      recipients=[user.email],
+                      html=render_template('root/reset_password_email.html',
+                                           reset=reset)
+                      )
+        mail.send(msg)
+
         db.session.add(reset)
         db.session.commit()
         flash('An email has been sent with instructions for resetting your password.')
-        return render_template('index.html')
+        return render_template('root/index.html')
     else:
         return render_template('admin/reset.html', form=form)
+
 
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -126,11 +147,12 @@ def login():
     g.login = True
     form = Login()
     if form.validate_on_submit():
-        user = User.query.filter(User.username==form.username.data).first()
+        user = User.query.filter(User.username == form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         flash('You have logged in.')
         return redirect(request.args.get("next") or url_for("admin.index"))
     return render_template('admin/login.html', form=form)
+
 
 @mod.route('/logout/')
 @login_required
@@ -138,6 +160,7 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('root.index'))
+
 
 @login_manager.user_loader
 def load_user(userid):

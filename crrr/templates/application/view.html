@@ -2,18 +2,6 @@
 {% block content %}
 {% from "_helpers.html" import render %}
 {% if form %}
-<h1>Adoption Application</h1>
-<p>Congratulations!  You've taken the first step towards adopting your
-Ridgeback by seeking out the application.  Please be sure to fill in all fields
-denoted with red text as they are required.  Upon completion of the form, you
-should be contacted by a Colorado Rhodesian Ridgeback Rescue representative
-after your information has been reviewed.  (This can take a week, please be
-patient!)  The next step in our process will be for a volunteer to arrange a
-home visit.  (Don't panic, we aren't interested in your housekeeping, and we
-don't care how big or little your house is!)  This is just an informal, short
-visit to make sure the dog will be going to a safe place, and to chat about
-what you are looking for in a dog.  That way we can help match the right dog
-with the right home. </p>
   <form method="POST" action={{ url_for('application.apply') }} class="pure-form pure-form-aligned" id="application">
     {{ form.hidden_tag() }}
     {% if form.errors %}
@@ -155,15 +143,6 @@ in properly:</p>
       {{ render(form.ridgebackhealthproblems, colon=False) }}
       {{ render(form.ridgebacksocialproblems, colon=False) }}
     </fieldset>
-    <div class="pure-controls">{{ form.submit(class="pure-button pure-button-primary") }}</div>
   </form>
-<p>If you have questions or need more info, please contact Inge Trump, CRRR coordinator:<br />
-<ul>
-  <li>(h) -- (303) 689-2159</li>
-  <li>(c) -- (303) 618-7397</li>
-</ul>
-</p>
-{% else %}
-<p>Thank you for your application to adopt a rescued Ridgeback.  A representative of Colorado Rhodesian Ridgeback Rescue, (CRRR), will be in contact with you.  In the meantime, please browse our <a href={{ url_for('dogs.available') }}>available dogs</a>.</p>
 {% endif %}
 {% endblock %}

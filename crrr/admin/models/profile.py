@@ -1,7 +1,7 @@
 from crrr import db
 
-housing = ['house','townhome','apartment','condo',
-           'mobile home','ranch','farm','duplex','other']
+housing = ['house', 'townhome', 'apartment', 'condo',
+           'mobile home', 'ranch', 'farm', 'duplex', 'other']
 
 ownership = ['own', 'rent']
 
@@ -15,6 +15,7 @@ class Profile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    kid_info = db.Column(db.String())
     free_feed = db.Column(db.Boolean)
     who_cares = db.Column(db.String())
     home = db.Column(db.String())
@@ -52,5 +53,3 @@ class Profile(db.Model):
                                            name='profile_ridgeback_purebred'))
     ridgeback_health_problems = db.Column(db.String())
     ridgeback_social_problems = db.Column(db.String())
-                                       
-

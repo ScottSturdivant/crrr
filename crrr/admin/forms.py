@@ -28,7 +28,7 @@ class Email(Form):
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
         self.user = None
-        
+
     def validate(self):
         rv = Form.validate(self)
         if not rv:

@@ -38,7 +38,8 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.password.encode('utf-8'),
+                                   password.encode('utf-8'))
 
     def get_id(self):
         return unicode(self.id)

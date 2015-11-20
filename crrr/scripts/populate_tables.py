@@ -4,31 +4,37 @@ This script is intended to take data from csv files dumped from the original
 mysql database and add them to the dev or production databases.
 """
 import argparse
+import pkg_resources
 import os
-from crrr import db
+from alembic import command
+from datetime import datetime
+from flask.ext.migrate import _get_config, Migrate
+from crrr import db, app
 from crrr.dogs.models import (
-        Dog,
-        Picture,
-        )
-from crrr.user.models import (
-        User,
-        Address,
-        Profile,
-        Pet,
-        Employment,
-        Family,
-        Phone
-        )
+    Dog,
+    Picture,
+)
+from crrr.admin.models import (
+    User,
+    Address,
+    Profile,
+    Pet,
+    Employment,
+    Family,
+    Phone
+)
 from crrr.root.models import (
-        App,
-        )
+    App,
+)
 CODEC = 'utf-8'
 
 # The existing database had a few spam entries that we'd like to ignore.
 BAD_APPS = [477, 478, 641, 645, 670, 671, 673, 674, 675, 676, 677, 682, 683, 684, 687]
 
+
 def str_to_bool(foo):
     return True if foo.lower() in ['y', 'yes', 'true', '1'] else False
+
 
 def import_dogs(dog_csv):
     """
@@ -39,7 +45,7 @@ def import_dogs(dog_csv):
     with open(dog_csv) as f:
         for i, line in enumerate(f):
             row = line.split('","')
-            id, name, status, breed, sex, age, mix, size, fee, desc, special, nodogs, nocats, nokids, fixed, shots, house, url1, url2, url3, archive, tails = row 
+            id, name, status, breed, sex, age, mix, size, fee, desc, special, nodogs, nocats, nokids, fixed, shots, house, url1, url2, url3, archive, tails = row
 
             dog = Dog()
             dog.id = int(id.strip('"'))
@@ -51,7 +57,10 @@ def import_dogs(dog_csv):
             dog.setAge(age)
             dog.mix = str_to_bool(mix)
             dog.setSize(size)
-            dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
+            try:
+                dog.fee = int(fee.partition('.')[0].strip('$')) if fee else 0
+            except:  # The string 'Donation' appears some places..
+                dog.fee
             dog.description = unicode(desc.strip(), CODEC, 'ignore')
             dog.special_needs = str_to_bool(special)
             dog.home_without_dogs = str_to_bool(nodogs)
@@ -66,7 +75,7 @@ def import_dogs(dog_csv):
             pictures = []
             for url in [url1, url2, url3]:
                 if url:
-                    pictures.append(Picture(file_url=url, thumb_url="tb_"+url))
+                    pictures.append(Picture(file_url=url, thumb_url="tb_" + url))
             dog.pictures.extend(pictures)
 
             print "Created: ", dog
@@ -74,6 +83,7 @@ def import_dogs(dog_csv):
             db.session.add(dog)
         db.session.commit()
         print "Addded %d dogs." % (i + 1)
+
 
 def import_users(user_csv):
     """
@@ -86,10 +96,10 @@ def import_users(user_csv):
             uname, password, fname, lname, addr = line.split('","')
 
             user = User()
-            user.username  = uname.strip('"')
+            user.username = uname.strip('"')
             user.set_password(os.environ.get('ADMIN_PASSWORD', password))
             user.firstname = fname
-            user.lastname  = lname
+            user.lastname = lname
             user.role = 1
 
             # If there was an address associated with a user, add it too
@@ -117,6 +127,7 @@ def import_users(user_csv):
         db.session.commit()
         print "Added %d users." % (i + 1)
 
+
 def import_apps(app_csv):
     """
     Dump the apps info with this cmd:
@@ -135,7 +146,7 @@ def import_apps(app_csv):
             # Now to co-erce this data into our new format...
             app = App()
             app.id = row[0].strip('"')
-            app.date = row[2]
+            app.submittal_date = datetime.strptime(row[2], "%Y-%m-%d")
             app.status = row[3].lower()
             app.notes = row[6]
             app.archive = str_to_bool(row[104].strip('"\n'))
@@ -146,13 +157,13 @@ def import_apps(app_csv):
             # new users for each of those apps.  Therefore we need to see if a
             # user already exists.
 
-            user = db.session.query(User).filter(User.email==row[17]).first()
+            user = db.session.query(User).filter(User.email == row[17]).first()
 
             if not user:
-                user = User(username=row[17], # email
+                user = User(username=row[17],  # email
                             email=row[17],
-                            first_name=row[7],
-                            last_name=row[8],
+                            first_name=row[7].strip(),
+                            last_name=row[8].strip(),
                             password='changeme',
                             active=False)
 
@@ -199,7 +210,7 @@ def import_apps(app_csv):
             fam3 = Family(relation=row[26], name=row[27] if row[27] else None)
             fam4 = Family(relation=row[28], name=row[29] if row[29] else None)
             fam5 = Family(relation=row[30], name=row[31] if row[31] else None)
-            family = [f for f in [fam1, fam2, fam3, fam4, fam5] if f]
+            family = [fam for fam in [fam1, fam2, fam3, fam4, fam5] if fam]
             user.relations.extend(family)
 
             # Did they have any pets?
@@ -222,6 +233,7 @@ def import_apps(app_csv):
 
             # Now for the profile!
             p = Profile()
+            p.kid_info = row[32]
             p.free_feed = str_to_bool(row[72])
             p.who_cares = unicode(row[73].strip(), CODEC, 'ignore')
             p.home = unicode(row[74].strip(), CODEC, 'ignore')
@@ -258,9 +270,10 @@ def import_apps(app_csv):
 
             # Finally, try to tie this application to a dog, an admin, and the
             # user
-            assignee = db.session.query(User).filter(User.role == 1).\
-                                              filter(User.username == row[1].lower()).\
-                                              first()
+            assignee = db.session.query(User).\
+                filter(User.role == 1).\
+                filter(User.username == row[1].lower()).\
+                first()
             app.assignee = assignee
 
             dog = db.session.query(Dog).filter(Dog.name == row[97].strip()).first()
@@ -272,7 +285,6 @@ def import_apps(app_csv):
             db.session.commit()  # Slower to do it here, but we need to get users added so we can query for them
 
     print "Processed %d apps." % (i + 1)
-
 
 
 def main():
@@ -293,6 +305,10 @@ def main():
         db.drop_all()
         print "Creating all tables."
         db.create_all()
+        print "Stamping alembic @ HEAD."
+        with app.app_context():
+            Migrate(app, db, directory=pkg_resources.resource_filename('crrr', 'migrations'))
+            command.stamp(_get_config(None), 'head')
     if args.dog_csv:
         import_dogs(args.dog_csv)
     if args.user_csv:

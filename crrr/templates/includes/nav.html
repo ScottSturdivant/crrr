@@ -9,14 +9,14 @@
       <li{% if g.faq %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.faq') }}>FAQs</a></li>
       <li{% if g.available_dogs %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.available') }}>Available Dogs</a></li>
       <li{% if g.happy_tails %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.happy_tails') }}>Happy Tails</a></li>
-      <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.application') }}>Application</a></li>
+      <li{% if g.application %} class="pure-menu-selected"{% endif %}><a href={{ url_for('application.apply') }}>Application</a></li>
       <li{% if g.volunteer %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.volunteer') }}>Volunteer</a></li>
       <li{% if g.about %} class="pure-menu-selected"{% endif %}><a href={{ url_for('root.about') }}>About Us</a></li>
       {% if g.user.is_authenticated() and g.user.get_role() == 1 %}
       <li class="pure-menu-heading"><a href={{ url_for('admin.index') }}>Admin</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Dogs</a></li>
       <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.add') }}>Add Dog</a></li>
-      <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('dogs.index') }}>Applications</a></li>
+      <li{% if g.edit_dog %} class="pure-menu-selected"{% endif %}><a href={{ url_for('application.all') }}>Applications</a></li>
       <li {% if g.logout %} class="pure-menu-selected"{% endif %}><a href={{url_for('admin.logout') }}>Logout</a></li>
       {% endif %}
     </ul>

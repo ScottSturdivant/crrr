@@ -1,19 +1,31 @@
-from flask import request, session, render_template, flash, g, url_for, redirect, Blueprint
+# -*- coding: utf-8 -*-
+from datetime import datetime
+from flask import request, render_template, g, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import current_user
-from crrr import app, mail
-from crrr.dogs.models import Dog
+from crrr import app, mail, db
 from crrr.root.forms import (
     Volunteer,
     Application,
-    )
+)
+from crrr.admin.models import (
+    User,
+    Address,
+    Profile,
+    Pet,
+    Employment,
+    Family,
+    Phone,
+)
 
 mod = Blueprint('root', __name__, url_prefix='/')
+
 
 @mod.route('/')
 def index():
     g.index = True
     return render_template('root/index.html')
+
 
 @mod.route('about/')
 def about():
@@ -21,11 +33,13 @@ def about():
     g.title = "CRRR - About"
     return render_template('root/about.html')
 
+
 @mod.route('breed/')
 def breed():
     g.breed = True
     g.title = "CRRR - Breed"
     return render_template('root/breed.html')
+
 
 @mod.route('faq/')
 def faq():
@@ -33,15 +47,7 @@ def faq():
     g.title = "CRRR - FAQ"
     return render_template('root/faq.html')
 
-@mod.route('application/', methods=['GET', 'POST'])
-def application():
-    g.application = True
-    g.title = "CRRR - Application"
-    form = Application(ridgebackname=request.args.get('dog'))
-    if form.validate_on_submit():
-        # TODO: Send form via email
-        return render_template('root/application.html')
-    return render_template('root/application.html', form=form)
+
 
 @mod.route('volunteer/', methods=['GET', 'POST'])
 def volunteer():
@@ -49,21 +55,29 @@ def volunteer():
     g.title = "CRRR - Volunteer"
     form = Volunteer()
     if form.validate_on_submit():
+        submitted_at = datetime.now().strftime("%B %d, %Y, %I:%M %p")
         app.logger.info('Volunteer application submitted.')
         app.logger.debug(form.data)
-        name = form.first_name.data + " " + form.last_name.data
-        msg = Message("%s Volunteer Application Submittal" % name,
-                      sender=(name, form.email.data),
-                      recipients=[app.config.get('CRRR_EMAIL'),
-                                  (name, form.email.data)])
-        msg.html = render_template('root/email_volunteer.html', form=form)
+        subject = '{} {} Volunteer Application Submittal'.format(
+            form.first_name.data, form.last_name.data
+        )
+        sender = app.config.get('CRRR_EMAIL')
+        msg = Message(subject,
+                      sender=sender,
+                      recipients=[sender, form.email.data],
+                      html=render_template('root/email_volunteer.html',
+                                           form=form,
+                                           submitted_at=submitted_at)
+                      )
         mail.send(msg)
         return render_template('root/volunteer.html')
     return render_template('root/volunteer.html', form=form)
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
+
 
 @app.before_request
 def before_request():

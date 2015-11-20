@@ -127,7 +127,7 @@ options = {
 **/
 var linearPartitionFitPics = function (images, options) {
     options.border = options.border || 0;
-    options.spacing = options.spacing || 0;
+    options.spacing = options.spacing || 2;
 
     var index = 0,
         partition, rowBuffer = [],

@@ -1,6 +1,6 @@
-from werkzeug.security import generate_password_hash, check_password_hash
 from crrr import db
 from crrr.dogs import constants as DOG
+
 
 class Dog(db.Model):
     __tablename__ = 'dog'
