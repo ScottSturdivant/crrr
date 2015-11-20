@@ -13,7 +13,7 @@ setup(
     author='Scott Sturdivant',
     author_email='scott.sturdivant@gmail.com',
     name="Colorado Rhodesian Ridgeback Rescue",
-    version='1.0',
+    version='1.1.0',
     long_description=__doc__,
     packages=find_packages(),
     include_package_data=True,
