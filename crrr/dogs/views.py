@@ -41,7 +41,8 @@ def happy_tails(page):
     return render_template('dogs/happy_tails.html', dogs=pagination.items, pagination=pagination, page=page)
 
 
-@mod.route('/<int:id>/edit', methods=['GET', 'POST'])
+@mod.route('/<int:id>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     g.title = 'CRRR - Edit Dog'
     dog = Dog.query.filter_by(id=id).first_or_404()
