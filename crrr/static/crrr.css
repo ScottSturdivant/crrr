@@ -166,7 +166,7 @@ table.center {
  * vertically center the text.
  */
 .banner {
-    background: transparent url('http://dev.crrr.org/static/images/headers/header_1.jpg') 0 0;
+    background: transparent url('https://dev.crrr.org/static/images/headers/header_1.jpg') 0 0;
     text-align: center;
     background-size: cover;
     height: 350px;
