@@ -18,6 +18,7 @@ PER_PAGE = 20
 
 
 @mod.route('/')
+@login_required
 def index():
     g.title = 'CRRR - Dogs'
     dogs = Dog.query.all()
