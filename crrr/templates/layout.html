@@ -27,7 +27,7 @@ ga('create', '{{ config.get('GOOGLE_ANALYTICS_ID') }}', 'auto');
 ga('send', 'pageview');
     </script>
     <!-- End Google Analytics -->
-    {% endif %}    
+    {% endif %}
     {% endblock %}
   </head>
 <body class="pure-skin-crrr">
@@ -62,8 +62,10 @@ ga('send', 'pageview');
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='ui.js') }}"></script>
   <script language="javascript" type="text/javascript">
+  {% set header=get_random_header_image() %}
     $(document).ready(function() {
-      $( "#banner").css("background-image", "url({{ url_for('static', filename='images/headers/' + get_random_header_image(), _external=True) }})")
+      $( "#banner").css("background-image", "url({{ url_for('static', filename='images/headers/' + header, _external=True) }})");
+      $( "#banner").attr("id", "{{ header|replace('.jpg', '') }}");
     });
   </script>
 

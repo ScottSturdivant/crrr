@@ -591,7 +591,22 @@ a.pure-button-primary {
     }
 
     /* shift the banner picture over. */
-    .banner {
+    #header_1 {
+      background-position: -675px;
+    }
+    #header_2 {
+      background-position: -400px;
+    }
+    #header_3 {
+      background-position: -50px;
+    }
+    #header_4 {
+      background-position: -200px;
+    }
+    #header_5 {
+      background-position: -350px;
+    }
+    #header_6 {
       background-position: -350px;
     }
 
