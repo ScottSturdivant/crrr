@@ -91,8 +91,9 @@ def add():
         form.populate_obj(dog)
 
         pictures = [p for p in form.uploads.entries if p]
-        # Create the output directory if required
         for picture in pictures:
+            if not picture.data:
+                continue
             app.logger.debug('adding picture: %s', picture)
             # Save the file original file
             filename = uploaded_photos.save(picture.data, folder=str(dog.id))
