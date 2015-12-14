@@ -1,21 +1,11 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from flask import request, render_template, g, Blueprint
+from flask import render_template, g, Blueprint
 from flask.ext.mail import Message
 from flask.ext.login import current_user
-from crrr import app, mail, db
+from crrr import app, mail
 from crrr.root.forms import (
     Volunteer,
-    Application,
-)
-from crrr.admin.models import (
-    User,
-    Address,
-    Profile,
-    Pet,
-    Employment,
-    Family,
-    Phone,
 )
 
 mod = Blueprint('root', __name__, url_prefix='/')
@@ -48,7 +38,6 @@ def faq():
     return render_template('root/faq.html')
 
 
-
 @mod.route('volunteer/', methods=['GET', 'POST'])
 def volunteer():
     g.volunteer = True
@@ -77,6 +66,11 @@ def volunteer():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('internal_server_error.html'), 404
 
 
 @app.before_request
