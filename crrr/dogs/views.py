@@ -62,6 +62,7 @@ def edit(id):
                 p = dog.pictures[i]
             except IndexError:
                 p = Picture()
+                dog.pictures.append(p)
 
             # Save the file original file
             filename = uploaded_photos.save(picture.data, folder=str(dog.id))
